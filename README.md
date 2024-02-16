@@ -1,5 +1,5 @@
 
-# ${1:Project Name}
+# Bubble Bobble
 TODO: Write a project description
 ## Installation
 TODO: Describe the installation process
