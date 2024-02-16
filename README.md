@@ -1,4 +1,3 @@
-
 # Mario Bros
 TODO: Write a project description
 ## Installation
