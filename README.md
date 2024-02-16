@@ -1,5 +1,5 @@
 
-# Bubble Bobble
+# Mario Bros
 TODO: Write a project description
 ## Installation
 TODO: Describe the installation process
