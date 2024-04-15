@@ -56,6 +56,26 @@ void TileMap::InitTileDictionary()
 
 	dict_rect[(int)Tile::PARET1_LVLB] = { 0,  0, n, n };
 
+	dict_rect[(int)Tile::S_FINAL_LATERAL1] = { 0,  0, n, n };
+	dict_rect[(int)Tile::S_LATERAL_1] = { 0,  0, n, n };
+	dict_rect[(int)Tile::S_FINAL_INFERIOR1] = { 0,  0, n, n };
+	dict_rect[(int)Tile::S_INFERIOR1] = { 0,  0, n, n };
+	dict_rect[(int)Tile::S_CANTO_INT1] = { 0,  0, n, n };
+	dict_rect[(int)Tile::S_CANTO_EXT1] = { 0,  0, n, n };
+
+	dict_rect[(int)Tile::S_FINAL_LATERAL2] = { 0,  0, n, n };
+	dict_rect[(int)Tile::S_LATERAL_2] = { 0,  0, n, n };
+	dict_rect[(int)Tile::S_FINAL_INFERIOR2] = { 0,  0, n, n };
+	dict_rect[(int)Tile::S_INFERIOR2] = { 0,  0, n, n };
+	dict_rect[(int)Tile::S_CANTO_INT2] = { 0,  0, n, n };
+	dict_rect[(int)Tile::S_CANTO_EXT2] = { 0,  0, n, n };
+
+	dict_rect[(int)Tile::S_FINAL_LATERAL3] = { 0,  0, n, n };
+	dict_rect[(int)Tile::S_LATERAL_3] = { 0,  0, n, n };
+	dict_rect[(int)Tile::S_FINAL_INFERIOR3] = { 0,  0, n, n };
+	dict_rect[(int)Tile::S_INFERIOR3] = { 0,  0, n, n };
+	dict_rect[(int)Tile::S_CANTO_INT3] = { 0,  0, n, n };
+	dict_rect[(int)Tile::S_CANTO_EXT3] = { 0,  0, n, n };
 
 
 
