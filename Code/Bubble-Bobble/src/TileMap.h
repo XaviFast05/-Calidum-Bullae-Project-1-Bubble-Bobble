@@ -22,18 +22,19 @@ enum class Tile {
 	PARET1_LVL2 = 20, PARET2_LVL2, PARET3_LVL2, PARET4_LVL2,
 	PARET1_LVL3 = 30, PARET2_LVL3, PARET3_LVL3, PARET4_LVL3,
 	PARET1_LVL4 = 40, PARET2_LVL4, PARET3_LVL4, PARET4_LVL4,
-	PARET1_LVLB = 50, 
+	PARET1_LVLB = 50,
 
 	//SOMBRES
-	S_FINAL_LATERAL1 = 14, S_LATERAL_1, S_FINAL_INFERIOR1, S_INFERIOR1, S_CANTO_INT1, S_CANTO_EXT1, 
-	S_FINAL_LATERAL2 = 24, S_LATERAL_2, S_FINAL_INFERIOR2, S_INFERIOR2, S_CANTO_INT2, S_CANTO_EXT2,
-	S_FINAL_LATERAL3 = 34, S_LATERAL_3, S_FINAL_INFERIOR3, S_INFERIOR3, S_CANTO_INT3, S_CANTO_EXT3,
+	S_FINAL_LATERAL1 = 60, S_LATERAL_1, S_FINAL_INFERIOR1, S_INFERIOR1, S_CANTO_INT1, S_CANTO_EXT1,
+	S_FINAL_LATERAL2 = 70, S_LATERAL_2, S_FINAL_INFERIOR2, S_INFERIOR2, S_CANTO_INT2, S_CANTO_EXT2,
+	S_FINAL_LATERAL3 = 80, S_LATERAL_3, S_FINAL_INFERIOR3, S_INFERIOR3, S_CANTO_INT3, S_CANTO_EXT3,
 
 	// id >= 100: entities' initial locations
 	PLAYER = 100,
 
 	//Intervals
-	
+	SOLID_FIRST = SLAB_1,
+	SOLID_LAST = PARET1_LVLB,
 	ENTITY_FIRST = PLAYER,
 	ENTITY_LAST = PLAYER
 };
@@ -73,8 +74,8 @@ private:
 
 	Tile GetTileIndex(int x, int y) const;
 	bool IsTileSolid(Tile tile) const;
-	bool IsTileLadderTop(Tile tile) const;
-	bool IsTileLadder(Tile tile) const;
+
+
 	bool CollisionX(const Point& p, int distance) const;
 	bool CollisionY(const Point& p, int distance) const;
 	int GetLadderCenterPos(int pixel_x, int pixel_y) const;

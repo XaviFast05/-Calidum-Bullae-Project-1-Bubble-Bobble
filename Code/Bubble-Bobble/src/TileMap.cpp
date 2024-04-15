@@ -84,7 +84,7 @@ AppStatus TileMap::Initialise()
 {
 	ResourceManager& data = ResourceManager::Instance();
 
-	if (data.LoadTexture(Resource::IMG_TILES, "images/tileset.png") != AppStatus::OK)
+	if (data.LoadTexture(Resource::IMG_TILES, "images/TILESET BUBBLE BOBBLE.png") != AppStatus::OK)
 	{
 		return AppStatus::ERROR;
 	}
@@ -137,18 +137,11 @@ Tile TileMap::GetTileIndex(int x, int y) const
 	}
 	return map[x + y * width];
 }
-//bool TileMap::IsTileSolid(Tile tile) const
-//{
-//	return (Tile::SOLID_FIRST <= tile && tile <= Tile::SOLID_LAST);
-//}
-//bool TileMap::IsTileLadderTop(Tile tile) const
-//{
-//	return tile == Tile::LADDER_TOP_L || tile == Tile::LADDER_TOP_R;
-//}
-//bool TileMap::IsTileLadder(Tile tile) const
-//{
-//	return tile == Tile::LADDER_L || tile == Tile::LADDER_R;
-//}
+bool TileMap::IsTileSolid(Tile tile) const
+{
+	return (Tile::SOLID_FIRST <= tile && tile <= Tile::SOLID_LAST);
+}
+
 bool TileMap::TestCollisionWallLeft(const AABB& box) const
 {
 	return CollisionX(box.pos, box.height);
@@ -207,10 +200,6 @@ bool TileMap::CollisionY(const Point& p, int distance) const
 	for (x = x0; x <= x1; ++x)
 	{
 		tile = GetTileIndex(x, y);
-
-		//One solid or laddertop tile is sufficient
-		if (IsTileSolid(tile) || IsTileLadderTop(tile))
-			return true;
 	}
 	return false;
 }
@@ -233,11 +222,6 @@ bool TileMap::TestOnLadder(const AABB& box, int* px) const
 	//To be able to climb up or down, both control points must be on ladder
 	tile1 = GetTileIndex(tx1, ty);
 	tile2 = GetTileIndex(tx2, ty);
-	if (IsTileLadder(tile1) && IsTileLadder(tile2))
-	{
-		*px = GetLadderCenterPos(left, bottom) - box.width/2;
-		return true;
-	}
 	return false;
 }
 bool TileMap::TestOnLadderTop(const AABB& box, int* px) const
@@ -259,11 +243,6 @@ bool TileMap::TestOnLadderTop(const AABB& box, int* px) const
 	//To be able to climb up or down, both control points must be on ladder
 	tile1 = GetTileIndex(tx1, ty);
 	tile2 = GetTileIndex(tx2, ty);
-	if (IsTileLadderTop(tile1) && IsTileLadderTop(tile2))
-	{
-		*px = GetLadderCenterPos(left, bottom) - box.width / 2;
-		return true;
-	}
 	return false;
 }
 int TileMap::GetLadderCenterPos(int pixel_x, int pixel_y) const
