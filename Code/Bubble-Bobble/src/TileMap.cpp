@@ -31,11 +31,11 @@ void TileMap::InitTileDictionary()
 {
 	const int n = TILE_SIZE;
 
-	dict_rect[(int)Tile::SLAB_1] = { 0,  0, n, n };
-	dict_rect[(int)Tile::SLAB_2] = { 0,  0, n, n };
-	dict_rect[(int)Tile::SLAB_3] = { 0,  0, n, n };
-	dict_rect[(int)Tile::SLAB_4] = { 0,  0, n, n };
-	dict_rect[(int)Tile::SLAB_BOSS] = { 0,  0, n, n };
+	dict_rect[(int)Tile::SLAB_1] = {10 * n, n, n, n };
+	dict_rect[(int)Tile::SLAB_2] = { 10 * n,  0, n, n };
+	dict_rect[(int)Tile::SLAB_3] = { 11 * n,  0, n, n };
+	dict_rect[(int)Tile::SLAB_4] = { 11 * n,  n, n, n };
+	dict_rect[(int)Tile::SLAB_BOSS] = { 12 * n,  0, n, n };
 
 	dict_rect[(int)Tile::PARET1_LVL1] = { 0,  0, n, n };
 	
