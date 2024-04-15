@@ -39,9 +39,20 @@ AppStatus Player::Initialise()
 	sprite->SetNumberAnimations((int)PlayerAnim::NUM_ANIMATIONS);
 	
 	sprite->SetAnimationDelay((int)PlayerAnim::IDLE_RIGHT, ANIM_DELAY);
-	sprite->AddKeyFrame((int)PlayerAnim::IDLE_RIGHT, { 0, 0, -n, n });
+	for (i = 0; i < 2; ++i) {
+		sprite->AddKeyFrame((int)PlayerAnim::IDLE_RIGHT, { 0, 0, -n, n });
+		sprite->AddKeyFrame((int)PlayerAnim::IDLE_RIGHT, { 0, 0, -n, n });
+		sprite->AddKeyFrame((int)PlayerAnim::IDLE_RIGHT, { 2*n, 0, -n, n });
+		sprite->AddKeyFrame((int)PlayerAnim::IDLE_RIGHT, { 2 * n, 0, -n, n });
+	}
+	
 	sprite->SetAnimationDelay((int)PlayerAnim::IDLE_LEFT, ANIM_DELAY);
-	sprite->AddKeyFrame((int)PlayerAnim::IDLE_LEFT, { 0, 0, n, n });
+	for (i = 0; i < 2; ++i) {
+		sprite->AddKeyFrame((int)PlayerAnim::IDLE_LEFT, { 0, 0, n, n });
+		sprite->AddKeyFrame((int)PlayerAnim::IDLE_LEFT, { 0, 0, n, n });
+		sprite->AddKeyFrame((int)PlayerAnim::IDLE_LEFT, { 2*n, 0, n, n });
+		sprite->AddKeyFrame((int)PlayerAnim::IDLE_LEFT, { 2 * n, 0, n, n });
+	}
 
 	sprite->SetAnimationDelay((int)PlayerAnim::WALKING_RIGHT, ANIM_DELAY);
 	for (i = 1; i < 5; ++i)
@@ -51,28 +62,22 @@ AppStatus Player::Initialise()
 		sprite->AddKeyFrame((int)PlayerAnim::WALKING_LEFT, { (float)i*n, 0*n, n, n });
 
 	sprite->SetAnimationDelay((int)PlayerAnim::FALLING_RIGHT, ANIM_DELAY);
-	sprite->AddKeyFrame((int)PlayerAnim::FALLING_RIGHT, { 0, 0, -n, n });
-	sprite->AddKeyFrame((int)PlayerAnim::FALLING_RIGHT, { 0, 0, -n, n });
+	sprite->AddKeyFrame((int)PlayerAnim::FALLING_RIGHT, { 6*n, 0, -n, n });
+	sprite->AddKeyFrame((int)PlayerAnim::FALLING_RIGHT, { 6*n, 1, -n, n });
 	sprite->SetAnimationDelay((int)PlayerAnim::FALLING_LEFT, ANIM_DELAY);
-	sprite->AddKeyFrame((int)PlayerAnim::FALLING_LEFT, { 0, 0, n, n });
-	sprite->AddKeyFrame((int)PlayerAnim::FALLING_LEFT, { 0, 0, n, n });
+	sprite->AddKeyFrame((int)PlayerAnim::FALLING_LEFT, { 6*n, 0, n, n });
+	sprite->AddKeyFrame((int)PlayerAnim::FALLING_LEFT, { 6*n, 1, n, n });
 
 	sprite->SetAnimationDelay((int)PlayerAnim::JUMPING_RIGHT, ANIM_DELAY);
 	sprite->AddKeyFrame((int)PlayerAnim::JUMPING_RIGHT, { 0, 0, -n, n });
 	sprite->SetAnimationDelay((int)PlayerAnim::JUMPING_LEFT, ANIM_DELAY);
 	sprite->AddKeyFrame((int)PlayerAnim::JUMPING_LEFT, { 0, 0, n, n });
 	sprite->SetAnimationDelay((int)PlayerAnim::LEVITATING_RIGHT, ANIM_DELAY);
-	sprite->AddKeyFrame((int)PlayerAnim::LEVITATING_RIGHT, { n, 0, -n, n });
+	sprite->AddKeyFrame((int)PlayerAnim::LEVITATING_RIGHT, { 6*n, 0, -n, n });
 	sprite->SetAnimationDelay((int)PlayerAnim::LEVITATING_LEFT, ANIM_DELAY);
-	sprite->AddKeyFrame((int)PlayerAnim::LEVITATING_LEFT, { n, 0, n, n });
+	sprite->AddKeyFrame((int)PlayerAnim::LEVITATING_LEFT, { 6*n, 0, n, n });
 
-	sprite->SetAnimationDelay((int)PlayerAnim::CLIMBING, ANIM_LADDER_DELAY);
-	for (i = 0; i < 4; ++i)
-		sprite->AddKeyFrame((int)PlayerAnim::CLIMBING, { (float)i * n, 6 * n, n, n });
-	sprite->SetAnimationDelay((int)PlayerAnim::CLIMBING_PRE_TOP, ANIM_DELAY);
-	sprite->AddKeyFrame((int)PlayerAnim::CLIMBING_PRE_TOP, { 4 * n, 6 * n, n, n });
-	sprite->SetAnimationDelay((int)PlayerAnim::CLIMBING_TOP, ANIM_DELAY);
-	sprite->AddKeyFrame((int)PlayerAnim::CLIMBING_TOP, { 5 * n, 6 * n, n, n });
+	
 		
 	sprite->SetAnimation((int)PlayerAnim::IDLE_RIGHT);
 
