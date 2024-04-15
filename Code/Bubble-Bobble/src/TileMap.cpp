@@ -97,7 +97,7 @@ AppStatus TileMap::Initialise()
 		return AppStatus::ERROR;
 	}
 	laser->SetNumberAnimations(1);
-	laser->SetAnimationDelay(0, ANIM_DELAY);
+	laser->SetAnimationDelay(1, ANIM_DELAY);
 	/*laser->AddKeyFrame(0, dict_rect[(int)Tile::LASER_FRAME0]);
 	laser->AddKeyFrame(0, dict_rect[(int)Tile::LASER_FRAME1]);
 	laser->AddKeyFrame(0, dict_rect[(int)Tile::LASER_FRAME2]);*/
@@ -260,7 +260,7 @@ int TileMap::GetLadderCenterPos(int pixel_x, int pixel_y) const
 		LOG("Internal error, tile should be a LADDER, coord: (%d,%d), tile type: %d", pixel_x, pixel_y, (int)tile);
 		return 0;
 	}*/
-	return 0;
+	return false;
 }
 void TileMap::Render()
 {
