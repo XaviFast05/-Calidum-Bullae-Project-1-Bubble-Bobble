@@ -31,60 +31,57 @@ void TileMap::InitTileDictionary()
 {
 	const int n = TILE_SIZE;
 
-	dict_rect[(int)Tile::SLAB_1] = {10 * n, n, n, n };
+	dict_rect[(int)Tile::SLAB_1] = { 10 * n,  n, n, n };
 	dict_rect[(int)Tile::SLAB_2] = { 10 * n,  0, n, n };
 	dict_rect[(int)Tile::SLAB_3] = { 11 * n,  0, n, n };
 	dict_rect[(int)Tile::SLAB_4] = { 11 * n,  n, n, n };
 	dict_rect[(int)Tile::SLAB_BOSS] = { 12 * n,  0, n, n };
 
 	dict_rect[(int)Tile::PARET1_LVL1] = { 0,  0, n, n };
-	
-	dict_rect[(int)Tile::PARET1_LVL2] = { 0,  0, n, n };
-	dict_rect[(int)Tile::PARET2_LVL2] = { 0,  0, n, n };
-	dict_rect[(int)Tile::PARET3_LVL2] = { 0,  0, n, n };
-	dict_rect[(int)Tile::PARET4_LVL2] = { 0,  0, n, n };
 
-	dict_rect[(int)Tile::PARET1_LVL3] = { 0,  0, n, n };
-	dict_rect[(int)Tile::PARET2_LVL3] = { 0,  0, n, n };
-	dict_rect[(int)Tile::PARET3_LVL3] = { 0,  0, n, n };
-	dict_rect[(int)Tile::PARET4_LVL3] = { 0,  0, n, n };
+	dict_rect[(int)Tile::PARET1_LVL2] = { 4 * n,  0, n, n };
+	dict_rect[(int)Tile::PARET2_LVL2] = { 5 * n,  0, n, n };
+	dict_rect[(int)Tile::PARET3_LVL2] = { 4 * n,  n, n, n };
+	dict_rect[(int)Tile::PARET4_LVL2] = { 5 * n,  n, n, n };
 
-	dict_rect[(int)Tile::PARET1_LVL4] = { 0,  0, n, n };
-	dict_rect[(int)Tile::PARET2_LVL4] = { 0,  0, n, n };
-	dict_rect[(int)Tile::PARET3_LVL4] = { 0,  0, n, n };
-	dict_rect[(int)Tile::PARET4_LVL4] = { 0,  0, n, n };
+	dict_rect[(int)Tile::PARET1_LVL3] = { 2 * n,  0, n, n };
+	dict_rect[(int)Tile::PARET2_LVL3] = { 3 * n,  0, n, n };
+	dict_rect[(int)Tile::PARET3_LVL3] = { 2 * n,  n, n, n };
+	dict_rect[(int)Tile::PARET4_LVL3] = { 3 * n,  n, n, n };
 
-	dict_rect[(int)Tile::PARET1_LVLB] = { 0,  0, n, n };
+	dict_rect[(int)Tile::PARET1_LVL4] = { 6 * n,  0, n, n };
+	dict_rect[(int)Tile::PARET2_LVL4] = { 7 * n,  0, n, n };
+	dict_rect[(int)Tile::PARET3_LVL4] = { 6 * n,  n, n, n };
+	dict_rect[(int)Tile::PARET4_LVL4] = { 7 * n,  n, n, n };
 
-	dict_rect[(int)Tile::S_FINAL_LATERAL1] = { 0,  0, n, n };
-	dict_rect[(int)Tile::S_LATERAL_1] = { 0,  0, n, n };
-	dict_rect[(int)Tile::S_FINAL_INFERIOR1] = { 0,  0, n, n };
-	dict_rect[(int)Tile::S_INFERIOR1] = { 0,  0, n, n };
-	dict_rect[(int)Tile::S_CANTO_INT1] = { 0,  0, n, n };
-	dict_rect[(int)Tile::S_CANTO_EXT1] = { 0,  0, n, n };
+	dict_rect[(int)Tile::PARET1_LVLB] = { 8 * n,  0, n, n };
 
-	dict_rect[(int)Tile::S_FINAL_LATERAL2] = { 0,  0, n, n };
-	dict_rect[(int)Tile::S_LATERAL_2] = { 0,  0, n, n };
-	dict_rect[(int)Tile::S_FINAL_INFERIOR2] = { 0,  0, n, n };
-	dict_rect[(int)Tile::S_INFERIOR2] = { 0,  0, n, n };
-	dict_rect[(int)Tile::S_CANTO_INT2] = { 0,  0, n, n };
-	dict_rect[(int)Tile::S_CANTO_EXT2] = { 0,  0, n, n };
+	dict_rect[(int)Tile::S_FINAL_LATERAL1] = { 0,  2 * n, n, n };
+	dict_rect[(int)Tile::S_LATERAL_1] = { n,  2 * n, n, n };
+	dict_rect[(int)Tile::S_FINAL_INFERIOR1] = { 0,  3 * n, n, n };
+	dict_rect[(int)Tile::S_INFERIOR1] = { n,  3 * n, n, n };
+	dict_rect[(int)Tile::S_CANTO_INT1] = { 2 * n,  2 * n, n, n };
+	dict_rect[(int)Tile::S_CANTO_EXT1] = { 2 * n,  3 * n, n, n };
 
-	dict_rect[(int)Tile::S_FINAL_LATERAL3] = { 0,  0, n, n };
-	dict_rect[(int)Tile::S_LATERAL_3] = { 0,  0, n, n };
-	dict_rect[(int)Tile::S_FINAL_INFERIOR3] = { 0,  0, n, n };
-	dict_rect[(int)Tile::S_INFERIOR3] = { 0,  0, n, n };
-	dict_rect[(int)Tile::S_CANTO_INT3] = { 0,  0, n, n };
-	dict_rect[(int)Tile::S_CANTO_EXT3] = { 0,  0, n, n };
+	dict_rect[(int)Tile::S_FINAL_LATERAL2] = { 3 * n,   2 * n, n, n };
+	dict_rect[(int)Tile::S_LATERAL_2] = { 4 * n,   2 * n, n, n };
+	dict_rect[(int)Tile::S_FINAL_INFERIOR2] = { 3 * n,  3 * n, n, n };
+	dict_rect[(int)Tile::S_INFERIOR2] = { 4 * n,  3 * n, n, n };
+	dict_rect[(int)Tile::S_CANTO_INT2] = { 5 * n,  2 * n, n, n };
+	dict_rect[(int)Tile::S_CANTO_EXT2] = { 5 * n,  3 * n, n, n };
 
-
-
+	dict_rect[(int)Tile::S_FINAL_LATERAL3] = { 6 * n,   2 * n, n, n };
+	dict_rect[(int)Tile::S_LATERAL_3] = { 7 * n,   2 * n, n, n };
+	dict_rect[(int)Tile::S_FINAL_INFERIOR3] = { 6 * n,   3 * n, n, n };
+	dict_rect[(int)Tile::S_INFERIOR3] = { 7 * n,   3 * n, n, n };
+	dict_rect[(int)Tile::S_CANTO_INT3] = { 8 * n,   2 * n, n, n };
+	dict_rect[(int)Tile::S_CANTO_EXT3] = { 8 * n,   3 * n, n, n };
 }
 AppStatus TileMap::Initialise()
 {
 	ResourceManager& data = ResourceManager::Instance();
 
-	if (data.LoadTexture(Resource::IMG_TILES, "images/TILESET BUBBLE BOBBLE.png") != AppStatus::OK)
+	if (data.LoadTexture(Resource::IMG_TILES, "images/tiles.png") != AppStatus::OK)
 	{
 		return AppStatus::ERROR;
 	}
@@ -97,24 +94,24 @@ AppStatus TileMap::Initialise()
 		return AppStatus::ERROR;
 	}
 	laser->SetNumberAnimations(1);
-	laser->SetAnimationDelay(1, ANIM_DELAY);
-	/*laser->AddKeyFrame(0, dict_rect[(int)Tile::LASER_FRAME0]);
-	laser->AddKeyFrame(0, dict_rect[(int)Tile::LASER_FRAME1]);
-	laser->AddKeyFrame(0, dict_rect[(int)Tile::LASER_FRAME2]);*/
+	laser->SetAnimationDelay(0, ANIM_DELAY);
+	laser->AddKeyFrame(0, dict_rect[(int)Tile::SLAB_1]);
+	laser->AddKeyFrame(0, dict_rect[(int)Tile::SLAB_1]);
+	laser->AddKeyFrame(0, dict_rect[(int)Tile::SLAB_1]);
 	laser->SetAnimation(0);
 
 	return AppStatus::OK;
 }
 AppStatus TileMap::Load(int data[], int w, int h)
 {
-	size = w*h;
+	size = w * h;
 	width = w;
 	height = h;
 
 	if (map != nullptr)	delete[] map;
 
 	map = new Tile[size];
-	if (map == nullptr)	
+	if (map == nullptr)
 	{
 		LOG("Failed to allocate memory for tile map");
 		return AppStatus::ERROR;
@@ -129,11 +126,11 @@ void TileMap::Update()
 }
 Tile TileMap::GetTileIndex(int x, int y) const
 {
-	int idx = x + y*width;
-	if(idx < 0 || idx >= size)
+	int idx = x + y * width;
+	if (idx < 0 || idx >= size)
 	{
 		LOG("Error: Index out of bounds. Tile map dimensions: %dx%d. Given index: (%d, %d)", width, height, x, y)
-		return Tile::AIR;
+			return Tile::AIR;
 	}
 	return map[x + y * width];
 }
@@ -150,7 +147,7 @@ bool TileMap::TestCollisionWallRight(const AABB& box) const
 {
 	return CollisionX(box.pos + Point(box.width - 1, 0), box.height);
 }
-bool TileMap::TestCollisionGround(const AABB& box, int *py) const
+bool TileMap::TestCollisionGround(const AABB& box, int* py) const
 {
 	Point p(box.pos.x, *py);	//control point
 	int tile_y;
@@ -176,7 +173,7 @@ bool TileMap::CollisionX(const Point& p, int distance) const
 	x = p.x / TILE_SIZE;
 	y0 = p.y / TILE_SIZE;
 	y1 = (p.y + distance - 1) / TILE_SIZE;
-	
+
 	//Iterate over the tiles within the vertical range
 	for (y = y0; y <= y1; ++y)
 	{
@@ -200,68 +197,16 @@ bool TileMap::CollisionY(const Point& p, int distance) const
 	for (x = x0; x <= x1; ++x)
 	{
 		tile = GetTileIndex(x, y);
+
+		//One solid or laddertop tile is sufficient
+		if (IsTileSolid(tile))
+			return true;
 	}
 	return false;
 }
-bool TileMap::TestOnLadder(const AABB& box, int* px) const
-{
-	int left, right, bottom;
-	int tx1, tx2, ty;
-	Tile tile1, tile2;
-	
-	//Control points
-	left = box.pos.x;
-	right = box.pos.x + box.width-1;
-	bottom = box.pos.y + box.height-1;
 
-	//Calculate the tile coordinates
-	tx1 = left / TILE_SIZE;
-	tx2 = right / TILE_SIZE;
-	ty = bottom / TILE_SIZE;
 
-	//To be able to climb up or down, both control points must be on ladder
-	tile1 = GetTileIndex(tx1, ty);
-	tile2 = GetTileIndex(tx2, ty);
-	return false;
-}
-bool TileMap::TestOnLadderTop(const AABB& box, int* px) const
-{
-	int left, right, bottom;
-	int tx1, tx2, ty;
-	Tile tile1, tile2;
 
-	//Control points
-	left = box.pos.x;
-	right = box.pos.x + box.width - 1;
-	bottom = box.pos.y + box.height - 1;
-
-	//Calculate the tile coordinates
-	tx1 = left / TILE_SIZE;
-	tx2 = right / TILE_SIZE;
-	ty = bottom / TILE_SIZE;
-
-	//To be able to climb up or down, both control points must be on ladder
-	tile1 = GetTileIndex(tx1, ty);
-	tile2 = GetTileIndex(tx2, ty);
-	return false;
-}
-int TileMap::GetLadderCenterPos(int pixel_x, int pixel_y) const
-{
-	int tx, ty;
-	
-	tx = pixel_x / TILE_SIZE;
-	ty = pixel_y / TILE_SIZE;
-	Tile tile = GetTileIndex(tx, ty);
-
-	/*if (tile == Tile::LADDER_L || tile == Tile::LADDER_TOP_L)		return tx * TILE_SIZE + TILE_SIZE;
-	else if (tile == Tile::LADDER_R || tile == Tile::LADDER_TOP_R)	return tx * TILE_SIZE;
-	else
-	{
-		LOG("Internal error, tile should be a LADDER, coord: (%d,%d), tile type: %d", pixel_x, pixel_y, (int)tile);
-		return 0;
-	}*/
-	return false;
-}
 void TileMap::Render()
 {
 	Tile tile;
@@ -277,23 +222,18 @@ void TileMap::Render()
 			{
 				pos.x = (float)j * TILE_SIZE;
 				pos.y = (float)i * TILE_SIZE;
-
-				/*if (tile != Tile::LASER)
-				{
-					rc = dict_rect[(int)tile];
-					DrawTextureRec(*img_tiles, rc, pos, WHITE);
-				}
-				else
-				{
-					laser->Draw((int)pos.x, (int)pos.y);
-				}*/
+				
+				rc = dict_rect[(int)tile];
+				DrawTextureRec(*img_tiles, rc, pos, WHITE);
+				
+				
 			}
 		}
 	}
 }
 void TileMap::Release()
 {
-	ResourceManager& data = ResourceManager::Instance(); 
+	ResourceManager& data = ResourceManager::Instance();
 	data.ReleaseTexture(Resource::IMG_TILES);
 
 	laser->Release();

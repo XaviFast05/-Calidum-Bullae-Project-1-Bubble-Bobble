@@ -33,10 +33,13 @@ enum class Tile {
 	PLAYER = 100,
 
 	//Intervals
+	STATIC_FIRST = SLAB_1,
+	STATIC_LAST = PARET1_LVLB,
 	SOLID_FIRST = SLAB_1,
 	SOLID_LAST = PARET1_LVLB,
 	ENTITY_FIRST = PLAYER,
 	ENTITY_LAST = PLAYER
+
 };
 
 class TileMap
@@ -54,18 +57,18 @@ public:
 	//Test for collisions with walls
 	bool TestCollisionWallLeft(const AABB& box) const;
 	bool TestCollisionWallRight(const AABB& box) const;
-	
+
 	//Test collision with the ground and update 'py' with the maximum y-position to prevent
 	//penetration of the grounded tile, that is, the pixel y-position above the grounded tile.
 	//Grounded tile = solid tile (blocks) or ladder tops.
-	bool TestCollisionGround(const AABB& box, int *py) const;
-	
+	bool TestCollisionGround(const AABB& box, int* py) const;
+
 	//Test if there is a ground tile one pixel below the given box
 	bool TestFalling(const AABB& box) const;
-	
+
 	//Test if box is on ladder and update 'px' with the x-center position of the ladder
 	bool TestOnLadder(const AABB& box, int* px) const;
-	
+
 	//Test if box is on ladder top and update 'px' with the x-center position of the ladder
 	bool TestOnLadderTop(const AABB& box, int* px) const;
 
@@ -74,24 +77,23 @@ private:
 
 	Tile GetTileIndex(int x, int y) const;
 	bool IsTileSolid(Tile tile) const;
-
-
+	bool IsTileLadderTop(Tile tile) const;
+	bool IsTileLadder(Tile tile) const;
 	bool CollisionX(const Point& p, int distance) const;
 	bool CollisionY(const Point& p, int distance) const;
 	int GetLadderCenterPos(int pixel_x, int pixel_y) const;
 
 	//Tile map
-	Tile *map;
+	Tile* map;
 
 	//Size of the tile map
 	int size, width, height;
-	
+
 	//Dictionary of tile frames
 	std::unordered_map<int, Rectangle> dict_rect;
 
-	Sprite *laser;
-	
-	//Tile sheet
-	const Texture2D *img_tiles;
-};
+	Sprite* laser;
 
+	//Tile sheet
+	const Texture2D* img_tiles;
+};
