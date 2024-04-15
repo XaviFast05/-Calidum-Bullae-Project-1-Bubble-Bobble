@@ -3,11 +3,11 @@
 #include "TileMap.h"
 
 //Representation model size: 32x32
-#define PLAYER_FRAME_SIZE		32
+#define PLAYER_FRAME_SIZE		16
 
 //Logical model size: 12x28
-#define PLAYER_PHYSICAL_WIDTH	12
-#define PLAYER_PHYSICAL_HEIGHT	28
+#define PLAYER_PHYSICAL_WIDTH	16
+#define PLAYER_PHYSICAL_HEIGHT	16
 
 //Horizontal speed and vertical speed while falling down
 #define PLAYER_SPEED			2
