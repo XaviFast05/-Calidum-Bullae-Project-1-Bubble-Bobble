@@ -62,20 +62,20 @@ AppStatus Player::Initialise()
 		sprite->AddKeyFrame((int)PlayerAnim::WALKING_LEFT, { (float)i*n, 0*n, n, n });
 
 	sprite->SetAnimationDelay((int)PlayerAnim::FALLING_RIGHT, ANIM_DELAY);
-	sprite->AddKeyFrame((int)PlayerAnim::FALLING_RIGHT, { 6*n, 0, -n, n });
-	sprite->AddKeyFrame((int)PlayerAnim::FALLING_RIGHT, { 6*n, 1, -n, n });
+	sprite->AddKeyFrame((int)PlayerAnim::FALLING_RIGHT, { 0, 6 * n, -n, n });
+	sprite->AddKeyFrame((int)PlayerAnim::FALLING_RIGHT, { n, 6 * n, -n, n });
 	sprite->SetAnimationDelay((int)PlayerAnim::FALLING_LEFT, ANIM_DELAY);
-	sprite->AddKeyFrame((int)PlayerAnim::FALLING_LEFT, { 6*n, 0, n, n });
-	sprite->AddKeyFrame((int)PlayerAnim::FALLING_LEFT, { 6*n, 1, n, n });
+	sprite->AddKeyFrame((int)PlayerAnim::FALLING_LEFT, { 0, 6 * n, n, n });
+	sprite->AddKeyFrame((int)PlayerAnim::FALLING_LEFT, { n, 6 * n, n, n });
 
 	sprite->SetAnimationDelay((int)PlayerAnim::JUMPING_RIGHT, ANIM_DELAY);
 	sprite->AddKeyFrame((int)PlayerAnim::JUMPING_RIGHT, { 0, 0, -n, n });
 	sprite->SetAnimationDelay((int)PlayerAnim::JUMPING_LEFT, ANIM_DELAY);
 	sprite->AddKeyFrame((int)PlayerAnim::JUMPING_LEFT, { 0, 0, n, n });
 	sprite->SetAnimationDelay((int)PlayerAnim::LEVITATING_RIGHT, ANIM_DELAY);
-	sprite->AddKeyFrame((int)PlayerAnim::LEVITATING_RIGHT, { 6*n, 0, -n, n });
+	sprite->AddKeyFrame((int)PlayerAnim::LEVITATING_RIGHT, { n, 6 * n, -n, n });
 	sprite->SetAnimationDelay((int)PlayerAnim::LEVITATING_LEFT, ANIM_DELAY);
-	sprite->AddKeyFrame((int)PlayerAnim::LEVITATING_LEFT, { 6*n, 0, n, n });
+	sprite->AddKeyFrame((int)PlayerAnim::LEVITATING_LEFT, { n, 6 * n, n, n });
 
 	
 		
