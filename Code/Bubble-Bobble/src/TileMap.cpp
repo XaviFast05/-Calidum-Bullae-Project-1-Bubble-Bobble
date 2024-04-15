@@ -31,39 +31,33 @@ void TileMap::InitTileDictionary()
 {
 	const int n = TILE_SIZE;
 
-	dict_rect[(int)Tile::BLOCK_SQUARE1_TL] = { 0,  0, n, n };
-	dict_rect[(int)Tile::BLOCK_SQUARE1_TR] = { n,  0, n, n };
-	dict_rect[(int)Tile::BLOCK_SQUARE1_BL] = { 0, n, n, n };
-	dict_rect[(int)Tile::BLOCK_SQUARE1_BR] = { n, n, n, n };
-	dict_rect[(int)Tile::BLOCK_SQUARE2_TL] = { 2 * n,  0, n, n };
-	dict_rect[(int)Tile::BLOCK_SQUARE2_TR] = { 3 * n,  0, n, n };
-	dict_rect[(int)Tile::BLOCK_SQUARE2_BL] = { 2 * n, n, n, n };
-	dict_rect[(int)Tile::BLOCK_SQUARE2_BR] = { 3 * n, n, n, n };
-	dict_rect[(int)Tile::BLOCK_VERT2_T] = { 4 * n,  0, n, n };
-	dict_rect[(int)Tile::BLOCK_VERT2_B] = { 4 * n, n, n, n };
-	dict_rect[(int)Tile::BLOCK_HORIZ2_L] = { 5 * n, 0, n, n };
-	dict_rect[(int)Tile::BLOCK_HORIZ2_R] = { 6 * n, 0, n, n };
-	dict_rect[(int)Tile::BLOCK_BLUE] = { 7 * n, 0, n, n };
-	dict_rect[(int)Tile::BLOCK_HORIZ3_L] = { 5 * n, n, n, n };
-	dict_rect[(int)Tile::BLOCK_HORIZ3_M] = { 6 * n, n, n, n };
-	dict_rect[(int)Tile::BLOCK_HORIZ3_R] = { 7 * n, n, n, n };
-	dict_rect[(int)Tile::BLOCK_BEAM_L] = { 0, 2 * n, n, n };
-	dict_rect[(int)Tile::BLOCK_BEAM_R] = { n, 2 * n, n, n };
+	dict_rect[(int)Tile::SLAB_1] = { 0,  0, n, n };
+	dict_rect[(int)Tile::SLAB_2] = { 0,  0, n, n };
+	dict_rect[(int)Tile::SLAB_3] = { 0,  0, n, n };
+	dict_rect[(int)Tile::SLAB_4] = { 0,  0, n, n };
+	dict_rect[(int)Tile::SLAB_BOSS] = { 0,  0, n, n };
 
-	dict_rect[(int)Tile::LADDER_L] = { 2 * n, 2 * n, n, n };
-	dict_rect[(int)Tile::LADDER_R] = { 3 * n, 2 * n, n, n };
-	dict_rect[(int)Tile::LADDER_TOP_L] = { 4 * n, 2 * n, n, n };
-	dict_rect[(int)Tile::LADDER_TOP_R] = { 5 * n, 2 * n, n, n };
-
-	dict_rect[(int)Tile::LOCK_RED] = { 6 * n, 2 * n, n, n };
-	dict_rect[(int)Tile::LOCK_YELLOW] = { 7 * n, 2 * n, n, n };
-
-	dict_rect[(int)Tile::LASER_L] = { 0, 6 * n, n, n };
-	dict_rect[(int)Tile::LASER_R] = { 4 * n, 6 * n, n, n };
+	dict_rect[(int)Tile::PARET1_LVL1] = { 0,  0, n, n };
 	
-	dict_rect[(int)Tile::LASER_FRAME0] = { 1 * n, 6 * n, n, n };
-	dict_rect[(int)Tile::LASER_FRAME1] = { 2 * n, 6 * n, n, n };
-	dict_rect[(int)Tile::LASER_FRAME2] = { 3 * n, 6 * n, n, n };
+	dict_rect[(int)Tile::PARET1_LVL2] = { 0,  0, n, n };
+	dict_rect[(int)Tile::PARET2_LVL2] = { 0,  0, n, n };
+	dict_rect[(int)Tile::PARET3_LVL2] = { 0,  0, n, n };
+	dict_rect[(int)Tile::PARET4_LVL2] = { 0,  0, n, n };
+
+	dict_rect[(int)Tile::PARET1_LVL3] = { 0,  0, n, n };
+	dict_rect[(int)Tile::PARET2_LVL3] = { 0,  0, n, n };
+	dict_rect[(int)Tile::PARET3_LVL3] = { 0,  0, n, n };
+	dict_rect[(int)Tile::PARET4_LVL3] = { 0,  0, n, n };
+
+	dict_rect[(int)Tile::PARET1_LVL4] = { 0,  0, n, n };
+	dict_rect[(int)Tile::PARET2_LVL4] = { 0,  0, n, n };
+	dict_rect[(int)Tile::PARET3_LVL4] = { 0,  0, n, n };
+	dict_rect[(int)Tile::PARET4_LVL4] = { 0,  0, n, n };
+
+	dict_rect[(int)Tile::PARET1_LVLB] = { 0,  0, n, n };
+
+
+
 
 }
 AppStatus TileMap::Initialise()
