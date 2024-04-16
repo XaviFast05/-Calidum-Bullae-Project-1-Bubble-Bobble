@@ -2,6 +2,7 @@
 #include "Globals.h"
 #include "ResourceManager.h"
 #include <cstring>
+#include "Player.h"
 
 TileMap::TileMap()
 {
@@ -144,6 +145,28 @@ bool TileMap::IsTileSlab(Tile tile) const
 	return(Tile::SLAB_FIRST <= tile && tile <= Tile::SLAB_LAST);
 }
 
+bool TileMap::TestInsideSlab(const Point& p, int distance) const
+{
+	int x, y, x0, x1;
+	Tile tile;
+
+	//Calculate the tile coordinates and the range of tiles to check for collision
+	y = p.y / TILE_SIZE;
+	x0 = p.x / TILE_SIZE;
+	x1 = (p.x + distance - 1) / TILE_SIZE;
+
+	//Iterate over the tiles within the horizontal range
+	for (x = x0; x <= x1; ++x)
+	{
+		tile = GetTileIndex(x, y);
+
+		//One solid or slab tile is sufficient
+		if (IsTileSlab(tile))
+			return true;
+	}
+	return false;
+}
+
 bool TileMap::TestCollisionWallLeft(const AABB& box) const
 {
 	return CollisionX(box.pos, box.height);
@@ -203,7 +226,7 @@ bool TileMap::CollisionY(const Point& p, int distance) const
 	{
 		tile = GetTileIndex(x, y);
 
-		//One solid or laddertop tile is sufficient
+		//One solid or slab tile is sufficient
 		if (IsTileSolid(tile)||IsTileSlab(tile))
 			return true;
 	}

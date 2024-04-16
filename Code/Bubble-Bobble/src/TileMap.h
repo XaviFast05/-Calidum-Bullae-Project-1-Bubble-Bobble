@@ -35,7 +35,7 @@ enum class Tile {
 	//Intervals
 	SLAB_FIRST = SLAB_1,
 	SLAB_LAST = SLAB_BOSS,
-	SOLID_FIRST = PARET1_LVL1,
+	SOLID_FIRST = SLAB_1,
 	SOLID_LAST = PARET1_LVLB,
 	ENTITY_FIRST = PLAYER,
 	ENTITY_LAST = PLAYER
@@ -54,6 +54,9 @@ public:
 	void Render();
 	void Release();
 
+
+	bool TestInsideSlab(const Point& p, int distance) const;
+
 	//Test for collisions with walls
 	bool TestCollisionWallLeft(const AABB& box) const;
 	bool TestCollisionWallRight(const AABB& box) const;
@@ -66,11 +69,7 @@ public:
 	//Test if there is a ground tile one pixel below the given box
 	bool TestFalling(const AABB& box) const;
 
-	//Test if box is on ladder and update 'px' with the x-center position of the ladder
-	bool TestOnLadder(const AABB& box, int* px) const;
 
-	//Test if box is on ladder top and update 'px' with the x-center position of the ladder
-	bool TestOnLadderTop(const AABB& box, int* px) const;
 
 private:
 	void InitTileDictionary();

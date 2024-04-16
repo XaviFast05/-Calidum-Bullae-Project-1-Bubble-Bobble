@@ -237,7 +237,7 @@ void Player::MoveX()
 		}
 
 		box = GetHitbox();
-		if (map->TestCollisionWallLeft(box))
+		if (map->TestCollisionWallLeft(box)&& !map->TestInsideSlab(box.pos + Point(box.width - 1, 0), box.height))
 		{
 			pos.x = prev_x;
 			if (state == State::WALKING) Stop();
@@ -253,7 +253,7 @@ void Player::MoveX()
 		}
 
 		box = GetHitbox();
-		if (map->TestCollisionWallRight(box))
+		if (map->TestCollisionWallRight(box) && !map->TestInsideSlab(box.pos, box.height))
 		{
 			pos.x = prev_x;
 			if (state == State::WALKING) Stop();
