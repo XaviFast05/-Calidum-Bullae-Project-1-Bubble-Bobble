@@ -30,7 +30,7 @@
 
 
 //Logic states
-enum class State { IDLE, WALKING, JUMPING, FALLING, CLIMBING, DEAD };
+enum class State { IDLE, WALKING, ATTACKING, JUMPING, FALLING, CLIMBING, DEAD };
 enum class Look { RIGHT, LEFT };
 
 //Rendering states
@@ -43,7 +43,8 @@ enum class PlayerAnim {
 	CLIMBING, CLIMBING_PRE_TOP, CLIMBING_TOP,
 	SHOCK_LEFT, SHOCK_RIGHT,
 	TELEPORT_LEFT, TELEPORT_RIGHT,
-	NUM_ANIMATIONS
+	NUM_ANIMATIONS,
+	ATTACK_RIGHT, ATTACK_LEFT
 };
 
 class Player: public Entity
@@ -80,6 +81,7 @@ private:
 	void StartWalkingRight();
 	void StartFalling();
 	void StartJumping();
+	void StartAttacking();
 	void ChangeAnimRight();
 	void ChangeAnimLeft();
 

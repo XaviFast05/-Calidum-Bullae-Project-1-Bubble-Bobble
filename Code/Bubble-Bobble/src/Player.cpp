@@ -89,6 +89,17 @@ AppStatus Player::Initialise()
 	sprite->AddKeyFrame((int)PlayerAnim::LEVITATING_LEFT, { n, 5 * n, n, n });
 	sprite->AddKeyFrame((int)PlayerAnim::LEVITATING_LEFT, { 0, 6 * n, n, n });
 
+	sprite->SetAnimationDelay((int)PlayerAnim::ATTACK_RIGHT, ANIM_DELAY);
+	sprite->AddKeyFrame((int)PlayerAnim::ATTACK_RIGHT, { 0, 1 * n, -n, n });
+	sprite->AddKeyFrame((int)PlayerAnim::ATTACK_RIGHT, { 8*n, 1 * n, -n, n });
+	sprite->AddKeyFrame((int)PlayerAnim::ATTACK_RIGHT, { 8*n, 1 * n, -n, n });
+	sprite->AddKeyFrame((int)PlayerAnim::ATTACK_RIGHT, { 8*n, 1 * n, -n, n });
+	sprite->SetAnimationDelay((int)PlayerAnim::ATTACK_LEFT, ANIM_DELAY);
+	sprite->AddKeyFrame((int)PlayerAnim::ATTACK_LEFT, { 0, 1 * n, n, n });
+	sprite->AddKeyFrame((int)PlayerAnim::ATTACK_LEFT, { 1*n, 1 * n, n, n });
+	sprite->AddKeyFrame((int)PlayerAnim::ATTACK_LEFT, { 2*n, 1 * n, n, n });
+	sprite->AddKeyFrame((int)PlayerAnim::ATTACK_LEFT, { 3*n, 1 * n, n, n });
+
 	
 		
 	sprite->SetAnimation((int)PlayerAnim::IDLE_RIGHT);
@@ -183,6 +194,13 @@ void Player::StartJumping()
 	else					SetAnimation((int)PlayerAnim::JUMPING_LEFT);
 	jump_delay = PLAYER_JUMP_DELAY;
 }
+void Player::StartAttacking()
+{
+	
+	state = State::ATTACKING;
+	if (IsLookingRight())	SetAnimation((int)PlayerAnim::ATTACK_RIGHT);
+	else					SetAnimation((int)PlayerAnim::ATTACK_LEFT);
+}
 void Player::ChangeAnimRight()
 {
 	look = Look::RIGHT;
@@ -192,6 +210,7 @@ void Player::ChangeAnimRight()
 		case State::WALKING: SetAnimation((int)PlayerAnim::WALKING_RIGHT); break;
 		case State::JUMPING: SetAnimation((int)PlayerAnim::JUMPING_RIGHT); break;
 		case State::FALLING: SetAnimation((int)PlayerAnim::FALLING_RIGHT); break;
+		case State::ATTACKING: SetAnimation((int)PlayerAnim::ATTACK_RIGHT); break;
 	}
 }
 void Player::ChangeAnimLeft()
@@ -203,6 +222,7 @@ void Player::ChangeAnimLeft()
 		case State::WALKING: SetAnimation((int)PlayerAnim::WALKING_LEFT); break;
 		case State::JUMPING: SetAnimation((int)PlayerAnim::JUMPING_LEFT); break;
 		case State::FALLING: SetAnimation((int)PlayerAnim::FALLING_LEFT); break;
+		case State::ATTACKING: SetAnimation((int)PlayerAnim::ATTACK_LEFT); break;
 	}
 }
 void Player::Update()
@@ -230,7 +250,7 @@ void Player::MoveX()
 	if (IsKeyDown(KEY_LEFT) && !IsKeyDown(KEY_RIGHT))
 	{
 		pos.x += -PLAYER_SPEED;
-		if (state == State::IDLE) StartWalkingLeft();
+		if (state == State::IDLE || state == State::ATTACKING) StartWalkingLeft();
 		else
 		{
 			if (IsLookingRight()) ChangeAnimLeft();
@@ -246,7 +266,7 @@ void Player::MoveX()
 	else if (IsKeyDown(KEY_RIGHT))
 	{
 		pos.x += PLAYER_SPEED;
-		if (state == State::IDLE) StartWalkingRight();
+		if (state == State::IDLE || state == State::ATTACKING) StartWalkingRight();
 		else
 		{
 			if (IsLookingLeft()) ChangeAnimRight();
@@ -259,6 +279,10 @@ void Player::MoveX()
 			if (state == State::WALKING) Stop();
 		}
 	}
+	else if (IsKeyDown(KEY_F) && state != State::JUMPING)
+	{
+		StartAttacking();
+	}
 	else
 	{
 		if (state == State::WALKING) Stop();
@@ -270,7 +294,6 @@ void Player::MoveY()
 
 	if (state == State::JUMPING)
 	{
-		
 		LogicJumping();
 	}
 	else //idle, walking, falling
