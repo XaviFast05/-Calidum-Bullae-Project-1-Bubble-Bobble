@@ -29,7 +29,7 @@ void Entity::connect()
 {
 	if (pos.y > WINDOW_HEIGHT)
 	{
-		pos.y = -TILE_SIZE;
+		pos.y = 20;
 	}
 }
 AABB Entity::GetHitbox() const
