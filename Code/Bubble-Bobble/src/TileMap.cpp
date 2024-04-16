@@ -39,15 +39,15 @@ void TileMap::InitTileDictionary()
 
 	dict_rect[(int)Tile::PARET1_LVL1] = { 0,  0, n, n };
 
-	dict_rect[(int)Tile::PARET1_LVL2] = { 4 * n,  0, n, n };
-	dict_rect[(int)Tile::PARET2_LVL2] = { 5 * n,  0, n, n };
-	dict_rect[(int)Tile::PARET3_LVL2] = { 4 * n,  n, n, n };
-	dict_rect[(int)Tile::PARET4_LVL2] = { 5 * n,  n, n, n };
+	dict_rect[(int)Tile::PARET1_LVL2] = { 2 * n,  0, n, n };
+	dict_rect[(int)Tile::PARET2_LVL2] = { 3 * n,  0, n, n };
+	dict_rect[(int)Tile::PARET3_LVL2] = { 2 * n,  n, n, n };
+	dict_rect[(int)Tile::PARET4_LVL2] = { 3 * n,  n, n, n };
 
-	dict_rect[(int)Tile::PARET1_LVL3] = { 2 * n,  0, n, n };
-	dict_rect[(int)Tile::PARET2_LVL3] = { 3 * n,  0, n, n };
-	dict_rect[(int)Tile::PARET3_LVL3] = { 2 * n,  n, n, n };
-	dict_rect[(int)Tile::PARET4_LVL3] = { 3 * n,  n, n, n };
+	dict_rect[(int)Tile::PARET1_LVL3] = { 4 * n,  0, n, n };
+	dict_rect[(int)Tile::PARET2_LVL3] = { 5 * n,  0, n, n };
+	dict_rect[(int)Tile::PARET3_LVL3] = { 4 * n,  n, n, n };
+	dict_rect[(int)Tile::PARET4_LVL3] = { 5 * n,  n, n, n };
 
 	dict_rect[(int)Tile::PARET1_LVL4] = { 6 * n,  0, n, n };
 	dict_rect[(int)Tile::PARET2_LVL4] = { 7 * n,  0, n, n };
