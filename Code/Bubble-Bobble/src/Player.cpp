@@ -211,6 +211,7 @@ void Player::Update()
 	Sprite* sprite = dynamic_cast<Sprite*>(render);
 	sprite->Update();
 	connect();
+
 }
 void Player::MoveX()
 {
@@ -218,7 +219,7 @@ void Player::MoveX()
 	int prev_x = pos.x;
 
 	//We can only go up and down while climbing
-	if (state == State::CLIMBING)	return;
+	
 
 	if (IsKeyDown(KEY_LEFT) && !IsKeyDown(KEY_RIGHT))
 	{
