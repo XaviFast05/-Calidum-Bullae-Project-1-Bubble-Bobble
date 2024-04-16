@@ -12,23 +12,22 @@
 //Horizontal speed and vertical speed while falling down
 #define PLAYER_SPEED			2
 
-//Vertical speed while on a ladder
-#define PLAYER_LADDER_SPEED		1
-
 //Frame animation delay while on a ladder
-#define ANIM_LADDER_DELAY		(2*ANIM_DELAY)
+#define ANIM_JUMP_DELAY		(2*ANIM_DELAY)
 
 //When jumping, initial jump speed and maximum falling speed
-#define PLAYER_JUMP_FORCE		10
+#define PLAYER_JUMP_FORCE		9
 
 //Frame delay for updating the jump velocity
 #define PLAYER_JUMP_DELAY		2
 
 //Player is levitating when abs(speed) <= this value
-#define PLAYER_LEVITATING_SPEED	4
+#define PLAYER_LEVITATING_SPEED	1
 
 //Gravity affects jumping velocity when jump_delay is 0
 #define GRAVITY_FORCE			1
+
+
 
 //Logic states
 enum class State { IDLE, WALKING, JUMPING, FALLING, CLIMBING, DEAD };
@@ -72,7 +71,6 @@ private:
 	void MoveX();
 	void MoveY();
 	void LogicJumping();
-	void LogicClimbing();
 
 	//Animation management
 	void SetAnimation(int id);
@@ -82,8 +80,6 @@ private:
 	void StartWalkingRight();
 	void StartFalling();
 	void StartJumping();
-	void StartClimbingUp();
-	void StartClimbingDown();
 	void ChangeAnimRight();
 	void ChangeAnimLeft();
 
