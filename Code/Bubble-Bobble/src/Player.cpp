@@ -5,6 +5,9 @@
 #include "Globals.h"
 #include <raymath.h>
 
+Sound soundEffects[10];
+
+
 Player::Player(const Point& p, State s, Look view) :
 	Entity(p, PLAYER_PHYSICAL_WIDTH, PLAYER_PHYSICAL_HEIGHT, PLAYER_FRAME_SIZE, PLAYER_FRAME_SIZE)
 {
@@ -21,6 +24,7 @@ AppStatus Player::Initialise()
 {
 	int i;
 	const int n = PLAYER_FRAME_SIZE;
+	soundEffects[0] = LoadSound("sound/SoundEffects/Characters/BubbleJumpFX.wav");
 
 	ResourceManager& data = ResourceManager::Instance();
 	if (data.LoadTexture(Resource::IMG_PLAYER, "images/bubMoveSprite.png") != AppStatus::OK)
@@ -207,6 +211,8 @@ void Player::Update()
 	//Instead, uses an independent behaviour for each axis.
 	MoveX();
 	MoveY();
+	
+
 
 	Sprite* sprite = dynamic_cast<Sprite*>(render);
 	sprite->Update();
@@ -264,6 +270,7 @@ void Player::MoveY()
 
 	if (state == State::JUMPING)
 	{
+		
 		LogicJumping();
 	}
 	else //idle, walking, falling
@@ -275,7 +282,9 @@ void Player::MoveY()
 			if (state == State::FALLING) Stop();
 			else if (IsKeyPressed(KEY_SPACE))
 			{
+				PlaySound(soundEffects[0]);
 				StartJumping();
+				
 			}
 		}
 		else
