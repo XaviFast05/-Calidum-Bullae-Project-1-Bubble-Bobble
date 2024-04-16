@@ -33,9 +33,9 @@ enum class Tile {
 	PLAYER = 100,
 
 	//Intervals
-	STATIC_FIRST = SLAB_1,
-	STATIC_LAST = PARET1_LVLB,
-	SOLID_FIRST = SLAB_1,
+	SLAB_FIRST = SLAB_1,
+	SLAB_LAST = SLAB_BOSS,
+	SOLID_FIRST = PARET1_LVL1,
 	SOLID_LAST = PARET1_LVLB,
 	ENTITY_FIRST = PLAYER,
 	ENTITY_LAST = PLAYER
@@ -77,11 +77,9 @@ private:
 
 	Tile GetTileIndex(int x, int y) const;
 	bool IsTileSolid(Tile tile) const;
-	bool IsTileLadderTop(Tile tile) const;
-	bool IsTileLadder(Tile tile) const;
+	bool IsTileSlab(Tile tile) const;
 	bool CollisionX(const Point& p, int distance) const;
 	bool CollisionY(const Point& p, int distance) const;
-	int GetLadderCenterPos(int pixel_x, int pixel_y) const;
 
 	//Tile map
 	Tile* map;

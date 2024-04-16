@@ -139,6 +139,11 @@ bool TileMap::IsTileSolid(Tile tile) const
 	return (Tile::SOLID_FIRST <= tile && tile <= Tile::SOLID_LAST);
 }
 
+bool TileMap::IsTileSlab(Tile tile) const
+{
+	return(Tile::SLAB_FIRST <= tile && tile <= Tile::SLAB_LAST);
+}
+
 bool TileMap::TestCollisionWallLeft(const AABB& box) const
 {
 	return CollisionX(box.pos, box.height);
@@ -199,7 +204,7 @@ bool TileMap::CollisionY(const Point& p, int distance) const
 		tile = GetTileIndex(x, y);
 
 		//One solid or laddertop tile is sufficient
-		if (IsTileSolid(tile))
+		if (IsTileSolid(tile)||IsTileSlab(tile))
 			return true;
 	}
 	return false;
