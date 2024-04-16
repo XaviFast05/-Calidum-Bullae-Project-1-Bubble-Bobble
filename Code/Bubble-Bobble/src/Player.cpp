@@ -62,20 +62,28 @@ AppStatus Player::Initialise()
 		sprite->AddKeyFrame((int)PlayerAnim::WALKING_LEFT, { (float)i*n, 0*n, n, n });
 
 	sprite->SetAnimationDelay((int)PlayerAnim::FALLING_RIGHT, ANIM_DELAY);
-	sprite->AddKeyFrame((int)PlayerAnim::FALLING_RIGHT, { 0, 6 * n, -n, n });
-	sprite->AddKeyFrame((int)PlayerAnim::FALLING_RIGHT, { n, 6 * n, -n, n });
+	for (i = 0; i < 2; ++i)
+		sprite->AddKeyFrame((int)PlayerAnim::FALLING_RIGHT, { (float)i * n, 6 * n, -n, n });
+
 	sprite->SetAnimationDelay((int)PlayerAnim::FALLING_LEFT, ANIM_DELAY);
-	sprite->AddKeyFrame((int)PlayerAnim::FALLING_LEFT, { 0, 6 * n, n, n });
-	sprite->AddKeyFrame((int)PlayerAnim::FALLING_LEFT, { n, 6 * n, n, n });
+	for (i = 0; i < 2; ++i)
+		sprite->AddKeyFrame((int)PlayerAnim::FALLING_LEFT, { (float)i * n, 6 * n, n, n });
+
 
 	sprite->SetAnimationDelay((int)PlayerAnim::JUMPING_RIGHT, ANIM_DELAY);
-	sprite->AddKeyFrame((int)PlayerAnim::JUMPING_RIGHT, { 0, 0, -n, n });
+	for (i = 0; i < 2; ++i)
+		sprite->AddKeyFrame((int)PlayerAnim::JUMPING_RIGHT, { (float)i * n, 5 * n, -n, n });
+
 	sprite->SetAnimationDelay((int)PlayerAnim::JUMPING_LEFT, ANIM_DELAY);
-	sprite->AddKeyFrame((int)PlayerAnim::JUMPING_LEFT, { 0, 0, n, n });
+	for (i = 0; i < 2; ++i)
+		sprite->AddKeyFrame((int)PlayerAnim::JUMPING_LEFT, { (float)i * n, 5 * n, n, n });
+
 	sprite->SetAnimationDelay((int)PlayerAnim::LEVITATING_RIGHT, ANIM_DELAY);
-	sprite->AddKeyFrame((int)PlayerAnim::LEVITATING_RIGHT, { n, 6 * n, -n, n });
+	sprite->AddKeyFrame((int)PlayerAnim::LEVITATING_RIGHT, { n, 5 * n, -n, n });
+	sprite->AddKeyFrame((int)PlayerAnim::LEVITATING_RIGHT, { 0, 6 * n, -n, n });
 	sprite->SetAnimationDelay((int)PlayerAnim::LEVITATING_LEFT, ANIM_DELAY);
-	sprite->AddKeyFrame((int)PlayerAnim::LEVITATING_LEFT, { n, 6 * n, n, n });
+	sprite->AddKeyFrame((int)PlayerAnim::LEVITATING_LEFT, { n, 5 * n, n, n });
+	sprite->AddKeyFrame((int)PlayerAnim::LEVITATING_LEFT, { 0, 6 * n, n, n });
 
 	
 		
@@ -202,6 +210,7 @@ void Player::Update()
 
 	Sprite* sprite = dynamic_cast<Sprite*>(render);
 	sprite->Update();
+	connect();
 }
 void Player::MoveX()
 {
