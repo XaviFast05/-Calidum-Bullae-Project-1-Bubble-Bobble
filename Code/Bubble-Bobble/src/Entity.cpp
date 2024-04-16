@@ -25,6 +25,13 @@ void Entity::Update()
 {
 	pos += dir;
 }
+void Entity::connect()
+{
+	if (pos.y > WINDOW_HEIGHT)
+	{
+		pos.y = -TILE_SIZE;
+	}
+}
 AABB Entity::GetHitbox() const
 {
 	Point p(pos.x, pos.y - (height - 1));
