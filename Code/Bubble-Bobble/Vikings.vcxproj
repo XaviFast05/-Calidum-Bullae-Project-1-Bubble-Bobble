@@ -112,8 +112,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\martima2\Documents\GitHub\-Calidum-Bullae-Project-1-Bubble-Bobble\Code\raylib\raylib\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\martima2\Documents\GitHub\-Calidum-Bullae-Project-1-Bubble-Bobble\Code\raylib\raylib\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\xaviercf12\Documents\GitHub\-Calidum-Bullae-Project-1-Bubble-Bobble\Code\raylib\raylib\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\xaviercf12\Documents\GitHub\-Calidum-Bullae-Project-1-Bubble-Bobble\Code\raylib\raylib\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
