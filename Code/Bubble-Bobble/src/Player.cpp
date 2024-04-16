@@ -24,7 +24,7 @@ AppStatus Player::Initialise()
 {
 	int i;
 	const int n = PLAYER_FRAME_SIZE;
-	soundEffects[0] = LoadSound("sound/SoundEffects/Characters/BubbleJumpFX.wav");
+	soundEffects[0] = LoadSound("sound/SoundEffects/Characters/JumpFX.wav");
 
 	ResourceManager& data = ResourceManager::Instance();
 	if (data.LoadTexture(Resource::IMG_PLAYER, "images/bubMoveSprite.png") != AppStatus::OK)
@@ -237,7 +237,7 @@ void Player::MoveX()
 		}
 
 		box = GetHitbox();
-		if (map->TestCollisionWallLeft(box)&& !map->TestInsideSlab(box.pos + Point(box.width - 1, 0), box.height))
+		if (map->TestCollisionWallLeft(box))
 		{
 			pos.x = prev_x;
 			if (state == State::WALKING) Stop();
@@ -253,7 +253,7 @@ void Player::MoveX()
 		}
 
 		box = GetHitbox();
-		if (map->TestCollisionWallRight(box) && !map->TestInsideSlab(box.pos, box.height))
+		if (map->TestCollisionWallRight(box))
 		{
 			pos.x = prev_x;
 			if (state == State::WALKING) Stop();

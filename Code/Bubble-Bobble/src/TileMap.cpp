@@ -145,7 +145,7 @@ bool TileMap::IsTileSlab(Tile tile) const
 	return(Tile::SLAB_FIRST <= tile && tile <= Tile::SLAB_LAST);
 }
 
-bool TileMap::TestInsideSlab(const Point& p, int distance) const
+bool TileMap::TestInsideSolid(const Point& p, int distance) const
 {
 	int x, y, x0, x1;
 	Tile tile;
@@ -161,7 +161,7 @@ bool TileMap::TestInsideSlab(const Point& p, int distance) const
 		tile = GetTileIndex(x, y);
 
 		//One solid or slab tile is sufficient
-		if (IsTileSlab(tile))
+		if (IsTileSolid(tile))
 			return true;
 	}
 	return false;

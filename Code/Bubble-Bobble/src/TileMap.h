@@ -55,7 +55,7 @@ public:
 	void Release();
 
 
-	bool TestInsideSlab(const Point& p, int distance) const;
+	bool TestInsideSolid(const Point& p, int distance) const;
 
 	//Test for collisions with walls
 	bool TestCollisionWallLeft(const AABB& box) const;
