@@ -3,6 +3,8 @@
 #include "ResourceManager.h"
 #include <stdio.h>
 
+Sound soundMusic[10];
+
 Game::Game()
 {
     state = GameState::MAIN_MENU;
@@ -24,6 +26,7 @@ Game::~Game()
 }
 AppStatus Game::Initialise(float scale)
 {
+    
     float w, h;
     w = WINDOW_WIDTH * scale;
     h = WINDOW_HEIGHT * scale;
@@ -54,23 +57,29 @@ AppStatus Game::Initialise(float scale)
     //Disable the escape key to quit functionality
     SetExitKey(0);
 
+    
+
     return AppStatus::OK;
 }
 AppStatus Game::LoadResources()
 {
     ResourceManager& data = ResourceManager::Instance();
     
-    if (data.LoadTexture(Resource::IMG_MENU, "images/menu.png") != AppStatus::OK)
+    if (data.LoadTexture(Resource::IMG_MENU, "images/title.png") != AppStatus::OK)
     {
         return AppStatus::ERROR;
     }
     img_menu = data.GetTexture(Resource::IMG_MENU);
     
+    
+
     return AppStatus::OK;
 }
 AppStatus Game::BeginPlay()
 {
     scene = new Scene();
+    soundMusic[0] = LoadSound("sound/Music/Main-Theme.ogg");
+    PlaySound(soundMusic[0]);
     if (scene == nullptr)
     {
         LOG("Failed to allocate memory for Scene");
@@ -97,7 +106,8 @@ AppStatus Game::Update()
 
     switch (state)
     {
-        case GameState::MAIN_MENU: 
+
+        case GameState::MAIN_MENU:;
             if (IsKeyPressed(KEY_ESCAPE)) return AppStatus::QUIT;
             if (IsKeyPressed(KEY_SPACE))
             {
@@ -110,6 +120,7 @@ AppStatus Game::Update()
             if (IsKeyPressed(KEY_ESCAPE))
             {
                 FinishPlay();
+                StopSound(soundMusic[0]);
                 state = GameState::MAIN_MENU;
             }
             else
