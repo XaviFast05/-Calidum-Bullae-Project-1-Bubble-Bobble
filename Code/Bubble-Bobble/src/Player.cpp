@@ -78,10 +78,10 @@ AppStatus Player::Initialise()
 	for (i = 0; i < 2; ++i)
 		sprite->AddKeyFrame((int)PlayerAnim::JUMPING_LEFT, { (float)i * n, 5 * n, n, n });
 
-	sprite->SetAnimationDelay((int)PlayerAnim::LEVITATING_RIGHT, ANIM_DELAY);
+	sprite->SetAnimationDelay((int)PlayerAnim::LEVITATING_RIGHT, ANIM_JUMP_DELAY);
 	sprite->AddKeyFrame((int)PlayerAnim::LEVITATING_RIGHT, { n, 5 * n, -n, n });
 	sprite->AddKeyFrame((int)PlayerAnim::LEVITATING_RIGHT, { 0, 6 * n, -n, n });
-	sprite->SetAnimationDelay((int)PlayerAnim::LEVITATING_LEFT, ANIM_DELAY);
+	sprite->SetAnimationDelay((int)PlayerAnim::LEVITATING_LEFT, ANIM_JUMP_DELAY);
 	sprite->AddKeyFrame((int)PlayerAnim::LEVITATING_LEFT, { n, 5 * n, n, n });
 	sprite->AddKeyFrame((int)PlayerAnim::LEVITATING_LEFT, { 0, 6 * n, n, n });
 
