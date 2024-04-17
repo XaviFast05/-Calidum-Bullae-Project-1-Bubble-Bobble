@@ -30,6 +30,8 @@
 
 
 
+
+
 //Logic states
 enum class State { IDLE, WALKING, ATTACKING, JUMPING, FALLING, CLIMBING, DEAD };
 enum class Look { RIGHT, LEFT };
@@ -73,6 +75,7 @@ private:
 	//Player mechanics
 	void MoveX();
 	void MoveY();
+	void Attack();
 	void LogicJumping();
 
 	//Animation management

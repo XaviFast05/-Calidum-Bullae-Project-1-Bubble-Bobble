@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "Globals.h"
 #include "ResourceManager.h"
+#include "Entity.h"
 #include <stdio.h>
 
 Sound soundMusic[10];
@@ -90,7 +91,15 @@ AppStatus Game::BeginPlay()
         LOG("Failed to initialise Scene");
         return AppStatus::ERROR;
     }
+    
+    for (int i = 0; i < MAX_SHOTS; ++i)
+    {
+        Shots[i] = nullptr;
+    }
+    
 
+    idx_shot = 0;
+    
     return AppStatus::OK;
 }
 void Game::FinishPlay()

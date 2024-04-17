@@ -20,6 +20,7 @@ Entity::~Entity()
 		render = nullptr;
 	}
 }
+
 void Entity::SetPos(const Point& p)
 {
 	pos = p;
@@ -27,6 +28,26 @@ void Entity::SetPos(const Point& p)
 void Entity::Update()
 {
 	pos += dir;
+	
+}
+void Entity::Init(Point& p, int s)
+{
+	pos = p;
+	speed = s;
+	is_alive = true;
+}
+bool Entity::IsAlive() const
+{
+	return is_alive;
+}
+void Entity::Move(Vector2 dir)
+{
+	pos.x += dir.x * speed;
+	pos.y += dir.y * speed;
+}
+void Entity::SetAlive(bool b)
+{
+	is_alive = b;
 }
 void Entity::connect()
 {

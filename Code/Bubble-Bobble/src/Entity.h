@@ -6,6 +6,9 @@
 #include "RenderComponent.h"
 #include "AABB.h"
 
+#define MAX_SHOTS 32
+#define SHOOT_SPEED 5
+
 class Entity
 {
 public:
@@ -18,6 +21,14 @@ public:
 	void Update();
 	void connect();
 	AABB GetHitbox() const;
+
+	void Init(Point& p, int s);
+	Entity* Shots[MAX_SHOTS];
+	int idx_shot;
+	bool IsAlive() const;
+	void Move(Vector2 dir);
+	
+	void SetAlive(bool b);
 
 	//Draw representation model
 	void Draw() const;
@@ -36,6 +47,10 @@ protected:
 
 	//Representation model
 	int frame_width, frame_height, frame_ground;
+
+	
+	int speed;
+	bool is_alive;
 
 	RenderComponent *render;
 };

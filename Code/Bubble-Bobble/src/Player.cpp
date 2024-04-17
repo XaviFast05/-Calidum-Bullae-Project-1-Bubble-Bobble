@@ -231,12 +231,39 @@ void Player::Update()
 	//Instead, uses an independent behaviour for each axis.
 	MoveX();
 	MoveY();
-	
+	Attack();
 
 
 	Sprite* sprite = dynamic_cast<Sprite*>(render);
 	sprite->Update();
 	connect();
+
+}
+void Player::Attack()
+{
+	Point p;
+	AABB box;
+	int position = pos.x;
+
+	if (IsKeyDown(KEY_F))
+	{
+		Shots[idx_shot]->Init( pos, SHOOT_SPEED);
+		idx_shot++;
+		idx_shot %= MAX_SHOTS;
+
+		StartAttacking();
+	}
+
+	for (int i = 0; i < MAX_SHOTS; ++i)
+	{
+		if (Shots[i]->IsAlive())
+		{
+			Shots[i]->Move({ 1, 0 });
+			p = pos;
+			if (p.x > WINDOW_WIDTH)
+				Shots[i]->SetAlive(false);
+		}
+	}
 
 }
 void Player::MoveX()
@@ -250,7 +277,7 @@ void Player::MoveX()
 	if (IsKeyDown(KEY_LEFT) && !IsKeyDown(KEY_RIGHT))
 	{
 		pos.x += -PLAYER_SPEED;
-		if (state == State::IDLE || state == State::ATTACKING) StartWalkingLeft();
+		if (state == State::IDLE) StartWalkingLeft();
 		else
 		{
 			if (IsLookingRight()) ChangeAnimLeft();
@@ -266,7 +293,7 @@ void Player::MoveX()
 	else if (IsKeyDown(KEY_RIGHT))
 	{
 		pos.x += PLAYER_SPEED;
-		if (state == State::IDLE || state == State::ATTACKING) StartWalkingRight();
+		if (state == State::IDLE ) StartWalkingRight();
 		else
 		{
 			if (IsLookingLeft()) ChangeAnimRight();
@@ -279,10 +306,7 @@ void Player::MoveX()
 			if (state == State::WALKING) Stop();
 		}
 	}
-	else if (IsKeyDown(KEY_F) && state != State::JUMPING)
-	{
-		StartAttacking();
-	}
+	
 	else
 	{
 		if (state == State::WALKING) Stop();
