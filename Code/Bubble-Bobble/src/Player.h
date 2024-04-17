@@ -10,7 +10,7 @@
 #define PLAYER_PHYSICAL_HEIGHT	16
 
 //Horizontal speed and vertical speed while falling down
-#define PLAYER_SPEED			2
+#define PLAYER_SPEED			1
 
 //Frame animation delay while on a ladder
 #define ANIM_JUMP_DELAY		(2*ANIM_DELAY)
@@ -22,7 +22,7 @@
 #define PLAYER_JUMP_DELAY		2
 
 //Player is levitating when abs(speed) <= this value
-#define PLAYER_LEVITATING_SPEED	1
+#define PLAYER_LEVITATING_SPEED	2
 
 //Gravity affects jumping velocity when jump_delay is 0
 #define GRAVITY_FORCE			1
