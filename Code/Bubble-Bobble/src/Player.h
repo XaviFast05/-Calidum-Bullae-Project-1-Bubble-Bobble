@@ -8,7 +8,8 @@
 //Logical model size: 12x28
 #define PLAYER_PHYSICAL_WIDTH	12
 #define PLAYER_PHYSICAL_HEIGHT	16
-#define PLAYER_GROUNDCHECK_WIDTH 8
+#define PLAYER_GROUNDCHECK_WIDTH 9
+
 //Horizontal speed and vertical speed while falling down
 #define PLAYER_SPEED			1
 
@@ -63,6 +64,7 @@ public:
 	void Update();
 	void DrawDebug(const Color& col) const;
 	void Release();
+	void Stop();
 
 private:
 	bool IsLookingRight() const;
@@ -76,7 +78,7 @@ private:
 	//Animation management
 	void SetAnimation(int id);
 	PlayerAnim GetAnimation();
-	void Stop();
+	
 	void StartWalkingLeft();
 	void StartWalkingRight();
 	void StartFalling();

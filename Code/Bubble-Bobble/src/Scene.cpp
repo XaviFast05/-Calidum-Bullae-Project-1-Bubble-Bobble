@@ -84,7 +84,7 @@ AppStatus Scene::LoadLevel(int stage)
 	Object *obj;
 	
 	ClearLevel();
-
+	player->Stop();
 	size = LEVEL_WIDTH * LEVEL_HEIGHT;
 	if (stage == 1)
 	{
