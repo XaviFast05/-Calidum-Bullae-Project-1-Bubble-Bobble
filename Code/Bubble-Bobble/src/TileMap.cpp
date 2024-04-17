@@ -187,7 +187,7 @@ bool TileMap::TestCollisionGround(const AABB& box, int* py) const
 	Point p(box.pos.x, *py);	//control point
 	int tile_y;
 
-	if (CollisionY(p, box.width))
+	if (CollisionY(p, PLAYER_GROUNDCHECK_WIDTH))
 	{
 		tile_y = p.y / TILE_SIZE;
 
@@ -196,6 +196,7 @@ bool TileMap::TestCollisionGround(const AABB& box, int* py) const
 	}
 	return false;
 }
+
 bool TileMap::TestFalling(const AABB& box) const
 {
 	return !CollisionY(box.pos + Point(0, box.height), box.width);
