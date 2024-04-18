@@ -3,7 +3,7 @@
 #include "ResourceManager.h"
 #include <stdio.h>
 
-Sound soundMusic[10];
+Music soundMusic[10];
 
 Game::Game()
 {
@@ -78,8 +78,8 @@ AppStatus Game::LoadResources()
 AppStatus Game::BeginPlay()
 {
     scene = new Scene();
-    soundMusic[0] = LoadSound("sound/Music/Main-Theme.ogg");
-    PlaySound(soundMusic[0]);
+    soundMusic[0] = LoadMusicStream("sound/Music/Main-Theme.ogg");
+    PlayMusicStream(soundMusic[0]);
     if (scene == nullptr)
     {
         LOG("Failed to allocate memory for Scene");
@@ -103,7 +103,7 @@ AppStatus Game::Update()
 {
     //Check if user attempts to close the window, either by clicking the close button or by pressing Alt+F4
     if(WindowShouldClose()) return AppStatus::QUIT;
-
+    UpdateMusicStream(soundMusic[0]);
     switch (state)
     {
 
@@ -120,7 +120,7 @@ AppStatus Game::Update()
             if (IsKeyPressed(KEY_ESCAPE))
             {
                 FinishPlay();
-                StopSound(soundMusic[0]);
+                StopMusicStream(soundMusic[0]);
                 state = GameState::MAIN_MENU;
             }
             else
