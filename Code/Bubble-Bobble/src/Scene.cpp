@@ -383,7 +383,7 @@ void Scene::CheckCollisions()
 		enemy_box = (*it)->GetHitbox();
 		if (player_box.TestAABB(enemy_box))
 		{
-			player->LifeManager();
+			player->GetHit();
 
 		}
 		else

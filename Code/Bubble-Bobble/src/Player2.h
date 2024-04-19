@@ -3,30 +3,30 @@
 #include "TileMap.h"
 
 //Representation model size: 32x32
-#define PLAYER_FRAME_SIZE		16
+#define PLAYER2_FRAME_SIZE		16
 
 //Logical model size: 12x28
-#define PLAYER_PHYSICAL_WIDTH	12
-#define PLAYER_PHYSICAL_HEIGHT	16
-#define PLAYER_GROUNDCHECK_WIDTH 9
+#define PLAYER2_PHYSICAL_WIDTH	12
+#define PLAYER2_PHYSICAL_HEIGHT	16
+#define PLAYER2_GROUNDCHECK_WIDTH 9
 
 //Horizontal speed and vertical speed while falling down
-#define PLAYER_SPEED			1
+#define PLAYER2_SPEED			1
 
 //Frame animation delay while on a ladder
 #define ANIM_JUMP_DELAY		(2*ANIM_DELAY)
 
 //When jumping, initial jump speed and maximum falling speed
-#define PLAYER_JUMP_FORCE		9
+#define PLAYER2_JUMP_FORCE		9
 
 //Frame delay for updating the jump velocity
-#define PLAYER_JUMP_DELAY		2
+#define PLAYER2_JUMP_DELAY		2
 
 //Player is levitating when abs(speed) <= this value
-#define PLAYER_LEVITATING_SPEED	2
+#define PLAYER2_LEVITATING_SPEED	2
 
 //Gravity affects jumping velocity when jump_delay is 0
-#define GRAVITY_FORCE			1
+#define GRAVITY2_FORCE			1
 
 
 
@@ -35,7 +35,7 @@ enum class State { IDLE, WALKING, ATTACKING, JUMPING, FALLING, CLIMBING, DEAD, D
 enum class Look { RIGHT, LEFT };
 
 //Rendering states
-enum class PlayerAnim {
+enum class Player2Anim {
 	IDLE_LEFT, IDLE_RIGHT,
 	WALKING_LEFT, WALKING_RIGHT,
 	JUMPING_LEFT, JUMPING_RIGHT,
@@ -48,12 +48,12 @@ enum class PlayerAnim {
 	ATTACK_RIGHT, ATTACK_LEFT
 };
 
-class Player: public Entity
+class Player2 : public Entity
 {
 public:
-	Player(const Point& p, State s, Look view);
-	~Player();
-	
+	Player2(const Point& p, State s, Look view);
+	~Player2();
+
 	AppStatus Initialise();
 	void SetTileMap(TileMap* tilemap);
 
@@ -80,8 +80,8 @@ private:
 
 	//Animation management
 	void SetAnimation(int id);
-	PlayerAnim GetAnimation();
-	
+	Player2Anim GetAnimation();
+
 	void StartWalkingLeft();
 	void StartWalkingRight();
 	void StartFalling();
@@ -103,7 +103,7 @@ private:
 	Look look;
 	int jump_delay;
 
-	TileMap *map;
+	TileMap* map;
 
 	int lifes;
 	int score;

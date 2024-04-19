@@ -18,6 +18,7 @@ Player::Player(const Point& p, State s, Look view) :
 	score = 0;
 	lifes = 3;
 }
+
 Player::~Player()
 {
 }
@@ -119,8 +120,9 @@ int Player::GetScore()
 {
 	return score;
 }
-void Player::LifeManager()
+void Player::GetHit()
 {
+	
 	lifes--;
 }
 void Player::LooseCondition()
@@ -400,3 +402,5 @@ void Player::Release()
 
 	render->Release();
 }
+
+
