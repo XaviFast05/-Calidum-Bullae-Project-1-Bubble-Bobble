@@ -16,6 +16,7 @@ Player::Player(const Point& p, State s, Look view) :
 	jump_delay = PLAYER_JUMP_DELAY;
 	map = nullptr;
 	score = 0;
+	lifes = 3;
 }
 Player::~Player()
 {
@@ -117,6 +118,17 @@ void Player::IncrScore(int n)
 int Player::GetScore()
 {
 	return score;
+}
+void Player::LifeManager()
+{
+	lifes--;
+}
+void Player::LooseCondition()
+{
+	if (lifes < 0)
+	{
+
+	}
 }
 void Player::SetTileMap(TileMap* tilemap)
 {
@@ -231,7 +243,7 @@ void Player::Update()
 	//Instead, uses an independent behaviour for each axis.
 	MoveX();
 	MoveY();
-	
+	LooseCondition();
 
 
 	Sprite* sprite = dynamic_cast<Sprite*>(render);

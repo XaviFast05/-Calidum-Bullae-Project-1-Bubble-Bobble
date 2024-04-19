@@ -3,39 +3,39 @@
 #include "TileMap.h"
 
 //Representation model size: 32x32
-#define PLAYER_FRAME_SIZE		16
+#define ENEMY_FRAME_SIZE		16
 
 //Logical model size: 12x28
-#define PLAYER_PHYSICAL_WIDTH	12
-#define PLAYER_PHYSICAL_HEIGHT	16
-#define PLAYER_GROUNDCHECK_WIDTH 9
+#define ENEMY_PHYSICAL_WIDTH	12
+#define ENEMY_PHYSICAL_HEIGHT	16
+#define ENEMY_GROUNDCHECK_WIDTH 9
 
 //Horizontal speed and vertical speed while falling down
-#define PLAYER_SPEED			1
+#define ENEMY_SPEED			1
 
 //Frame animation delay while on a ladder
 #define ANIM_JUMP_DELAY		(2*ANIM_DELAY)
 
 //When jumping, initial jump speed and maximum falling speed
-#define PLAYER_JUMP_FORCE		9
+#define ENEMY_JUMP_FORCE		9
 
 //Frame delay for updating the jump velocity
-#define PLAYER_JUMP_DELAY		2
+#define ENEMY_JUMP_DELAY		2
 
 //Player is levitating when abs(speed) <= this value
-#define PLAYER_LEVITATING_SPEED	2
+#define ENEMY_LEVITATING_SPEED	2
 
 //Gravity affects jumping velocity when jump_delay is 0
-#define GRAVITY_FORCE			1
+#define ENEMY_FORCE			1
 
 
 
 //Logic states
-enum class State { IDLE, WALKING, ATTACKING, JUMPING, FALLING, CLIMBING, DEAD };
-enum class Look { RIGHT, LEFT };
+enum class E_State { IDLE, WALKING, ATTACKING, JUMPING, FALLING, CLIMBING, DEAD };
+enum class E_Look { RIGHT, LEFT };
 
 //Rendering states
-enum class PlayerAnim {
+enum class EnemyAnim {
 	IDLE_LEFT, IDLE_RIGHT,
 	WALKING_LEFT, WALKING_RIGHT,
 	JUMPING_LEFT, JUMPING_RIGHT,
@@ -48,18 +48,15 @@ enum class PlayerAnim {
 	ATTACK_RIGHT, ATTACK_LEFT
 };
 
-class Player: public Entity
+class Enemy : public Entity
 {
 public:
-	Player(const Point& p, State s, Look view);
-	~Player();
-	
+	Enemy(const Point& p, E_State s, E_Look view);
+	~Enemy();
+
 	AppStatus Initialise();
 	void SetTileMap(TileMap* tilemap);
 
-	void InitScore();
-	void IncrScore(int n);
-	int GetScore();
 	void LifeManager();
 	void LooseCondition();
 
@@ -80,8 +77,8 @@ private:
 
 	//Animation management
 	void SetAnimation(int id);
-	PlayerAnim GetAnimation();
-	
+	EnemyAnim GetAnimation();
+
 	void StartWalkingLeft();
 	void StartWalkingRight();
 	void StartFalling();
@@ -99,13 +96,12 @@ private:
 	bool IsInFirstHalfTile() const;
 	bool IsInSecondHalfTile() const;
 
-	State state;
-	Look look;
+	E_State state;
+	E_Look look;
 	int jump_delay;
 
-	TileMap *map;
+	TileMap* map;
 
 	int lifes;
 	int score;
 };
-

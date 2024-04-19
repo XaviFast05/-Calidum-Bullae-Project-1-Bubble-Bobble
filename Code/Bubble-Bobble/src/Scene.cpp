@@ -33,6 +33,12 @@ Scene::~Scene()
 		delete obj;
 	}
 	objects.clear();
+
+	for (Entity* enem : enemies)
+	{
+		delete enem;
+	}
+	enemies.clear();
 }
 AppStatus Scene::Init()
 {
@@ -82,6 +88,7 @@ AppStatus Scene::LoadLevel(int stage)
 	Point pos;
 	int *map = nullptr;
 	Object *obj;
+	Enemy* enem;
 	
 	ClearLevel();
 	player->Stop();
@@ -348,7 +355,7 @@ void Scene::Release()
 }
 void Scene::CheckCollisions()
 {
-	AABB player_box, obj_box;
+	AABB player_box, obj_box, enemy_box;
 	
 	player_box = player->GetHitbox();
 	auto it = objects.begin();
@@ -370,6 +377,22 @@ void Scene::CheckCollisions()
 			++it; 
 		}
 	}
+	auto en = enemies.begin();
+	while (en != enemies.end())
+	{
+		enemy_box = (*it)->GetHitbox();
+		if (player_box.TestAABB(enemy_box))
+		{
+			player->LifeManager();
+
+		}
+		else
+		{
+			//Move to the next object
+			++it;
+		}
+	}
+
 }
 void Scene::ClearLevel()
 {
