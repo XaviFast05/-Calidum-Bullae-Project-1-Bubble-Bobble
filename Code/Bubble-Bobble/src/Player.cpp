@@ -129,7 +129,7 @@ void Player::LooseCondition()
 {
 	if (lifes < 0)
 	{
-
+		state = State::DEAD;
 	}
 }
 void Player::SetTileMap(TileMap* tilemap)
@@ -210,10 +210,11 @@ void Player::StartJumping()
 }
 void Player::StartAttacking()
 {
-	
+	&Sprite::SetAutomaticMode;
 	state = State::ATTACKING;
 	if (IsLookingRight())	SetAnimation((int)PlayerAnim::ATTACK_RIGHT);
 	else					SetAnimation((int)PlayerAnim::ATTACK_LEFT);
+	
 }
 void Player::ChangeAnimRight()
 {
