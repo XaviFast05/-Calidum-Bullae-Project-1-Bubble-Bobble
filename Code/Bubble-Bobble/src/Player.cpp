@@ -5,7 +5,7 @@
 #include "Globals.h"
 #include <raymath.h>
 
-Sound soundEffects[10];
+Sound soundEffectsplayer1[10];
 
 
 Player::Player(const Point& p, State s, Look view) :
@@ -26,7 +26,7 @@ AppStatus Player::Initialise()
 {
 	int i;
 	const int n = PLAYER_FRAME_SIZE;
-	soundEffects[0] = LoadSound("sound/SoundEffects/Characters/JumpFX.wav");
+	soundEffectsplayer1[0] = LoadSound("sound/SoundEffects/Characters/JumpFX.wav");
 
 	ResourceManager& data = ResourceManager::Instance();
 	if (data.LoadTexture(Resource::IMG_PLAYER, "images/bubMoveSprite.png") != AppStatus::OK)
@@ -319,7 +319,7 @@ void Player::MoveY()
 			if (state == State::FALLING) Stop();
 			else if (IsKeyPressed(KEY_SPACE))
 			{
-				PlaySound(soundEffects[0]);
+				PlaySound(soundEffectsplayer1[0]);
 				StartJumping();
 				
 			}
