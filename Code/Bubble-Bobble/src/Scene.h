@@ -23,6 +23,7 @@ private:
     
     void CheckCollisions(); 
     void ClearLevel();
+    void EnemyUpdate() const;
     void RenderObjects() const;
     void RenderEnemies() const;
     void RenderObjectsDebug(const Color& col) const;

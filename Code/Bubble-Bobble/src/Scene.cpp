@@ -381,6 +381,7 @@ void Scene::Update()
 
 	level->Update();
 	player->Update();
+	EnemyUpdate();
 	CheckCollisions();
 }
 void Scene::Render()
@@ -458,6 +459,13 @@ void Scene::ClearLevel()
 		delete obj;
 	}
 	objects.clear();
+}
+void Scene::EnemyUpdate() const
+{
+	for (Enemy* enem : enemies)
+	{
+		enem->Update();
+	}
 }
 void Scene::RenderObjects() const
 {
