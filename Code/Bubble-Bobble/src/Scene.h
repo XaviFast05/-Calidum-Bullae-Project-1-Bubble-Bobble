@@ -24,7 +24,9 @@ private:
     void CheckCollisions(); 
     void ClearLevel();
     void RenderObjects() const;
+    void RenderEnemies() const;
     void RenderObjectsDebug(const Color& col) const;
+    void RenderEnemiesDebug(const Color& col) const;
 
     void RenderGUI() const;
 

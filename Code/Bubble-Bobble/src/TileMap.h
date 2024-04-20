@@ -35,6 +35,7 @@ enum class Tile {
 
 	// id >= 100: entities' initial locations
 	PLAYER = 100,
+	ENEMY = 101,
 
 	ITEM_MUSHROOM = 90, ITEM_BANANA, ITEM_ICE_CREAM, ITEM_FLAN, ITEM_CAKE, ITEM_CHERRY,
 
@@ -44,7 +45,7 @@ enum class Tile {
 	SOLID_FIRST = PARET1_LVL1,
 	SOLID_LAST = PARET1_LVLB,
 	ENTITY_FIRST = PLAYER,
-	ENTITY_LAST = PLAYER
+	ENTITY_LAST = ENEMY
 
 };
 

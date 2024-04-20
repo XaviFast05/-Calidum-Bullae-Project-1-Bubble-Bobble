@@ -88,7 +88,7 @@ AppStatus Scene::LoadLevel(int stage)
 	Point pos;
 	int *map = nullptr;
 	Object *obj;
-	Enemy* enem;
+	Enemy *enem;
 	
 	ClearLevel();
 	player->Stop();
@@ -107,7 +107,7 @@ AppStatus Scene::LoadLevel(int stage)
 			10, 10, 71, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10,
 			10, 10, 71, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10,
 			10, 10, 71, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10,
-			10, 10, 71, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10,
+			10, 10, 71, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 101, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10,
 			10, 10, 1, 1, 70, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 70, 0, 0, 1, 1, 10, 10,
 			10, 10, 74, 73, 75, 0, 0, 72, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 75, 0, 0, 72, 73, 10, 10,
 			10, 10, 71, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10,
@@ -341,6 +341,14 @@ AppStatus Scene::LoadLevel(int stage)
 				objects.push_back(obj);
 				map[i] = 0;
 			}
+			else if (tile == Tile::ENEMY)
+			{
+				pos.x = x * TILE_SIZE;
+				pos.y = y * TILE_SIZE + TILE_SIZE - 1;
+				enem = new Enemy(pos, E_State::IDLE, E_Look::RIGHT);
+				enemies.push_back(enem);
+				map[i] = 0;
+			}
 			++i;
 		}
 	}
@@ -349,7 +357,7 @@ AppStatus Scene::LoadLevel(int stage)
 	player->SetPos(pos);
 	//Tile map
 	level->Load(map, LEVEL_WIDTH, LEVEL_HEIGHT);
-
+	player->GetHit();
 	delete[] map;
 
 	return AppStatus::OK;
@@ -384,11 +392,13 @@ void Scene::Render()
 	{
 		RenderObjects(); 
 		player->Draw();
+		RenderEnemies();
 	}
 	if (debug == DebugMode::SPRITES_AND_HITBOXES || debug == DebugMode::ONLY_HITBOXES)
 	{
 		RenderObjectsDebug(YELLOW);
 		player->DrawDebug(GREEN);
+		RenderEnemiesDebug(RED);
 	}
 
 	EndMode2D();
@@ -428,16 +438,15 @@ void Scene::CheckCollisions()
 	auto en = enemies.begin();
 	while (en != enemies.end())
 	{
-		enemy_box = (*it)->GetHitbox();
+		enemy_box = (*en)->GetHitbox();
 		if (player_box.TestAABB(enemy_box))
 		{
 			player->GetHit();
-
 		}
 		else
 		{
 			//Move to the next object
-			++it;
+			++en;
 		}
 	}
 
@@ -457,11 +466,25 @@ void Scene::RenderObjects() const
 		obj->Draw();
 	}
 }
+void Scene::RenderEnemies() const
+{
+	for (Enemy* enem : enemies)
+	{
+		enem->Draw();
+	}
+}
 void Scene::RenderObjectsDebug(const Color& col) const
 {
 	for (Object* obj : objects)
 	{
 		obj->DrawDebug(col);
+	}
+}
+void Scene::RenderEnemiesDebug(const Color& col) const
+{
+	for (Enemy* enem : enemies)
+	{
+		enem->DrawDebug(col);
 	}
 }
 void Scene::RenderGUI() const
