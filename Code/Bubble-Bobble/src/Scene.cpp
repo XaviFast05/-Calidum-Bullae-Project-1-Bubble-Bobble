@@ -420,5 +420,5 @@ void Scene::RenderGUI() const
 {
 	//Temporal approach
 	DrawText(TextFormat("SCORE : %d", player->GetScore()), 5, 5, 5, LIGHTGRAY);
-	DrawText(TextFormat("LIVES : %d", player->GetScore()), 5, 15, 5, LIGHTGRAY);
+	DrawText(TextFormat("LIFES : %d", player->GetLifes()), 5, 15, 5, LIGHTGRAY);
 }

@@ -61,6 +61,7 @@ public:
 	void IncrScore(int n);
 	int GetScore();
 	void GetHit();
+	int GetLifes();
 	void LooseCondition();
 
 	void Update();

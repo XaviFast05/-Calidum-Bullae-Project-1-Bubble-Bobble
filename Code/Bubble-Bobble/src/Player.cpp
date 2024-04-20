@@ -122,8 +122,11 @@ int Player::GetScore()
 }
 void Player::GetHit()
 {
-	
 	lifes--;
+}
+int Player::GetLifes()
+{
+	return lifes;
 }
 void Player::LooseCondition()
 {
