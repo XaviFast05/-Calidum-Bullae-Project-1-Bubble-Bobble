@@ -8,7 +8,7 @@
 Sound soundEffectsplayer2[10];
 
 Player2::Player2(const Point& p, State s, Look view) :
-	Entity(p, PLAYER2_PHYSICAL_WIDTH, PLAYER2_PHYSICAL_HEIGHT, PLAYER2_FRAME_SIZE, PLAYER2_FRAME_SIZE, PLAYER2_GROUNDCHECK_WIDTH)
+	Entity(p, PLAYER2_PHYSICAL_WIDTH, PLAYER2_PHYSICAL_HEIGHT, PLAYER2_FRAME_SIZE, PLAYER2_FRAME_SIZE)
 {
 	state = s;
 	look = view;
@@ -16,6 +16,7 @@ Player2::Player2(const Point& p, State s, Look view) :
 	map = nullptr;
 	score = 0;
 	lifes = 3;
+	frame_ground = PLAYER2_GROUNDCHECK_WIDTH;
 }
 
 Player2::~Player2()

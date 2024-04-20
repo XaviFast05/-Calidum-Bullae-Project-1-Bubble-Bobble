@@ -103,6 +103,7 @@ private:
 	State state;
 	Look look;
 	int jump_delay;
+	int frame_ground;
 
 	TileMap *map;
 

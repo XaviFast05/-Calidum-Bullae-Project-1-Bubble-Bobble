@@ -10,7 +10,6 @@ class Entity
 {
 public:
 	Entity(const Point& p, int width, int height);
-	Entity(const Point& p, int width, int height, int frame_width, int frame_height, int frame_ground);
 	Entity(const Point& p, int width, int height, int frame_width, int frame_height);
 	virtual ~Entity();
 
@@ -35,7 +34,7 @@ protected:
 	int width, height;				
 
 	//Representation model
-	int frame_width, frame_height, frame_ground;
+	int frame_width, frame_height;
 
 	RenderComponent *render;
 };

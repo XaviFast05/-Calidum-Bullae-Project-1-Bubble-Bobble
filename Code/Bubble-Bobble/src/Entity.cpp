@@ -6,9 +6,6 @@
 Entity::Entity(const Point& p, int w, int h) : pos(p), dir({ 0,0 }), width(w), height(h), frame_width(w), frame_height(h), render(nullptr)
 {
 }
-Entity::Entity(const Point& p, int w, int h, int frame_w, int frame_h, int frame_g) : pos(p), dir({ 0,0 }), width(w), height(h), frame_width(frame_w), frame_height(frame_h), frame_ground(frame_g), render(nullptr)
-{
-}
 Entity::Entity(const Point& p, int w, int h, int frame_w, int frame_h) : pos(p), dir({ 0,0 }), width(w), height(h), frame_width(frame_w), frame_height(frame_h), render(nullptr)
 {
 }
