@@ -346,6 +346,8 @@ AppStatus Scene::LoadLevel(int stage)
 				pos.x = x * TILE_SIZE;
 				pos.y = y * TILE_SIZE + TILE_SIZE - 1;
 				enem = new Enemy(pos, E_State::IDLE, E_Look::RIGHT);
+				enem -> Initialise();
+				enem->SetTileMap(level);
 				enemies.push_back(enem);
 				map[i] = 0;
 			}
@@ -357,7 +359,6 @@ AppStatus Scene::LoadLevel(int stage)
 	player->SetPos(pos);
 	//Tile map
 	level->Load(map, LEVEL_WIDTH, LEVEL_HEIGHT);
-	player->GetHit();
 	delete[] map;
 
 	return AppStatus::OK;
@@ -459,6 +460,11 @@ void Scene::ClearLevel()
 		delete obj;
 	}
 	objects.clear();
+	for (Enemy* enem : enemies)
+	{
+		delete enem;
+	}
+	enemies.clear();
 }
 void Scene::EnemyUpdate() const
 {
