@@ -243,19 +243,47 @@ void Enemy::MoveX()
 	int prev_x = pos.x;
 
 	//We can only go up and down while climbing
-	pos.x += -ENEMY_SPEED;
+	
 
-	StartWalkingLeft();
-	if (IsLookingRight()) ChangeAnimLeft();
-
-	box = GetHitbox();
-	if (map->TestCollisionWallLeft(box))
+	if (IsKeyDown(KEY_LEFT) && !IsKeyDown(KEY_RIGHT))
 	{
-		StartWalkingRight();
+		pos.x += -ENEMY_SPEED;
+		if (state == E_State::IDLE || state == E_State::ATTACKING) StartWalkingLeft();
+		else
+		{
+			if (IsLookingRight()) ChangeAnimLeft();
+		}
+
+		box = GetHitbox();
+		if (map->TestCollisionWallLeft(box))
+		{
+			pos.x = prev_x;
+			if (state == E_State::WALKING) Stop();
+		}
 	}
-	if (map->TestCollisionWallRight(box))
+	else if (IsKeyDown(KEY_RIGHT))
 	{
-		StartWalkingLeft();
+		pos.x += ENEMY_SPEED;
+		if (state == E_State::IDLE || state == E_State::ATTACKING) StartWalkingRight();
+		else
+		{
+			if (IsLookingLeft()) ChangeAnimRight();
+		}
+
+		box = GetHitbox();
+		if (map->TestCollisionWallRight(box))
+		{
+			pos.x = prev_x;
+			if (state == E_State::WALKING) Stop();
+		}
+	}
+	else if (IsKeyDown(KEY_F) && state != E_State::JUMPING)
+	{
+		StartAttacking();
+	}
+	else
+	{
+		if (state == E_State::WALKING) Stop();
 	}
 
 }
