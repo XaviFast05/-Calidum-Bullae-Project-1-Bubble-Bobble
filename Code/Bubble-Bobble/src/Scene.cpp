@@ -122,7 +122,7 @@ AppStatus Scene::LoadLevel(int stage)
 			10, 10, 74, 73, 75, 0, 0, 72, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 75, 0, 0, 72, 73, 10, 10,
 			10, 10, 71, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10,
 			10, 10, 71, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10,
-			10, 10, 71, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10,
+			10, 10, 71, 0, 0, 0, 0, 0, 0, 0, 0, 90, 0, 0, 91, 0, 0, 92, 0, 0, 93, 0, 0, 94, 0, 0, 95, 0, 0, 0, 10, 10,
 			10, 10, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 10, 10
 
 		};
@@ -291,6 +291,54 @@ AppStatus Scene::LoadLevel(int stage)
 				pos.x = x * TILE_SIZE;
 				pos.y = y * TILE_SIZE + TILE_SIZE - 1;
 				player->SetPos(pos);
+				map[i] = 0;
+			}
+			else if (tile == Tile::ITEM_MUSHROOM)
+			{
+				pos.x = x * TILE_SIZE;
+				pos.y = y * TILE_SIZE + TILE_SIZE - 1;
+				obj = new Object(pos, ObjectType::MUSHROOM);
+				objects.push_back(obj);
+				map[i] = 0;
+			}
+			else if (tile == Tile::ITEM_BANANA)
+			{
+				pos.x = x * TILE_SIZE;
+				pos.y = y * TILE_SIZE + TILE_SIZE - 1;
+				obj = new Object(pos, ObjectType::BANANA);
+				objects.push_back(obj);
+				map[i] = 0;
+			}
+			else if (tile == Tile::ITEM_ICE_CREAM)
+			{
+				pos.x = x * TILE_SIZE;
+				pos.y = y * TILE_SIZE + TILE_SIZE - 1;
+				obj = new Object(pos, ObjectType::ICE_CREAM);
+				objects.push_back(obj);
+				map[i] = 0;
+			}
+			else if (tile == Tile::ITEM_FLAN)
+			{
+				pos.x = x * TILE_SIZE;
+				pos.y = y * TILE_SIZE + TILE_SIZE - 1;
+				obj = new Object(pos, ObjectType::FLAN);
+				objects.push_back(obj);
+				map[i] = 0;
+			}
+			else if (tile == Tile::ITEM_CAKE)
+			{
+				pos.x = x * TILE_SIZE;
+				pos.y = y * TILE_SIZE + TILE_SIZE - 1;
+				obj = new Object(pos, ObjectType::CAKE);
+				objects.push_back(obj);
+				map[i] = 0;
+			}
+			else if (tile == Tile::ITEM_CHERRY)
+			{
+				pos.x = x * TILE_SIZE;
+				pos.y = y * TILE_SIZE + TILE_SIZE - 1;
+				obj = new Object(pos, ObjectType::CHERRY);
+				objects.push_back(obj);
 				map[i] = 0;
 			}
 			++i;

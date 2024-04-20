@@ -6,6 +6,7 @@
 #include "Globals.h"
 #include <unordered_map>
 
+
 enum class Tile {
 
 	// -1: area covered by an entity
@@ -34,6 +35,8 @@ enum class Tile {
 
 	// id >= 100: entities' initial locations
 	PLAYER = 100,
+
+	ITEM_MUSHROOM = 90, ITEM_BANANA, ITEM_ICE_CREAM, ITEM_FLAN, ITEM_CAKE, ITEM_CHERRY,
 
 	//Intervals
 	SLAB_FIRST = SLAB_1,
@@ -96,4 +99,5 @@ private:
 
 	//Tile sheet
 	const Texture2D* img_tiles;
+	const Texture2D* img_items;
 };

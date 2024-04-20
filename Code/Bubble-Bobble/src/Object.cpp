@@ -6,17 +6,21 @@ Object::Object(const Point& p, ObjectType t) : Entity(p, OBJECT_PHYSICAL_SIZE, O
 	type = t; 
 	
 	Rectangle rc;
-	const int n = TILE_SIZE;
+	const int n = OBJECT_FRAME_SIZE;
 	switch (type)
 	{
-		case ObjectType::APPLE: rc = {4*n, 3*n, n, n}; break;
-		case ObjectType::CHILI: rc = {5*n, 3*n, n, n}; break;
+		case ObjectType::MUSHROOM: rc = {0, 0, n, n}; break;
+		case ObjectType::BANANA: rc = {n, 0, n, n}; break;
+		case ObjectType::ICE_CREAM: rc = { n*2, 0, n, n }; break;
+		case ObjectType::FLAN: rc = { n*3, 0, n, n }; break;
+		case ObjectType::CAKE: rc = { n*4, 0, n, n }; break;
+		case ObjectType::CHERRY: rc = { n*5, 0, n, n }; break;
 
 		default: LOG("Internal error: object creation of invalid type");
 	}
 
 	ResourceManager& data = ResourceManager::Instance();
-	render = new StaticImage(data.GetTexture(Resource::IMG_TILES), rc);
+	render = new StaticImage(data.GetTexture(Resource::IMG_ITEMS), rc);
 }
 Object::~Object()
 {
@@ -27,8 +31,12 @@ void Object::DrawDebug(const Color& col) const
 }
 int Object::Points() const
 {
-	if (type == ObjectType::APPLE)		return POINTS_APPLE;
-	else if (type == ObjectType::CHILI)	return POINTS_CHILI;
+	if (type == ObjectType::MUSHROOM)		return POINTS_MUSHROOM;
+	else if (type == ObjectType::BANANA)	return POINTS_BANANA;
+	else if (type == ObjectType::ICE_CREAM)	return POINTS_ICE_CREAM;
+	else if (type == ObjectType::FLAN)	return POINTS_FLAN;
+	else if (type == ObjectType::CAKE)	return POINTS_CAKE;
+	else if (type == ObjectType::CHERRY)	return POINTS_CHERRY;
 	else
 	{
 		LOG("Internal error: object type invalid when giving points");

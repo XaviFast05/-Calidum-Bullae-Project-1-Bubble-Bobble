@@ -11,6 +11,7 @@ TileMap::TileMap()
 	height = 0;
 	laser = nullptr;
 	img_tiles = nullptr;
+	img_items = nullptr;
 
 	InitTileDictionary();
 }
@@ -94,6 +95,12 @@ AppStatus TileMap::Initialise()
 		return AppStatus::ERROR;
 	}
 	img_tiles = data.GetTexture(Resource::IMG_TILES);
+
+	if (data.LoadTexture(Resource::IMG_ITEMS, "images/items.png") != AppStatus::OK)
+	{
+		return AppStatus::ERROR;
+	}
+	img_items = data.GetTexture(Resource::IMG_ITEMS);
 
 	laser = new Sprite(img_tiles);
 	if (laser == nullptr)
