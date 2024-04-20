@@ -26,12 +26,12 @@ AppStatus Enemy::Initialise()
 	const int n = ENEMY_FRAME_SIZE;
 
 	ResourceManager& data = ResourceManager::Instance();
-	if (data.LoadTexture(Resource::IMG_PLAYER, "images/bubMoveSprite.png") != AppStatus::OK)
+	if (data.LoadTexture(Resource::IMG_ENEMIES, "images/BubbleBusterSprite.png") != AppStatus::OK)
 	{
 		return AppStatus::ERROR;
 	}
 
-	render = new Sprite(data.GetTexture(Resource::IMG_PLAYER));
+	render = new Sprite(data.GetTexture(Resource::IMG_ENEMIES));
 	if (render == nullptr)
 	{
 		LOG("Failed to allocate memory for player sprite");
@@ -42,63 +42,58 @@ AppStatus Enemy::Initialise()
 	sprite->SetNumberAnimations((int)EnemyAnim::NUM_ANIMATIONS);
 
 	sprite->SetAnimationDelay((int)EnemyAnim::IDLE_RIGHT, ANIM_DELAY);
-	for (i = 0; i < 2; ++i) {
+	
 		sprite->AddKeyFrame((int)EnemyAnim::IDLE_RIGHT, { 0, 0, -n, n });
 		sprite->AddKeyFrame((int)EnemyAnim::IDLE_RIGHT, { 0, 0, -n, n });
-		sprite->AddKeyFrame((int)EnemyAnim::IDLE_RIGHT, { 2 * n, 0, -n, n });
-		sprite->AddKeyFrame((int)EnemyAnim::IDLE_RIGHT, { 2 * n, 0, -n, n });
-	}
+		
 
 	sprite->SetAnimationDelay((int)EnemyAnim::IDLE_LEFT, ANIM_DELAY);
-	for (i = 0; i < 2; ++i) {
+	
 		sprite->AddKeyFrame((int)EnemyAnim::IDLE_LEFT, { 0, 0, n, n });
 		sprite->AddKeyFrame((int)EnemyAnim::IDLE_LEFT, { 0, 0, n, n });
-		sprite->AddKeyFrame((int)EnemyAnim::IDLE_LEFT, { 2 * n, 0, n, n });
-		sprite->AddKeyFrame((int)EnemyAnim::IDLE_LEFT, { 2 * n, 0, n, n });
-	}
+		
+	
 
 	sprite->SetAnimationDelay((int)EnemyAnim::WALKING_RIGHT, ANIM_DELAY);
-	for (i = 1; i < 5; ++i)
-		sprite->AddKeyFrame((int)EnemyAnim::WALKING_RIGHT, { (float)i * n, 0 * n, -n, n });
+	for (i = 1; i < 4; ++i)
+	{
+		sprite->AddKeyFrame((int)EnemyAnim::WALKING_RIGHT, { 0 * n, 0 * n, -n, n });
+		sprite->AddKeyFrame((int)EnemyAnim::WALKING_RIGHT, { 1 * n, 0 * n, -n, n });
+		sprite->AddKeyFrame((int)EnemyAnim::WALKING_RIGHT, { 2 * n, 0 * n, -n, n });
+		sprite->AddKeyFrame((int)EnemyAnim::WALKING_RIGHT, { 3 * n, 0 * n, -n, n });
+	}
 	sprite->SetAnimationDelay((int)EnemyAnim::WALKING_LEFT, ANIM_DELAY);
-	for (i = 1; i < 5; ++i)
-		sprite->AddKeyFrame((int)EnemyAnim::WALKING_LEFT, { (float)i * n, 0 * n, n, n });
+	for (i = 1; i < 4; ++i)
+	{
+		sprite->AddKeyFrame((int)EnemyAnim::WALKING_LEFT, { 0 * n, 0 * n, n, n });
+		sprite->AddKeyFrame((int)EnemyAnim::WALKING_LEFT, { 1 * n, 0 * n, n, n });
+		sprite->AddKeyFrame((int)EnemyAnim::WALKING_LEFT, { 2 * n, 0 * n, n, n });
+		sprite->AddKeyFrame((int)EnemyAnim::WALKING_LEFT, { 3 * n, 0 * n, n, n });
+	}
 
 	sprite->SetAnimationDelay((int)EnemyAnim::FALLING_RIGHT, ANIM_DELAY);
-	for (i = 0; i < 2; ++i)
-		sprite->AddKeyFrame((int)EnemyAnim::FALLING_RIGHT, { (float)i * n, 6 * n, -n, n });
+	for (i = 0; i < 4; ++i)
+		sprite->AddKeyFrame((int)EnemyAnim::FALLING_RIGHT, { (float)i * n, 0 * n, -n, n });
 
 	sprite->SetAnimationDelay((int)EnemyAnim::FALLING_LEFT, ANIM_DELAY);
-	for (i = 0; i < 2; ++i)
-		sprite->AddKeyFrame((int)EnemyAnim::FALLING_LEFT, { (float)i * n, 6 * n, n, n });
+	for (i = 0; i < 4; ++i)
+		sprite->AddKeyFrame((int)EnemyAnim::FALLING_LEFT, { (float)i * n, 0 * n, n, n });
 
 
 	sprite->SetAnimationDelay((int)EnemyAnim::JUMPING_RIGHT, ANIM_DELAY);
-	for (i = 0; i < 2; ++i)
-		sprite->AddKeyFrame((int)EnemyAnim::JUMPING_RIGHT, { (float)i * n, 5 * n, -n, n });
+	for (i = 0; i < 4; ++i)
+		sprite->AddKeyFrame((int)EnemyAnim::JUMPING_RIGHT, { (float)i * n, 0 * n, -n, n });
 
 	sprite->SetAnimationDelay((int)EnemyAnim::JUMPING_LEFT, ANIM_DELAY);
-	for (i = 0; i < 2; ++i)
-		sprite->AddKeyFrame((int)EnemyAnim::JUMPING_LEFT, { (float)i * n, 5 * n, n, n });
+	for (i = 0; i < 4; ++i)
+		sprite->AddKeyFrame((int)EnemyAnim::JUMPING_LEFT, { (float)i * n, 0 * n, n, n });
 
 	sprite->SetAnimationDelay((int)EnemyAnim::LEVITATING_RIGHT, ANIM_JUMP_DELAY);
-	sprite->AddKeyFrame((int)EnemyAnim::LEVITATING_RIGHT, { n, 5 * n, -n, n });
-	sprite->AddKeyFrame((int)EnemyAnim::LEVITATING_RIGHT, { 0, 6 * n, -n, n });
+	for (i = 0; i < 4; ++i)
+		sprite->AddKeyFrame((int)EnemyAnim::LEVITATING_RIGHT, { (float)i * n, 0 * n, -n, n });
 	sprite->SetAnimationDelay((int)EnemyAnim::LEVITATING_LEFT, ANIM_JUMP_DELAY);
-	sprite->AddKeyFrame((int)EnemyAnim::LEVITATING_LEFT, { n, 5 * n, n, n });
-	sprite->AddKeyFrame((int)EnemyAnim::LEVITATING_LEFT, { 0, 6 * n, n, n });
-
-	sprite->SetAnimationDelay((int)EnemyAnim::ATTACK_RIGHT, ANIM_DELAY);
-	sprite->AddKeyFrame((int)EnemyAnim::ATTACK_RIGHT, { 0, 1 * n, -n, n });
-	sprite->AddKeyFrame((int)EnemyAnim::ATTACK_RIGHT, { 8 * n, 1 * n, -n, n });
-	sprite->AddKeyFrame((int)EnemyAnim::ATTACK_RIGHT, { 8 * n, 1 * n, -n, n });
-	sprite->AddKeyFrame((int)EnemyAnim::ATTACK_RIGHT, { 8 * n, 1 * n, -n, n });
-	sprite->SetAnimationDelay((int)EnemyAnim::ATTACK_LEFT, ANIM_DELAY);
-	sprite->AddKeyFrame((int)EnemyAnim::ATTACK_LEFT, { 0, 1 * n, n, n });
-	sprite->AddKeyFrame((int)EnemyAnim::ATTACK_LEFT, { 1 * n, 1 * n, n, n });
-	sprite->AddKeyFrame((int)EnemyAnim::ATTACK_LEFT, { 2 * n, 1 * n, n, n });
-	sprite->AddKeyFrame((int)EnemyAnim::ATTACK_LEFT, { 3 * n, 1 * n, n, n });
-
+	for (i = 0; i < 4; ++i)
+		sprite->AddKeyFrame((int)EnemyAnim::LEVITATING_LEFT, { (float)i * n, 0 * n, n, n });
 
 
 	sprite->SetAnimation((int)EnemyAnim::IDLE_RIGHT);
@@ -382,7 +377,7 @@ void Enemy::DrawDebug(const Color& col) const
 void Enemy::Release()
 {
 	ResourceManager& data = ResourceManager::Instance();
-	data.ReleaseTexture(Resource::IMG_PLAYER);
+	data.ReleaseTexture(Resource::IMG_ENEMIES);
 
 	render->Release();
 }
