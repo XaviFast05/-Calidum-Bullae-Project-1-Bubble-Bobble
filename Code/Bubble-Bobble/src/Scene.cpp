@@ -418,7 +418,13 @@ void Scene::RenderObjectsDebug(const Color& col) const
 }
 void Scene::RenderGUI() const
 {
-	//Temporal approach
-	DrawText(TextFormat("SCORE : %d", player->GetScore()), 5, 5, 5, LIGHTGRAY);
-	DrawText(TextFormat("LIFES : %d", player->GetLifes()), 5, 15, 5, LIGHTGRAY);
+	//Player 1
+	DrawText(TextFormat("1UP"), 35, 10, 5, GREEN);
+	DrawText(TextFormat("%d", player->GetScore()), 38, 20, 5, LIGHTGRAY);
+	DrawText(TextFormat("%d", player->GetLifes()), 2, 220, 20, GREEN);
+
+	//Player 2
+	DrawText(TextFormat("2UP"), 204, 10, 5, BLUE);
+	DrawText(TextFormat("%d", player->GetScore()), 210, 20, 5, LIGHTGRAY);
+	DrawText(TextFormat("%d", player->GetLifes()), 245, 220, 20, BLUE);
 }

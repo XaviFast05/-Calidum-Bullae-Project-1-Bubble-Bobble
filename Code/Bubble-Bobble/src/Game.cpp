@@ -80,6 +80,7 @@ AppStatus Game::BeginPlay()
     scene = new Scene();
     soundMusic[0] = LoadMusicStream("sound/Music/Main-Theme.ogg");
     PlayMusicStream(soundMusic[0]);
+    SetMusicVolume;
     if (scene == nullptr)
     {
         LOG("Failed to allocate memory for Scene");
