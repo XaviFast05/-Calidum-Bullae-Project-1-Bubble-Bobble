@@ -250,9 +250,8 @@ void Enemy::MoveX()
 	int prev_x = pos.x;
 
 	//We can only go up and down while climbing
-	
 
-	if (state==E_State::IDLE&& look==E_Look::LEFT)
+	if (look==E_Look::LEFT&&state!=E_State::FALLING)
 	{
 		pos.x += -ENEMY_SPEED;
 		if (state == E_State::IDLE || state == E_State::ATTACKING) StartWalkingLeft();
@@ -268,7 +267,7 @@ void Enemy::MoveX()
 			if (state == E_State::WALKING) ChangeAnimRight();
 		}
 	}
-	else if (state == E_State::IDLE && look == E_Look::RIGHT)
+	else if (look == E_Look::RIGHT && state != E_State::FALLING)
 	{
 		pos.x += ENEMY_SPEED;
 		if (state == E_State::IDLE || state == E_State::ATTACKING) StartWalkingRight();
@@ -309,11 +308,6 @@ void Enemy::MoveY()
 		if (map->TestCollisionGround(box, &pos.y))
 		{
 			if (state == E_State::FALLING) Stop();
-			else if (IsKeyPressed(KEY_SPACE))
-			{
-				StartJumping();
-
-			}
 		}
 		else
 		{

@@ -62,7 +62,7 @@ public:
 	int GetScore();
 	void GetHit();
 	int GetLifes();
-	void LooseCondition();
+	bool LooseCondition();
 
 	void Update();
 	void DrawDebug(const Color& col) const;
