@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\AABB.cpp" />
+    <ClCompile Include="src\Bubble.cpp" />
     <ClCompile Include="src\Enemy.cpp" />
     <ClCompile Include="src\Entity.cpp" />
     <ClCompile Include="src\Game.cpp" />
@@ -37,6 +38,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\AABB.h" />
+    <ClInclude Include="src\Bubble.h" />
     <ClInclude Include="src\Enemy.h" />
     <ClInclude Include="src\Entity.h" />
     <ClInclude Include="src\Game.h" />
@@ -116,8 +118,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\martima2\Documents\GitHub\-Calidum-Bullae-Project-1-Bubble-Bobble\Code\raylib\raylib\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\martima2\Documents\GitHub\-Calidum-Bullae-Project-1-Bubble-Bobble\Code\raylib\raylib\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\mfoyo\Documents\GitHub\-Calidum-Bullae-Project-1-Bubble-Bobble\Code\raylib\raylib\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\mfoyo\Documents\GitHub\-Calidum-Bullae-Project-1-Bubble-Bobble\Code\raylib\raylib\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
