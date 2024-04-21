@@ -29,6 +29,7 @@ AppStatus Player::Initialise()
 	int i;
 	const int n = PLAYER_FRAME_SIZE;
 	soundEffectsplayer1[0] = LoadSound("sound/SoundEffects/Characters/JumpFX.wav");
+	soundEffectsplayer1[1] = LoadSound("sound/SoundEffects/Characters/AttackFX.wav");
 
 	ResourceManager& data = ResourceManager::Instance();
 	if (data.LoadTexture(Resource::IMG_PLAYER, "images/bubMoveSprite.png") != AppStatus::OK)
@@ -310,6 +311,7 @@ void Player::Attack()
 {
 	if (IsKeyPressed(KEY_F)&&state!=State::JUMPING)
 	{
+		PlaySound(soundEffectsplayer1[1]);
 		StartAttacking();
 	}
 }
