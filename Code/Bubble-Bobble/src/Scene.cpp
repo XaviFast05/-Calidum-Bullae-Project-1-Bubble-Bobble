@@ -433,6 +433,7 @@ void Scene::Update()
 	player->Update();
 	EnemyUpdate();
 	CheckCollisions();
+	BubbleShoot();
 }
 void Scene::Render()
 {
