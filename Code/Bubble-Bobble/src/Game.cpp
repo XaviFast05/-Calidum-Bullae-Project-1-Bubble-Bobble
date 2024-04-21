@@ -202,17 +202,24 @@ AppStatus Game::Update()
         break;
 
         case GameState::PLAYING:
+        {
+            Player* player = scene->GetPlayer();
             if (IsKeyPressed(KEY_ESCAPE))
             {
                 //FinishPlay();
                 state = GameState::GAME_OVER;
-         
+
+            }
+            else if (player->LooseCondition())
+            {
+                state = GameState::GAME_OVER;
             }
             else
             {
                 //Game logic
                 scene->Update();
             }
+        }
         break;
         case GameState::TRANSITION:
 
