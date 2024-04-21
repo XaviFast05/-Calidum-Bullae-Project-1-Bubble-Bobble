@@ -309,7 +309,7 @@ void Player::MoveX()
 }
 void Player::Attack()
 {
-	if (IsKeyDown(KEY_F))
+	if (IsKeyPressed(KEY_F))
 	{
 		StartAttacking();
 	}

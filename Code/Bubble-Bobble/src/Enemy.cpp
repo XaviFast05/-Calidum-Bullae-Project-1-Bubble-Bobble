@@ -283,10 +283,6 @@ void Enemy::MoveX()
 			if (state == E_State::WALKING) ChangeAnimLeft();
 		}
 	}
-	else if (IsKeyDown(KEY_F) && state != E_State::JUMPING)
-	{
-		StartAttacking();
-	}
 	else
 	{
 		if (state == E_State::WALKING) Stop();
