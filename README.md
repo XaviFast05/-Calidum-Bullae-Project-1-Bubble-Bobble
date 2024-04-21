@@ -35,7 +35,7 @@ Use 1 through 5 to change stages (only stage 1 is ready for gameplay)
 CLAIDUM BULLAE TEAM
 
 Webpage: https://github.com/XaviFast05/-Calidum-Bullae-Project-1-Bubble-Bobble
-1 minute Gameplay: ENLACE
+1 minute Gameplay: https://youtu.be/SzqWarxlHJw
 
 Xavier Chaparro (@XaviFast05)
 Martí Mach (@0psycada)
