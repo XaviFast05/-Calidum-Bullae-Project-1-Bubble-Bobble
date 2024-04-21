@@ -399,7 +399,9 @@ void Player::DrawDebug(const Color& col) const
 {	
 	Entity::DrawHitbox(pos.x, pos.y, width, height, col);
 	
-	DrawText(TextFormat("Position: (%d,%d)\nSize: %dx%d\nFrame: %dx%d", pos.x, pos.y, width, height, frame_width, frame_height), 18*16, 0, 8, LIGHTGRAY);
+	DrawText(TextFormat("Position: (%d,%d)", pos.x, pos.y), 50, 0, 8, LIGHTGRAY);
+	DrawText(TextFormat("Size: %dx%d", width, height), 150, 0, 8, LIGHTGRAY);
+	DrawText(TextFormat("Frame: %dx%d", frame_width, frame_height), 50, 10, 8, LIGHTGRAY);
 	DrawPixel(pos.x, pos.y, WHITE);
 }
 void Player::Release()

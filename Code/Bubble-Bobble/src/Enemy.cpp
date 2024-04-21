@@ -377,8 +377,8 @@ void Enemy::DrawDebug(const Color& col) const
 {
 	Entity::DrawHitbox(pos.x, pos.y, width, height, col);
 
-	DrawText(TextFormat("Position: (%d,%d)\nSize: %dx%d\nFrame: %dx%d", pos.x, pos.y, width, height, frame_width, frame_height), 18 * 16, 0, 8, LIGHTGRAY);
-	DrawPixel(pos.x, pos.y, WHITE);
+	/*DrawText(TextFormat("Position: (%d,%d)\nSize: %dx%d\nFrame: %dx%d", pos.x, pos.y, width, height, frame_width, frame_height), 10 * 10, 0, 8, LIGHTGRAY);
+	DrawPixel(pos.x, pos.y, WHITE);*/
 }
 void Enemy::Release()
 {

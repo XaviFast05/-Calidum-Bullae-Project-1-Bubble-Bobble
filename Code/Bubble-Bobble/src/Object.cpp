@@ -1,6 +1,8 @@
 #include "Object.h"
 #include "StaticImage.h"
 
+Sound sounObjects[10];
+
 Object::Object(const Point& p, ObjectType t) : Entity(p, OBJECT_PHYSICAL_SIZE, OBJECT_PHYSICAL_SIZE, OBJECT_FRAME_SIZE, OBJECT_FRAME_SIZE)
 {
 	type = t; 
@@ -18,7 +20,7 @@ Object::Object(const Point& p, ObjectType t) : Entity(p, OBJECT_PHYSICAL_SIZE, O
 
 		default: LOG("Internal error: object creation of invalid type");
 	}
-
+	sounObjects[0] = LoadSound("sound/SoundEffects/Items/GrabFruitFX.wav");
 	ResourceManager& data = ResourceManager::Instance();
 	render = new StaticImage(data.GetTexture(Resource::IMG_ITEMS), rc);
 }
@@ -31,12 +33,36 @@ void Object::DrawDebug(const Color& col) const
 }
 int Object::Points() const
 {
-	if (type == ObjectType::MUSHROOM)		return POINTS_MUSHROOM;
-	else if (type == ObjectType::BANANA)	return POINTS_BANANA;
-	else if (type == ObjectType::ICE_CREAM)	return POINTS_ICE_CREAM;
-	else if (type == ObjectType::FLAN)	return POINTS_FLAN;
-	else if (type == ObjectType::CAKE)	return POINTS_CAKE;
-	else if (type == ObjectType::CHERRY)	return POINTS_CHERRY;
+	if (type == ObjectType::MUSHROOM)
+	{
+		PlaySound(sounObjects[0]);
+		return POINTS_MUSHROOM;
+	}
+	else if (type == ObjectType::BANANA) 
+	{ 
+		PlaySound(sounObjects[0]);
+		return POINTS_BANANA; 
+	}
+	else if (type == ObjectType::ICE_CREAM) 
+	{ 
+		PlaySound(sounObjects[0]);
+		return POINTS_ICE_CREAM; 
+	}
+	else if (type == ObjectType::FLAN) 
+	{ 
+		PlaySound(sounObjects[0]);
+		return POINTS_FLAN; 
+	}
+	else if (type == ObjectType::CAKE)
+	{
+		PlaySound(sounObjects[0]);
+		return POINTS_CAKE;
+	}
+	else if (type == ObjectType::CHERRY) 
+	{ 
+		PlaySound(sounObjects[0]);
+		return POINTS_CHERRY; 
+	}
 	else
 	{
 		LOG("Internal error: object type invalid when giving points");
