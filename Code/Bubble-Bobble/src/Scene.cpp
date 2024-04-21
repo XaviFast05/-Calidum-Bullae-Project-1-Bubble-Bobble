@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include "Globals.h"
 
-
+//arreglao
 
 Scene::Scene()
 {
