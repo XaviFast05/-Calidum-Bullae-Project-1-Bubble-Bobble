@@ -105,11 +105,11 @@ AppStatus Game::LoadResources()
     }
     img_copy = data.GetTexture(Resource::IMG_COPY);
 
-    if (data.LoadTexture(Resource::IMG_OPENING, "images/Explanation.png") != AppStatus::OK)
+    if (data.LoadTexture(Resource::IMG_OPENING, "images/Cinematic.png") != AppStatus::OK)
     {
         return AppStatus::ERROR;
     }
-    img_copy = data.GetTexture(Resource::IMG_OPENING);
+    img_opening = data.GetTexture(Resource::IMG_OPENING);
 
     return AppStatus::OK;
 }
@@ -129,7 +129,6 @@ AppStatus Game::BeginPlay()
     scene = new Scene();
     soundMusic[0] = LoadMusicStream("sound/Music/Main-Theme.ogg");
     PlayMusicStream(soundMusic[0]);
-    SetMusicVolume;
     if (scene == nullptr)
     {
         LOG("Failed to allocate memory for Scene");
@@ -161,6 +160,7 @@ AppStatus Game::Update()
             {
                 GettingTime = true;
                 state = GameState::MAIN_MENU;
+                
             }
             if (IsKeyPressed(KEY_ONE))
             {
@@ -173,6 +173,7 @@ AppStatus Game::Update()
             if (IsKeyPressed(KEY_SPACE))
             {
                 state = GameState::OPENING;
+
             }
             if (IsKeyPressed(KEY_ONE))
             {
@@ -184,18 +185,25 @@ AppStatus Game::Update()
    
 
         case GameState::OPENING:
-
+            
+            
             if (IsKeyPressed(KEY_ESCAPE)) return AppStatus::QUIT;
-            if (CheckTime() > 1)
+            
+            if (CheckTime() > 2)
             {
                 if (BeginPlay() != AppStatus::OK) return AppStatus::ERROR;
+                
+                
                 state = GameState::PLAYING;
                 GettingTime = true;
             }
+            
         break;
         case GameState::GAME_OVER:
+            PauseMusicStream(soundMusic[0]);
             if (CheckTime() > 3)
             {
+                
                 state = GameState::MAIN_MENU;
                 GettingTime = true;
             }
@@ -291,6 +299,9 @@ void Game::Render()
             break;
 
     
+        case GameState::OPENING:
+            DrawTexture(*img_opening, 0, 0, WHITE);
+            break;
 
         case GameState::GAME_OVER:
             DrawTexture(*img_game_over, 0, 0, WHITE);
@@ -364,7 +375,12 @@ void Game::Transition()
 void Game::UnloadResources()
 {
     ResourceManager& data = ResourceManager::Instance();
+    data.ReleaseTexture(Resource::IMG_CREATORS);
+    data.ReleaseTexture(Resource::IMG_OPENING);
+    data.ReleaseTexture(Resource::IMG_GAME_OVER);
+    data.ReleaseTexture(Resource::IMG_COPY);
     data.ReleaseTexture(Resource::IMG_MENU);
+    data.ReleaseTexture(Resource::IMG_UPC);
 
     UnloadRenderTexture(target);
 }
