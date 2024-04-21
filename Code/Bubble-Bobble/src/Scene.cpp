@@ -385,7 +385,7 @@ void Scene::BubbleShoot()
 {
 	BubbleTime += GetFrameTime();
 
-	if (IsKeyPressed(KEY_S) && BubbleTime >= .3)
+	if (IsKeyPressed(KEY_F) && BubbleTime >= .3)
 	{
 		if (player->IsLookingLeft())
 		{
@@ -393,7 +393,6 @@ void Scene::BubbleShoot()
 			buble->Initialise();
 			bubbles.push_back(buble);
 			Bubble* singleBubble = new Bubble(player->GetPos(), Directions::LEFT);
-
 		}
 		else
 		{

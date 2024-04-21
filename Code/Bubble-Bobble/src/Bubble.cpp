@@ -36,7 +36,7 @@ AppStatus Bubble::Initialise()
 	const int y = 22;
 
 	ResourceManager& data = ResourceManager::Instance();
-	data.LoadTexture(Resource::IMG_BUBBLE, "images/Bubbles.png");
+	data.LoadTexture(Resource::IMG_BUBBLE, "images/bubbles.png");
 
 	render = new Sprite(data.GetTexture(Resource::IMG_BUBBLE));
 	if (render == nullptr)
@@ -112,7 +112,7 @@ void Bubble::SetPlayer(Player* p)
 void Bubble::Movement(Directions d)
 {
 	ClampPos();
-	Stomp();
+	
 	if (pos.y > 32)
 	{
 		if (d == Directions::LEFT)

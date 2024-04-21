@@ -69,10 +69,10 @@ public:
 	void Release();
 	void Stop();
 
-private:
-
 	bool IsLookingRight() const;
 	bool IsLookingLeft() const;
+
+private:
 
 	//Player mechanics
 	void MoveX();

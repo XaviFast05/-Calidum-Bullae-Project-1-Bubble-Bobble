@@ -17,6 +17,10 @@ Entity::~Entity()
 		render = nullptr;
 	}
 }
+Point Entity::GetPos()
+{
+	return pos;
+}
 void Entity::SetPos(const Point& p)
 {
 	pos = p;

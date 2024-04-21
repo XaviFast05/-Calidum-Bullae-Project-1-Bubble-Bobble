@@ -26,6 +26,7 @@ public:
 	void DrawHitbox(const Color& col) const;
 	void DrawHitbox(int x, int y, int w, int h, const Color& col) const;
 
+	Point GetPos();
 protected:
 	Point GetRenderingPosition() const;
 
