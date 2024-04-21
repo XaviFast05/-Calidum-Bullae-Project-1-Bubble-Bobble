@@ -7,9 +7,19 @@ Music soundMusic[10];
 
 Game::Game()
 {
-    state = GameState::MAIN_MENU;
     scene = nullptr;
+    state = GameState::START;
     img_menu = nullptr;
+    img_copy = nullptr;
+    img_upc = nullptr;
+    img_creators = nullptr;
+
+    a = 1;
+    TransCondition = true;
+    TransCounter = 0;
+
+    GettingTime = true;
+    Time = GetTime();
 
     target = {};
     src = {};
@@ -65,16 +75,55 @@ AppStatus Game::LoadResources()
 {
     ResourceManager& data = ResourceManager::Instance();
     
-    if (data.LoadTexture(Resource::IMG_MENU, "images/title.png") != AppStatus::OK)
+    if (data.LoadTexture(Resource::IMG_MENU, "images/title-export.png") != AppStatus::OK)
     {
         return AppStatus::ERROR;
     }
     img_menu = data.GetTexture(Resource::IMG_MENU);
-    
-    
+
+    if (data.LoadTexture(Resource::IMG_UPC, "images/UPC_CITM.png") != AppStatus::OK)
+    {
+        return AppStatus::ERROR;
+    }
+    img_upc = data.GetTexture(Resource::IMG_UPC);
+
+    if (data.LoadTexture(Resource::IMG_CREATORS, "images/Pato Productions.png") != AppStatus::OK)
+    {
+        return AppStatus::ERROR;
+    }
+    img_creators = data.GetTexture(Resource::IMG_CREATORS);
+
+    if (data.LoadTexture(Resource::IMG_GAME_OVER, "images/Game over.png") != AppStatus::OK)
+    {
+        return AppStatus::ERROR;
+    }
+    img_game_over = data.GetTexture(Resource::IMG_GAME_OVER);
+
+    if (data.LoadTexture(Resource::IMG_COPY, "images/Explanation.png") != AppStatus::OK)
+    {
+        return AppStatus::ERROR;
+    }
+    img_copy = data.GetTexture(Resource::IMG_COPY);
+
+    if (data.LoadTexture(Resource::IMG_OPENING, "images/Explanation.png") != AppStatus::OK)
+    {
+        return AppStatus::ERROR;
+    }
+    img_copy = data.GetTexture(Resource::IMG_OPENING);
 
     return AppStatus::OK;
 }
+int Game::CheckTime()
+{
+    if (GettingTime == true)
+    {
+        Time = GetTime();
+        GettingTime = false;
+    }
+
+    return GetTime() - Time;
+}
+
 AppStatus Game::BeginPlay()
 {
     scene = new Scene();
@@ -107,34 +156,94 @@ AppStatus Game::Update()
     UpdateMusicStream(soundMusic[0]);
     switch (state)
     {
+        case GameState::START:
+            if (TransCounter == 6)
+            {
+                GettingTime = true;
+                state = GameState::MAIN_MENU;
+            }
+            if (IsKeyPressed(KEY_ONE))
+            {
+                state = GameState::OPENING;
+            }
+        break;
 
-        case GameState::MAIN_MENU:;
+        case GameState::MAIN_MENU:
             if (IsKeyPressed(KEY_ESCAPE)) return AppStatus::QUIT;
             if (IsKeyPressed(KEY_SPACE))
             {
-                if(BeginPlay() != AppStatus::OK) return AppStatus::ERROR;
+                state = GameState::OPENING;
+            }
+            if (IsKeyPressed(KEY_ONE))
+            {
                 state = GameState::PLAYING;
             }
-            break;
+        break;
 
-        case GameState::PLAYING:  
-            Player *player = scene->GetPlayer();
+
+   
+
+        case GameState::OPENING:
+
+            if (IsKeyPressed(KEY_ESCAPE)) return AppStatus::QUIT;
+            if (CheckTime() > 1)
+            {
+                if (BeginPlay() != AppStatus::OK) return AppStatus::ERROR;
+                state = GameState::PLAYING;
+                GettingTime = true;
+            }
+        break;
+        case GameState::GAME_OVER:
+            if (CheckTime() > 3)
+            {
+                state = GameState::MAIN_MENU;
+                GettingTime = true;
+            }
+        break;
+
+        case GameState::PLAYING:
             if (IsKeyPressed(KEY_ESCAPE))
             {
-                FinishPlay();
-                StopMusicStream(soundMusic[0]);
-                state = GameState::MAIN_MENU;
-            }
-            else if(player->LooseCondition())
-            { 
-                state = GameState::MAIN_MENU;
+                //FinishPlay();
+                state = GameState::GAME_OVER;
+         
             }
             else
             {
                 //Game logic
                 scene->Update();
             }
+        break;
+        case GameState::TRANSITION:
+
             break;
+        //case GameState::MAIN_MENU:;
+        //    if (IsKeyPressed(KEY_ESCAPE)) return AppStatus::QUIT;
+        //    if (IsKeyPressed(KEY_SPACE))
+        //    {
+        //        if(BeginPlay() != AppStatus::OK) return AppStatus::ERROR;
+        //        state = GameState::PLAYING;
+        //    }
+        //    break;
+
+        //case GameState::PLAYING:  
+        //    Player *player = scene->GetPlayer();
+        //    if (IsKeyPressed(KEY_ESCAPE))
+        //    {
+        //        FinishPlay();
+        //        StopMusicStream(soundMusic[0]);
+        //        state = GameState::MAIN_MENU;
+        //    }
+        //    else if(player->LooseCondition())
+        //    { 
+        //        state = GameState::MAIN_MENU;
+        //    }
+        //    else
+        //    {
+        //        //Game logic
+        //        scene->Update();
+        //    }
+        //    break;
     }
     return AppStatus::OK;
 }
@@ -146,13 +255,64 @@ void Game::Render()
     
     switch (state)
     {
+        case GameState::START:
+            if ((TransCounter == 0) || (TransCounter == 1))
+            {
+                DrawTexture(*img_copy, 0, 0, WHITE);
+                Transition();
+
+            }
+            else if ((TransCounter == 2) || (TransCounter == 3))
+            {
+                DrawTexture(*img_upc, 0, 0, WHITE);
+                Transition();
+
+            }
+            else if ((TransCounter == 4) || (TransCounter == 5))
+            {
+                DrawTexture(*img_creators, 0, 0, WHITE);
+                Transition();
+
+            }
+
+            break;
+
         case GameState::MAIN_MENU:
+            
             DrawTexture(*img_menu, 0, 0, WHITE);
+            
+            break;
+
+    
+
+        case GameState::GAME_OVER:
+            DrawTexture(*img_game_over, 0, 0, WHITE);
             break;
 
         case GameState::PLAYING:
             scene->Render();
             break;
+
+    /*    case GameState::TRANSITIONING:
+            float progress = timeElapsed / totalTime;
+            float yPos_stage2 = 224.0f * -progress;
+            if (timeElapsed < totalTime) {
+                DrawTexture(*img_stage1, 0, yPos_stage2, WHITE);
+                DrawTexture(*img_stage2, 0, yPos_stage2 + 224, WHITE);
+                
+                timeElapsed += GetFrameTime();
+
+            }
+            else {
+                
+                timeElapsed = 0;
+                state = GameState::PLAYING;
+                scene->LoadLevel(2);
+
+            }*/
+
+            break;
+
     }
     
     EndTextureMode();
@@ -166,6 +326,33 @@ void Game::Cleanup()
 {
     UnloadResources();
     CloseWindow();
+}
+void Game::Transition()
+{
+    if (TransCondition == true)
+    {
+        DrawRectangle(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, Fade(BLACK, a));
+        a -= 0.02;
+    }
+    else if (TransCondition == false)
+    {
+        DrawRectangle(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, Fade(BLACK, a));
+        a += 0.02;
+    }
+
+    if (a > 1)
+    {
+        a = 1;
+        TransCondition = 1;
+        TransCounter++;
+    }
+    if (a < 0)
+    {
+        a = 0.0;
+        WaitTime(2);
+        TransCondition = false;
+        TransCounter++;
+    }
 }
 void Game::UnloadResources()
 {

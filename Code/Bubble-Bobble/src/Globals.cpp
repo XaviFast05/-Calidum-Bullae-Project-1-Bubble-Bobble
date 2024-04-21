@@ -2,6 +2,7 @@
 #include <fstream>
 #include <iostream>
 #include <ctime>
+#include <chrono>
 
 void log(const char file[], int line, const char* text, ...)
 {

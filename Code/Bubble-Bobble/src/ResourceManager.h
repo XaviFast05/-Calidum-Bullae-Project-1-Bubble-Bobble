@@ -7,12 +7,19 @@
 
 enum class Resource {
     IMG_MENU,
-    IMG_PLAYER, 
+    IMG_PLAYER,
     IMG_BUSTER,
     IMG_SKELMON,
     IMG_TILES,
-    IMG_ITEMS
+    IMG_ITEMS,
+    IMG_UPC,
+    IMG_CREATORS,
+    IMG_COPY,
+    IMG_GAME_OVER,
+    IMG_OPENING,
+
 };
+
 
 class ResourceManager {
 public:
