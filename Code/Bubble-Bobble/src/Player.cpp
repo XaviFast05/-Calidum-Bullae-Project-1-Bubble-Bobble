@@ -216,8 +216,7 @@ void Player::StartJumping()
 }
 void Player::StartAttacking()
 {
-	dir.y = PLAYER_SPEED;
-	//&Sprite::SetAutomaticMode;
+	&Sprite::SetAutomaticMode;
 	state = State::ATTACKING;
 	if (IsLookingRight())	SetAnimation((int)PlayerAnim::ATTACK_RIGHT);
 	else					SetAnimation((int)PlayerAnim::ATTACK_LEFT);
@@ -333,7 +332,6 @@ void Player::MoveY()
 			{
 				PlaySound(soundEffectsplayer1[0]);
 				StartJumping();
-				
 			}
 		}
 		else
