@@ -31,7 +31,7 @@ public:
 	Directions dire;
 	int stages;
 	void DrawDebug(const Color& col) const;
-	void Stomp();
+	
 	void SetPlayer(Player* p);
 
 private:
