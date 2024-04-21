@@ -11,8 +11,11 @@ Game::Game()
     state = GameState::START;
     img_menu = nullptr;
     img_copy = nullptr;
+    img_opening = nullptr;
+    img_game_over = nullptr;
     img_upc = nullptr;
     img_creators = nullptr;
+
 
     a = 1;
     TransCondition = true;

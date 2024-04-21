@@ -43,9 +43,6 @@
     <ClCompile Include="src\Enemy.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
-    <ClCompile Include="src\Player2.cpp">
-      <Filter>Entities</Filter>
-    </ClCompile>
     <ClCompile Include="src\Bubble.cpp">
       <Filter>Core</Filter>
     </ClCompile>
@@ -94,9 +91,6 @@
       <Filter>Render</Filter>
     </ClInclude>
     <ClInclude Include="src\Enemy.h">
-      <Filter>Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Player2.h">
       <Filter>Entities</Filter>
     </ClInclude>
     <ClInclude Include="src\Bubble.h">

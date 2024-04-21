@@ -216,7 +216,8 @@ void Player::StartJumping()
 }
 void Player::StartAttacking()
 {
-	&Sprite::SetAutomaticMode;
+	dir.y = PLAYER_SPEED;
+	//&Sprite::SetAutomaticMode;
 	state = State::ATTACKING;
 	if (IsLookingRight())	SetAnimation((int)PlayerAnim::ATTACK_RIGHT);
 	else					SetAnimation((int)PlayerAnim::ATTACK_LEFT);
@@ -253,6 +254,7 @@ void Player::Update()
 	MoveX();
 	MoveY();
 	LooseCondition();
+	Attack();
 
 
 	Sprite* sprite = dynamic_cast<Sprite*>(render);
@@ -300,13 +302,16 @@ void Player::MoveX()
 			if (state == State::WALKING) Stop();
 		}
 	}
-	else if (IsKeyDown(KEY_F) && state != State::JUMPING)
-	{
-		StartAttacking();
-	}
 	else
 	{
 		if (state == State::WALKING) Stop();
+	}
+}
+void Player::Attack()
+{
+	if (IsKeyDown(KEY_F))
+	{
+		StartAttacking();
 	}
 }
 void Player::MoveY()
