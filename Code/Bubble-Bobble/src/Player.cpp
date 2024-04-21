@@ -130,12 +130,13 @@ int Player::GetLifes()
 {
 	return lifes;
 }
-void Player::LooseCondition()
+bool Player::LooseCondition()
 {
-	if (lifes < 0)
+	if (lifes == 0)
 	{
-		state = State::DEAD;
+		return true;
 	}
+	else return false;
 }
 void Player::SetTileMap(TileMap* tilemap)
 {

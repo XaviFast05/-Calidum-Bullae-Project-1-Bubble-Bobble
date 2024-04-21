@@ -17,7 +17,7 @@ public:
     void Update();
     void Render();
     void Release();
-
+    Player* GetPlayer();
 private:
     AppStatus LoadLevel(int stage);
     
@@ -28,7 +28,6 @@ private:
     void RenderEnemies() const;
     void RenderObjectsDebug(const Color& col) const;
     void RenderEnemiesDebug(const Color& col) const;
-
     void RenderGUI() const;
 
     Player *player;

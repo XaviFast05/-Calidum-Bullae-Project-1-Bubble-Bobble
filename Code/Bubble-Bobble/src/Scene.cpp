@@ -107,7 +107,7 @@ AppStatus Scene::LoadLevel(int stage)
 			10, 10, 71, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10,
 			10, 10, 71, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10,
 			10, 10, 71, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10,
-			10, 10, 71, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 101, 0, 0, 102, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10,
+			10, 10, 71, 0, 0, 0, 0, 0, 0, 0, 0, 101, 0, 0, 0, 101, 0, 0, 102, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10,
 			10, 10, 1, 1, 70, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 70, 0, 0, 1, 1, 10, 10,
 			10, 10, 74, 73, 75, 0, 0, 72, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 75, 0, 0, 72, 73, 10, 10,
 			10, 10, 71, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10,
@@ -454,6 +454,9 @@ void Scene::CheckCollisions()
 		if (player_box.TestAABB(enemy_box))
 		{
 			player->GetHit();
+			delete* en;
+			//Erase the object from the vector and get the iterator to the next valid element
+			en = enemies.erase(en);
 		}
 		else
 		{
@@ -522,4 +525,8 @@ void Scene::RenderGUI() const
 	DrawText(TextFormat("2UP"), 204, 10, 5, BLUE);
 	DrawText(TextFormat("%d", player->GetScore()), 210, 20, 5, LIGHTGRAY);
 	DrawText(TextFormat("%d", player->GetLifes()), 245, 220, 20, BLUE);
+}
+Player* Scene::GetPlayer()
+{
+	return player;
 }

@@ -118,10 +118,15 @@ AppStatus Game::Update()
             break;
 
         case GameState::PLAYING:  
+            Player *player = scene->GetPlayer();
             if (IsKeyPressed(KEY_ESCAPE))
             {
                 FinishPlay();
                 StopMusicStream(soundMusic[0]);
+                state = GameState::MAIN_MENU;
+            }
+            else if(player->LooseCondition())
+            { 
                 state = GameState::MAIN_MENU;
             }
             else
