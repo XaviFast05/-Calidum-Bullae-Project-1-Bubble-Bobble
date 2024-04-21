@@ -38,7 +38,6 @@ private:
     std::vector<Object*> objects;
     std::vector<Enemy*> enemies;
     std::vector<Bubble*> bubbles;
-    Bubble* singleBubble;
     float BubbleTime;
     Camera2D camera;
 

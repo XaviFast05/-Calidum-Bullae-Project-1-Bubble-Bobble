@@ -30,12 +30,6 @@ Scene::~Scene()
         delete level;
         level = nullptr;
     }
-	if (singleBubble != nullptr)
-	{
-		singleBubble->Release();
-		delete singleBubble;
-		singleBubble = nullptr;
-	}
 	for (Entity* obj : objects)
 	{
 		delete obj;
@@ -392,14 +386,12 @@ void Scene::BubbleShoot()
 			Bubble* buble = new Bubble(player->GetPos(), Directions::LEFT);
 			buble->Initialise();
 			bubbles.push_back(buble);
-			Bubble* singleBubble = new Bubble(player->GetPos(), Directions::LEFT);
 		}
 		else
 		{
 			Bubble* buble = new Bubble(player->GetPos(), Directions::RIGHT);
 			buble->Initialise();
 			bubbles.push_back(buble);
-			Bubble* singleBubble = new Bubble(player->GetPos(), Directions::LEFT);
 		}
 		BubbleTime = 0;
 
@@ -432,6 +424,7 @@ void Scene::Update()
 	level->Update();
 	player->Update();
 	EnemyUpdate();
+	UpdateBubbles();
 	CheckCollisions();
 	BubbleShoot();
 }
