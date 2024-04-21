@@ -308,7 +308,7 @@ void Player::MoveX()
 }
 void Player::Attack()
 {
-	if (IsKeyPressed(KEY_F))
+	if (IsKeyPressed(KEY_F)&&state!=State::JUMPING)
 	{
 		StartAttacking();
 	}
