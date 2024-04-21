@@ -7,9 +7,10 @@
 
 
 
-Enemy::Enemy(const Point& p, E_State s, E_Look view) :
+Enemy::Enemy(const Point& p, E_State s, E_Look view, E_Type t) :
 	Entity(p, ENEMY_PHYSICAL_WIDTH, ENEMY_PHYSICAL_HEIGHT, ENEMY_FRAME_SIZE, ENEMY_FRAME_SIZE)
 {
+	type = t;
 	state = s;
 	look = view;
 	jump_delay = ENEMY_JUMP_DELAY;
@@ -26,15 +27,26 @@ AppStatus Enemy::Initialise()
 	const int n = ENEMY_FRAME_SIZE;
 
 	ResourceManager& data = ResourceManager::Instance();
-	if (data.LoadTexture(Resource::IMG_ENEMIES, "images/BubbleBusterSprite.png") != AppStatus::OK)
+	
+	if (data.LoadTexture(Resource::IMG_BUSTER, "images/BubbleBusterSprite.png") != AppStatus::OK)
 	{
 		return AppStatus::ERROR;
 	}
 
-	render = new Sprite(data.GetTexture(Resource::IMG_ENEMIES));
+	if (data.LoadTexture(Resource::IMG_SKELMON, "images/SkelMonstaSprite.png") != AppStatus::OK)
+	{
+		return AppStatus::ERROR;
+	}
+	switch (type)
+	{
+	case E_Type::BUSTER:render = new Sprite(data.GetTexture(Resource::IMG_BUSTER)); break;
+	case E_Type::SKELMON:render = new Sprite(data.GetTexture(Resource::IMG_SKELMON)); break;
+
+		default: LOG("Internal error: enemy creation of invalid type");
+	}
 	if (render == nullptr)
 	{
-		LOG("Failed to allocate memory for player sprite");
+		LOG("Failed to allocate memory for enemy sprite");
 		return AppStatus::ERROR;
 	}
 
@@ -240,7 +252,7 @@ void Enemy::MoveX()
 	//We can only go up and down while climbing
 	
 
-	if (IsKeyDown(KEY_LEFT) && !IsKeyDown(KEY_RIGHT))
+	if (state==E_State::IDLE&& look==E_Look::LEFT)
 	{
 		pos.x += -ENEMY_SPEED;
 		if (state == E_State::IDLE || state == E_State::ATTACKING) StartWalkingLeft();
@@ -253,10 +265,10 @@ void Enemy::MoveX()
 		if (map->TestCollisionWallLeft(box))
 		{
 			pos.x = prev_x;
-			if (state == E_State::WALKING) Stop();
+			if (state == E_State::WALKING) ChangeAnimRight();
 		}
 	}
-	else if (IsKeyDown(KEY_RIGHT))
+	else if (state == E_State::IDLE && look == E_Look::RIGHT)
 	{
 		pos.x += ENEMY_SPEED;
 		if (state == E_State::IDLE || state == E_State::ATTACKING) StartWalkingRight();
@@ -269,7 +281,7 @@ void Enemy::MoveX()
 		if (map->TestCollisionWallRight(box))
 		{
 			pos.x = prev_x;
-			if (state == E_State::WALKING) Stop();
+			if (state == E_State::WALKING) ChangeAnimLeft();
 		}
 	}
 	else if (IsKeyDown(KEY_F) && state != E_State::JUMPING)
@@ -377,7 +389,8 @@ void Enemy::DrawDebug(const Color& col) const
 void Enemy::Release()
 {
 	ResourceManager& data = ResourceManager::Instance();
-	data.ReleaseTexture(Resource::IMG_ENEMIES);
+	data.ReleaseTexture(Resource::IMG_BUSTER);
+	data.ReleaseTexture(Resource::IMG_SKELMON);
 
 	render->Release();
 }

@@ -31,6 +31,7 @@
 
 
 //Logic states
+enum class E_Type {BUSTER, SKELMON};
 enum class E_State { IDLE, WALKING, ATTACKING, JUMPING, FALLING, CLIMBING, DEAD };
 enum class E_Look { RIGHT, LEFT };
 
@@ -51,7 +52,7 @@ enum class EnemyAnim {
 class Enemy : public Entity
 {
 public:
-	Enemy(const Point& p, E_State s, E_Look view);
+	Enemy(const Point& p, E_State s, E_Look view,  E_Type t);
 	~Enemy();
 
 	AppStatus Initialise();
@@ -96,6 +97,7 @@ private:
 	bool IsInFirstHalfTile() const;
 	bool IsInSecondHalfTile() const;
 
+	E_Type type;
 	E_State state;
 	E_Look look;
 	int jump_delay;

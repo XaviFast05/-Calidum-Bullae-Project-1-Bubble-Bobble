@@ -107,7 +107,7 @@ AppStatus Scene::LoadLevel(int stage)
 			10, 10, 71, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10,
 			10, 10, 71, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10,
 			10, 10, 71, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10,
-			10, 10, 71, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 101, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10,
+			10, 10, 71, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 101, 0, 0, 102, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10,
 			10, 10, 1, 1, 70, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 70, 0, 0, 1, 1, 10, 10,
 			10, 10, 74, 73, 75, 0, 0, 72, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 75, 0, 0, 72, 73, 10, 10,
 			10, 10, 71, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10,
@@ -341,12 +341,22 @@ AppStatus Scene::LoadLevel(int stage)
 				objects.push_back(obj);
 				map[i] = 0;
 			}
-			else if (tile == Tile::ENEMY)
+			else if (tile == Tile::BUSTER)
 			{
 				pos.x = x * TILE_SIZE;
 				pos.y = y * TILE_SIZE + TILE_SIZE - 1;
-				enem = new Enemy(pos, E_State::IDLE, E_Look::RIGHT);
+				enem = new Enemy(pos, E_State::IDLE, E_Look::RIGHT, E_Type::BUSTER);
 				enem -> Initialise();
+				enem->SetTileMap(level);
+				enemies.push_back(enem);
+				map[i] = 0;
+			}
+			else if (tile == Tile::SKELMON)
+			{
+				pos.x = x * TILE_SIZE;
+				pos.y = y * TILE_SIZE + TILE_SIZE - 1;
+				enem = new Enemy(pos, E_State::IDLE, E_Look::RIGHT, E_Type::SKELMON);
+				enem->Initialise();
 				enem->SetTileMap(level);
 				enemies.push_back(enem);
 				map[i] = 0;
