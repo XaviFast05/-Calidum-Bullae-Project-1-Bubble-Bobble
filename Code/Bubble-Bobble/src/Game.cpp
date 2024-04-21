@@ -81,13 +81,13 @@ AppStatus Game::LoadResources()
     }
     img_menu = data.GetTexture(Resource::IMG_MENU);
 
-    if (data.LoadTexture(Resource::IMG_UPC, "images/UPC_CITM.png") != AppStatus::OK)
+    if (data.LoadTexture(Resource::IMG_UPC, "images/UPC.png") != AppStatus::OK)
     {
         return AppStatus::ERROR;
     }
     img_upc = data.GetTexture(Resource::IMG_UPC);
 
-    if (data.LoadTexture(Resource::IMG_CREATORS, "images/Pato Productions.png") != AppStatus::OK)
+    if (data.LoadTexture(Resource::IMG_CREATORS, "images/Calidum Bullae.png") != AppStatus::OK)
     {
         return AppStatus::ERROR;
     }
@@ -99,7 +99,7 @@ AppStatus Game::LoadResources()
     }
     img_game_over = data.GetTexture(Resource::IMG_GAME_OVER);
 
-    if (data.LoadTexture(Resource::IMG_COPY, "images/Explanation.png") != AppStatus::OK)
+    if (data.LoadTexture(Resource::IMG_COPY, "images/copy.png") != AppStatus::OK)
     {
         return AppStatus::ERROR;
     }

@@ -17,6 +17,7 @@ enum class Resource {
     IMG_COPY,
     IMG_GAME_OVER,
     IMG_OPENING,
+    IMG_BUBBLE,
 
 };
 

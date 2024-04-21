@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include "Globals.h"
 
+
+
 Scene::Scene()
 {
 	player = nullptr;
@@ -28,6 +30,12 @@ Scene::~Scene()
         delete level;
         level = nullptr;
     }
+	if (singleBubble != nullptr)
+	{
+		singleBubble->Release();
+		delete singleBubble;
+		singleBubble = nullptr;
+	}
 	for (Entity* obj : objects)
 	{
 		delete obj;
@@ -373,6 +381,33 @@ AppStatus Scene::LoadLevel(int stage)
 
 	return AppStatus::OK;
 }
+void Scene::BubbleShoot()
+{
+	BubbleTime += GetFrameTime();
+
+	if (IsKeyPressed(KEY_S) && BubbleTime >= .3)
+	{
+		if (player->IsLookingLeft())
+		{
+			Bubble* buble = new Bubble(player->GetPos(), Directions::LEFT);
+			buble->Initialise();
+			bubbles.push_back(buble);
+			Bubble* singleBubble = new Bubble(player->GetPos(), Directions::LEFT);
+
+		}
+		else
+		{
+			Bubble* buble = new Bubble(player->GetPos(), Directions::RIGHT);
+			buble->Initialise();
+			bubbles.push_back(buble);
+			Bubble* singleBubble = new Bubble(player->GetPos(), Directions::LEFT);
+		}
+		BubbleTime = 0;
+
+	}
+
+
+}
 void Scene::Update()
 {
 	Point p1, p2;
@@ -389,6 +424,11 @@ void Scene::Update()
 	else if (IsKeyPressed(KEY_THREE))	LoadLevel(3);
 	else if (IsKeyPressed(KEY_FOUR))	LoadLevel(4);
 	else if (IsKeyPressed(KEY_FIVE))	LoadLevel(5);
+
+	for (Bubble* buble : bubbles)
+	{
+		buble->SetPlayer(player);
+	}
 
 	level->Update();
 	player->Update();
@@ -479,6 +519,13 @@ void Scene::ClearLevel()
 	}
 	enemies.clear();
 }
+void Scene::UpdateBubbles()
+{
+	for (Bubble* buble : bubbles)
+	{
+		buble->Update();
+	}
+}
 void Scene::EnemyUpdate() const
 {
 	for (Enemy* enem : enemies)
@@ -491,6 +538,17 @@ void Scene::RenderObjects() const
 	for (Object* obj : objects)
 	{
 		obj->Draw();
+	}
+	for (Bubble* bubl : bubbles)
+	{
+		bubl->Draw();
+	}
+	auto it = bubbles.begin();
+	while (it != bubbles.end())
+	{
+
+		(*it)->Draw();
+		++it;
 	}
 }
 void Scene::RenderEnemies() const
