@@ -31,7 +31,7 @@ void Bubble::SetAnimation(int id)
 AppStatus Bubble::Initialise()
 {
 	Rectangle rc;
-	const int n = TILE_SIZE;
+	const int n = 16;
 	const int p = PADDINGG_X;
 	const int y = 22;
 
@@ -49,11 +49,11 @@ AppStatus Bubble::Initialise()
 	sprite->SetNumberAnimations((int)BubbleAnim::NUM_ANIMATIONS);
 
 	sprite->SetAnimationDelay((int)BubbleAnim::IDLE, ANIM_DELAY);
-	sprite->AddKeyFrame((int)BubbleAnim::IDLE, { (n + p), y, n, n });
-	sprite->AddKeyFrame((int)BubbleAnim::IDLE, { (n + p), y, n, n });
+	sprite->AddKeyFrame((int)BubbleAnim::IDLE, { n, 0, n, n });
+	sprite->AddKeyFrame((int)BubbleAnim::IDLE, { n, 0, n, n });
 
 	sprite->SetAnimationDelay((int)BubbleAnim::INSHOOT, ANIM_DELAY + 6);
-	for (int i = 0; i < 6; ++i)
+	for (int i = 0; i < 3; ++i)
 		sprite->AddKeyFrame((int)BubbleAnim::INSHOOT, { (float)i * n, 0, n, n });
 
 	sprite->SetAnimation((int)BubbleAnim::INSHOOT);

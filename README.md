@@ -29,7 +29,7 @@ F3 to go to Game Over Screen
 
 F4 for GOD mode
 
-
+Use 1 through 5 to change stages (only stage 1 is ready for gameplay)
 
 
 CLAIDUM BULLAE TEAM
