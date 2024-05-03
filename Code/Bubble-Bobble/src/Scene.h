@@ -5,6 +5,7 @@
 #include "Object.h"
 #include "Enemy.h"
 #include "Bubble.h"
+#include "Text.h"
 
 enum class DebugMode { OFF, SPRITES_AND_HITBOXES, ONLY_HITBOXES, SIZE };
 
@@ -40,6 +41,8 @@ private:
     std::vector<Bubble*> bubbles;
     float BubbleTime;
     Camera2D camera;
+
+    Text *font1;
 
     DebugMode debug;
 };

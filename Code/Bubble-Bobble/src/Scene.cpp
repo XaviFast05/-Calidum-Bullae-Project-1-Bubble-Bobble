@@ -80,6 +80,19 @@ AppStatus Scene::Init()
 	//Assign the tile map reference to the player to check collisions while navigating
 	player->SetTileMap(level);
 
+	font1 = new Text();
+	if (font1 == nullptr)
+	{
+		LOG("Failed to allocate memory for font 1");
+		return AppStatus::ERROR;
+	}
+	//Initialise text font 1
+	if (font1->Initialise(Resource::IMG_FONT, "images/font8x8.png", ' ', 8) != AppStatus::OK)
+	{
+		LOG("Failed to initialise Level");
+		return AppStatus::ERROR;
+	}
+
     return AppStatus::OK;
 }
 AppStatus Scene::LoadLevel(int stage)
@@ -602,14 +615,14 @@ void Scene::RenderEnemiesDebug(const Color& col) const
 void Scene::RenderGUI() const
 {
 	//Player 1
-	DrawText(TextFormat("1UP"), 35, 10, 5, GREEN);
-	DrawText(TextFormat("%d", player->GetScore()), 38, 20, 5, LIGHTGRAY);
-	DrawText(TextFormat("%d", player->GetLifes()), 2, 220, 20, GREEN);
+	font1->Draw(35, 10, TextFormat("1UP"), GREEN);
+	font1->Draw(38, 20, TextFormat("%d", player->GetScore()));
+	font1->Draw(2, 220, TextFormat("%d", player->GetLifes()), GREEN);
 
 	//Player 2
-	DrawText(TextFormat("2UP"), 204, 10, 5, BLUE);
-	DrawText(TextFormat("%d", player->GetScore()), 210, 20, 5, LIGHTGRAY);
-	DrawText(TextFormat("%d", player->GetLifes()), 245, 220, 20, BLUE);
+	font1->Draw(204, 10, TextFormat("2UP"), BLUE);
+	font1->Draw(210, 20, TextFormat("%d", player->GetScore()));
+	font1->Draw(245, 220, TextFormat("%d", player->GetLifes()), BLUE);
 }
 Player* Scene::GetPlayer()
 {

@@ -18,6 +18,7 @@ enum class Resource {
     IMG_GAME_OVER,
     IMG_OPENING,
     IMG_BUBBLE,
+    IMG_FONT,
 
 };
 
