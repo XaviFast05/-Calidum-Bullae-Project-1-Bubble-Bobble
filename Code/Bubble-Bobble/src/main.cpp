@@ -14,7 +14,19 @@ int main()
     game = new Game();
     status = game->Initialise(GAME_SCALE_FACTOR);
     InitAudioDevice();
-    
+
+    if (!IsWindowFullscreen())
+    {
+        int monitor = GetCurrentMonitor();
+        SetWindowSize(GetMonitorWidth(monitor), GetMonitorHeight(monitor));
+        ToggleFullscreen();
+    }
+    else
+    {
+        ToggleFullscreen();
+        SetWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+    }
+
     if (status != AppStatus::OK)
     {
         LOG("Failed to initialise game");
