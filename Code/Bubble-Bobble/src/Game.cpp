@@ -16,7 +16,6 @@ Game::Game()
     img_upc = nullptr;
     img_creators = nullptr;
 
-
     a = 1;
     TransCondition = true;
     TransCounter = 0;

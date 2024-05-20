@@ -14,6 +14,7 @@ int main()
     game = new Game();
     status = game->Initialise(GAME_SCALE_FACTOR);
     InitAudioDevice();
+    
     if (status != AppStatus::OK)
     {
         LOG("Failed to initialise game");
@@ -31,6 +32,7 @@ int main()
         }
         game->Render();
     }
+
 
     LOG("Application finish");
     game->Cleanup();

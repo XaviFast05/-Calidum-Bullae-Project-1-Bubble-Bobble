@@ -43,11 +43,11 @@
     <ClCompile Include="src\Enemy.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
-    <ClCompile Include="src\Bubble.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
     <ClCompile Include="src\Text.cpp">
       <Filter>Render</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Bubble.cpp">
+      <Filter>Entities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -96,11 +96,11 @@
     <ClInclude Include="src\Enemy.h">
       <Filter>Entities</Filter>
     </ClInclude>
-    <ClInclude Include="src\Bubble.h">
-      <Filter>Core</Filter>
-    </ClInclude>
     <ClInclude Include="src\Text.h">
       <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Bubble.h">
+      <Filter>Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

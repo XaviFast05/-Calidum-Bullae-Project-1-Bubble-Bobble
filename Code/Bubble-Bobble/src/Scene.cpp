@@ -2,13 +2,14 @@
 #include <stdio.h>
 #include "Globals.h"
 
-//arreglao
+
 
 Scene::Scene()
 {
 	player = nullptr;
     level = nullptr;
-	
+
+
 	camera.target = { 0, 0 };				 //Center of the screen
 	camera.offset = { 0, MARGIN_GUI_Y };	//Offset from the target (center of the screen)
 	camera.rotation = 0.0f;					//No rotation
