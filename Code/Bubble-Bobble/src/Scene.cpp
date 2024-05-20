@@ -624,6 +624,10 @@ void Scene::RenderGUI() const
 	font1->Draw(204, 10, TextFormat("2UP"), BLUE);
 	font1->Draw(210, 20, TextFormat("%d", player->GetScore()));
 	font1->Draw(245, 220, TextFormat("%d", player->GetLifes()), BLUE);
+
+	//High Score
+	font1->Draw(90, 10, TextFormat("HIGH SCORE"), RED);
+	font1->Draw(110, 20, TextFormat("%d", player->GetScore()));
 }
 Player* Scene::GetPlayer()
 {
