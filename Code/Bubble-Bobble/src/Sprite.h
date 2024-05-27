@@ -8,6 +8,8 @@ enum class AnimMode { AUTOMATIC, MANUAL };
 struct Animation
 {
     int delay;
+    int offsetX = 0;
+    int offsetY = 0;
     std::vector<Rectangle> frames;
 };
 
@@ -20,11 +22,13 @@ public:
     void SetNumberAnimations(int num);
     void SetAnimationDelay(int id, int delay);
     void AddKeyFrame(int id, const Rectangle& rect);
+    void AddKeyFrameOffset(int id, const Rectangle& rect, int offsetX, int offsetY);
     void SetAnimation(int id);
     int GetAnimation();
 
     void SetManualMode();
     void SetAutomaticMode();
+    bool AnimationEnd() const;
     
     void Update();
     void NextFrame();
@@ -44,5 +48,7 @@ private:
     std::vector<Animation> animations;
 
     AnimMode mode;
+
+    bool animation_end = false;
 };
 

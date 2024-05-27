@@ -7,6 +7,7 @@ Sprite::Sprite(const Texture2D *texture)
     current_frame = 0;
     current_delay = 0;
     mode = AnimMode::AUTOMATIC;
+    animation_end = false;
 }
 Sprite::~Sprite()
 {
@@ -31,6 +32,15 @@ void Sprite::AddKeyFrame(int id, const Rectangle& rect)
         animations[id].frames.push_back(rect);
     }
 }
+void Sprite::AddKeyFrameOffset(int id, const Rectangle& rect, int offsetX, int offsetY)
+{
+    if (id >= 0 && id < animations.size())
+    {
+        animations[id].offsetX = offsetX;
+        animations[id].offsetX = offsetY;
+        animations[id].frames.push_back(rect);
+    }
+}
 void Sprite::SetAnimation(int id)
 {
     if (id >= 0 && id < animations.size())
@@ -38,6 +48,7 @@ void Sprite::SetAnimation(int id)
         current_anim = id;
         current_frame = 0;
         current_delay = animations[current_anim].delay;
+        animation_end = false;
     }
 }
 int Sprite::GetAnimation()
@@ -51,6 +62,10 @@ void Sprite::SetManualMode()
 void Sprite::SetAutomaticMode()
 {
     mode = AnimMode::AUTOMATIC;
+}
+bool Sprite::AnimationEnd() const
+{
+    return animation_end;
 }
 void Sprite::Update()
 {
@@ -66,6 +81,7 @@ void Sprite::Update()
                 current_frame++;
                 current_frame %= animations[current_anim].frames.size();
                 current_delay = animations[current_anim].delay;
+                animation_end = (current_frame == 0);
             }
         }
     }

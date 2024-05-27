@@ -24,6 +24,8 @@ Player::Player(const Point& p, State s, Look view) :
 
 Player::~Player()
 {
+	UnloadSound(soundEffectsplayer1[0]);
+	UnloadSound(soundEffectsplayer1[1]);
 }
 AppStatus Player::Initialise()
 {
@@ -106,6 +108,12 @@ AppStatus Player::Initialise()
 	sprite->AddKeyFrame((int)PlayerAnim::ATTACK_LEFT, { 2*n, 1 * n, n, n });
 	sprite->AddKeyFrame((int)PlayerAnim::ATTACK_LEFT, { 3*n, 1 * n, n, n });
 
+	sprite->SetAnimationDelay((int)PlayerAnim::DEATH_ANIM, ANIM_DELAY);
+	for (int i = 0; i < 13; ++i)
+	{
+		sprite->AddKeyFrameOffset((int)PlayerAnim::DEATH_ANIM, { (float)i * n, 10 * n, n, 2 * n }, 0, -n);
+	}
+
 	
 		
 	sprite->SetAnimation((int)PlayerAnim::IDLE_RIGHT);
@@ -127,6 +135,8 @@ int Player::GetScore()
 void Player::GetHit()
 {
 	lifes--;
+	state = State::DEAD;
+	SetAnimation((int)PlayerAnim::DEATH_ANIM);
 }
 int Player::GetLifes()
 {
@@ -252,13 +262,28 @@ void Player::Update()
 {
 	//Player doesn't use the "Entity::Update() { pos += dir; }" default behaviour.
 	//Instead, uses an independent behaviour for each axis.
-	MoveX();
-	MoveY();
-	LooseCondition();
-	Attack();
-
 
 	Sprite* sprite = dynamic_cast<Sprite*>(render);
+	if (state == State::DEAD)
+	{
+		if (sprite->AnimationEnd())
+		{
+			state = State::IDLE;
+			SetAnimation((int)PlayerAnim::IDLE_RIGHT);
+			pos = { 4 * TILE_SIZE, 27 * TILE_SIZE };
+		}
+	}
+	else
+	{
+		MoveX();
+		MoveY();
+		LooseCondition();
+		Attack();
+	}
+	
+
+
+	
 	sprite->Update();
 	connect();
 
