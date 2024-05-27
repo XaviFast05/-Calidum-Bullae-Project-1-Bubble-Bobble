@@ -16,8 +16,9 @@ Player::Player(const Point& p, State s, Look view) :
 	jump_delay = PLAYER_JUMP_DELAY;
 	map = nullptr;
 	score = 0;
-	lifes = 3;
+	lifes = 4;
 	frame_ground = PLAYER_GROUNDCHECK_WIDTH;
+	BubbleTime = 0;
 
 }
 
@@ -309,11 +310,13 @@ void Player::MoveX()
 }
 void Player::Attack()
 {
-	if (IsKeyPressed(KEY_F)&&state!=State::JUMPING )
+	BubbleTime += GetFrameTime();
+	if (IsKeyPressed(KEY_F)&&state!=State::JUMPING&& BubbleTime>=.3)
 	{
 		PlaySound(soundEffectsplayer1[1]);
 		StartAttacking();
 	}
+	BubbleTime= 0;
 }
 void Player::MoveY()
 {

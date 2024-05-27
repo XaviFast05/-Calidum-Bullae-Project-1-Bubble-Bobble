@@ -618,7 +618,7 @@ void Scene::RenderGUI() const
 	//Player 1
 	font1->Draw(35, 10, TextFormat("1UP"), GREEN);
 	font1->Draw(38, 20, TextFormat("%d", player->GetScore()));
-	int casos = player->GetLifes();
+	int casos = player->GetLifes()-1;
 
 	if(casos == 1)
 		font1->Draw(0, 232, TextFormat("%$"));
