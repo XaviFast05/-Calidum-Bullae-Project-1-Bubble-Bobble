@@ -309,7 +309,7 @@ void Player::MoveX()
 }
 void Player::Attack()
 {
-	if (IsKeyPressed(KEY_F)&&state!=State::JUMPING)
+	if (IsKeyPressed(KEY_F)&&state!=State::JUMPING )
 	{
 		PlaySound(soundEffectsplayer1[1]);
 		StartAttacking();

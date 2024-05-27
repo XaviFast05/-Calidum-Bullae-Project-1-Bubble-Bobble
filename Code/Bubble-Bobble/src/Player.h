@@ -110,5 +110,6 @@ private:
 
 	int lifes;
 	int score;
+	float BubbleTime;
 };
 
