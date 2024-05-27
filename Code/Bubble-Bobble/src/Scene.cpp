@@ -618,12 +618,25 @@ void Scene::RenderGUI() const
 	//Player 1
 	font1->Draw(35, 10, TextFormat("1UP"), GREEN);
 	font1->Draw(38, 20, TextFormat("%d", player->GetScore()));
-	font1->Draw(2, 220, TextFormat("%d", player->GetLifes()), GREEN);
-
+	int casos = player->GetLifes();
+	if(casos == 1)
+		font1->Draw(2, 220, TextFormat("%"));
+	else if(casos ==2)
+	{
+		font1->Draw(2, 220, TextFormat("%"));
+		font1->Draw(10, 220, TextFormat("%"));
+	}
+	else if(casos == 3)
+	{
+		font1->Draw(2, 220, TextFormat("%"));
+		font1->Draw(10, 220, TextFormat("%"));
+		font1->Draw(18, 220, TextFormat("%"));
+	}
+	
 	//Player 2
 	font1->Draw(204, 10, TextFormat("2UP"), BLUE);
-	font1->Draw(210, 20, TextFormat("%d", player->GetScore()));
-	font1->Draw(245, 220, TextFormat("%d", player->GetLifes()), BLUE);
+	font1->Draw(210, 20, TextFormat("0"));
+	//font1->Draw(245, 220, TextFormat("%d", player->GetLifes()), BLUE);
 
 	//High Score
 	font1->Draw(90, 10, TextFormat("HIGH SCORE"), RED);
