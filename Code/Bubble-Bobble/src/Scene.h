@@ -6,6 +6,7 @@
 #include "Enemy.h"
 #include "Bubble.h"
 #include "Text.h"
+#include "SuperDrunk.h"
 
 enum class DebugMode { OFF, SPRITES_AND_HITBOXES, ONLY_HITBOXES, SIZE };
 
@@ -36,6 +37,7 @@ private:
 
     Player *player;
     TileMap *level;
+    std::vector<Drunk*> supers ;
     std::vector<Object*> objects;
     std::vector<Enemy*> enemies;
     std::vector<Bubble*> bubbles;

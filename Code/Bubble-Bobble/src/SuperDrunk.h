@@ -4,12 +4,12 @@
 #include "Player.h"
 
 //Representation model size: 32x32
-#define DRUNK_FRAME_SIZE		16
+#define DRUNK_FRAME_SIZE	64
 
 //Logical model size: 12x28
-#define DRUNK_PHYSICAL_WIDTH	12
-#define DRUNK_PHYSICAL_HEIGHT	16
-#define DRUNK_GROUNDCHECK_WIDTH 9
+#define DRUNK_PHYSICAL_WIDTH	64
+#define DRUNK_PHYSICAL_HEIGHT	64
+#define DRUNK_GROUNDCHECK_WIDTH 0
 
 //Horizontal speed and vertical speed while falling down
 #define DRUNK_SPEED			1

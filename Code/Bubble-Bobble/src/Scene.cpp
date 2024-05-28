@@ -106,7 +106,8 @@ AppStatus Scene::LoadLevel(int stage)
 	int *map = nullptr;
 	Object *obj;
 	Enemy *enem;
-	
+	Drunk* super;
+
 	ClearLevel();
 	player->Stop();
 	size = LEVEL_WIDTH * LEVEL_HEIGHT;
@@ -263,7 +264,7 @@ AppStatus Scene::LoadLevel(int stage)
 			50, 50, 81, 0, 0, 0, 0, 0, 0, 0, 82, 83, 85, 0, 0, 0, 0, 0, 0, 0, 82, 83, 85, 0, 0, 0, 0, 0, 0, 0, 50, 50,
 			50, 50, 81, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 50, 50,
 			50, 50, 81, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 50, 50,
-			50, 50, 81, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 50, 50,
+			50, 50, 81, 0, 0, 0, 0, 0, 0, 0, 0, 0, 103, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 50, 50,
 			50, 50, 81, 0, 0, 0, 5, 5, 80, 0, 0, 0, 0, 0, 0, 5, 5, 80, 0, 0, 0, 0, 0, 0, 5, 5, 80, 0, 0, 0, 50, 50,
 			50, 50, 81, 0, 0, 0, 82, 83, 85, 0, 0, 0, 0, 0, 0, 82, 83, 85, 0, 0, 0, 0, 0, 0, 82, 83, 85, 0, 0, 0, 50, 50,
 			50, 50, 81, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 50, 50,
@@ -378,6 +379,17 @@ AppStatus Scene::LoadLevel(int stage)
 				enem->SetTileMap(level);
 				enem->SetPlayer(player);
 				enemies.push_back(enem);
+				map[i] = 0;
+			}
+			else if (tile == Tile::SUPERDRUNK)
+			{
+				pos.x = x * TILE_SIZE;
+				pos.y = y * TILE_SIZE + TILE_SIZE - 1;
+				super = new Drunk(pos, D_State::IDLE, D_Look::RIGHT);
+				super->Initialise();
+				super->SetTileMap(level);
+				super->SetPlayer(player);
+				supers.push_back(super);
 				map[i] = 0;
 			}
 			++i;
@@ -573,6 +585,10 @@ void Scene::EnemyUpdate() const
 	{
 		enem->Update();
 	}
+	for (Drunk* super : supers)
+	{
+		super->Update();
+	}
 }
 void Scene::RenderObjects() const
 {
@@ -598,6 +614,10 @@ void Scene::RenderEnemies() const
 	{
 		enem->Draw();
 	}
+	for (Drunk* super : supers)
+	{
+		super->Draw();
+	}
 }
 void Scene::RenderObjectsDebug(const Color& col) const
 {
@@ -611,6 +631,10 @@ void Scene::RenderEnemiesDebug(const Color& col) const
 	for (Enemy* enem : enemies)
 	{
 		enem->DrawDebug(col);
+	}
+	for (Drunk* super : supers)
+	{
+		super->DrawDebug(col);
 	}
 }
 void Scene::RenderGUI() const
