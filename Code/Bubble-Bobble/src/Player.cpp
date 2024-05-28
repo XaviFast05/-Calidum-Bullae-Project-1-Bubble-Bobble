@@ -33,6 +33,7 @@ AppStatus Player::Initialise()
 	const int n = PLAYER_FRAME_SIZE;
 	soundEffectsplayer1[0] = LoadSound("sound/SoundEffects/Characters/JumpFX.wav");
 	soundEffectsplayer1[1] = LoadSound("sound/SoundEffects/Characters/AttackFX.wav");
+	soundEffectsplayer1[2] = LoadSound("sound/SoundEffects/Characters/DeathFX.wav");
 
 	ResourceManager& data = ResourceManager::Instance();
 	if (data.LoadTexture(Resource::IMG_PLAYER, "images/bubMoveSprite.png") != AppStatus::OK)
@@ -134,12 +135,15 @@ int Player::GetScore()
 }
 void Player::GetHit()
 {
+	
 	if (state != State::DEAD)
 	{
 		lifes--;
 		state = State::DEAD;
 		SetAnimation((int)PlayerAnim::DEATH_ANIM);
+		PlaySound(soundEffectsplayer1[2]);
 	}
+
 }
 int Player::GetLifes()
 {
