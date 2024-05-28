@@ -63,6 +63,7 @@ public:
 	int GetScore();
 	void GetHit();
 	int GetLifes();
+	State GetState();
 	bool LooseCondition();
 
 	void Update();

@@ -392,7 +392,6 @@ void Enemy::Release()
 	ResourceManager& data = ResourceManager::Instance();
 	data.ReleaseTexture(Resource::IMG_BUSTER);
 	data.ReleaseTexture(Resource::IMG_SKELMON);
-	player->Release();
-	map->Release();
+
 	render->Release();
 }

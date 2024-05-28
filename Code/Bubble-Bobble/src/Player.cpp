@@ -145,6 +145,10 @@ int Player::GetLifes()
 {
 	return lifes;
 }
+State Player::GetState()
+{
+	return state; 
+}
 bool Player::LooseCondition()
 {
 	if (lifes == 0)
