@@ -19,6 +19,7 @@ Enemy::Enemy(const Point& p, E_State s, E_Look view, E_Type t) :
 	score = 0;
 	lifes = 3;
 	player = nullptr;
+	jumptime = 0;
 }
 Enemy::~Enemy()
 {
@@ -299,6 +300,7 @@ void Enemy::MoveY()
 {
 	AABB box;
 
+	jumptime += GetFrameTime();
 	if (state == E_State::JUMPING)
 	{
 		LogicJumping();
@@ -311,14 +313,19 @@ void Enemy::MoveY()
 		if (map->TestCollisionGround(box, &pos.y))
 		{
 			if (state == E_State::FALLING) Stop();
-			else if(playerpos.y<pos.y)
+			else if(playerpos.y<pos.y && jumptime>2)
 			{
 				StartJumping();
+				jumptime = 0;
 			}
 		}
 		else
 		{
-			if (state != E_State::FALLING) StartFalling();
+			if (state != E_State::FALLING && playerpos.y > pos.y) StartFalling();
+			else if (state != E_State::FALLING && playerpos.y < pos.y)
+			{
+				StartJumping();
+			}
 		}
 	}
 }

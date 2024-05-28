@@ -109,4 +109,5 @@ private:
 	int lifes;
 	int score;
 	Player* player;
+	float jumptime;
 };
