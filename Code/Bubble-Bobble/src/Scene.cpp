@@ -31,14 +31,15 @@ Scene::~Scene()
         delete level;
         level = nullptr;
     }
-	for (Entity* obj : objects)
+	for (Object* obj : objects)
 	{
 		delete obj;
 	}
 	objects.clear();
 
-	for (Entity* enem : enemies)
+	for (Enemy* enem : enemies)
 	{
+		enem->Release();
 		delete enem;
 	}
 	enemies.clear();
