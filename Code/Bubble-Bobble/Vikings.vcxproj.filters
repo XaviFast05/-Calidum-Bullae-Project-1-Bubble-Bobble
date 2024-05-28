@@ -49,6 +49,9 @@
     <ClCompile Include="src\Bubble.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
+    <ClCompile Include="src\SuperDrunk.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Globals.h">
@@ -100,6 +103,9 @@
       <Filter>Render</Filter>
     </ClInclude>
     <ClInclude Include="src\Bubble.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SuperDrunk.h">
       <Filter>Entities</Filter>
     </ClInclude>
   </ItemGroup>

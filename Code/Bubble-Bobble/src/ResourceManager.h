@@ -10,6 +10,7 @@ enum class Resource {
     IMG_PLAYER,
     IMG_BUSTER,
     IMG_SKELMON,
+    IMG_SUPERDRUNK,
     IMG_TILES,
     IMG_ITEMS,
     IMG_UPC,
