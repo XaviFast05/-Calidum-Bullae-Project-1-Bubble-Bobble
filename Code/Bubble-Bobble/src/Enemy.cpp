@@ -4,6 +4,7 @@
 #include "TileMap.h"
 #include "Globals.h"
 #include <raymath.h>
+#include "Player.h"
 
 
 
@@ -17,6 +18,7 @@ Enemy::Enemy(const Point& p, E_State s, E_Look view, E_Type t) :
 	map = nullptr;
 	score = 0;
 	lifes = 3;
+	player = nullptr;
 }
 Enemy::~Enemy()
 {
@@ -126,6 +128,10 @@ void Enemy::LooseCondition()
 void Enemy::SetTileMap(TileMap* tilemap)
 {
 	map = tilemap;
+}
+void Enemy::SetPlayer(Player* play)
+{
+	player = play;
 }
 bool Enemy::IsLookingRight() const
 {
@@ -251,7 +257,7 @@ void Enemy::MoveX()
 
 	//We can only go up and down while climbing
 
-	if (look==E_Look::LEFT&&state!=E_State::FALLING)
+	if (look==E_Look::LEFT&&state!=E_State::FALLING&& state != E_State::JUMPING)
 	{
 		pos.x += -ENEMY_SPEED;
 		if (state == E_State::IDLE || state == E_State::ATTACKING) StartWalkingLeft();
@@ -267,7 +273,7 @@ void Enemy::MoveX()
 			if (state == E_State::WALKING) ChangeAnimRight();
 		}
 	}
-	else if (look == E_Look::RIGHT && state != E_State::FALLING)
+	else if (look == E_Look::RIGHT && state != E_State::FALLING && state != E_State::JUMPING)
 	{
 		pos.x += ENEMY_SPEED;
 		if (state == E_State::IDLE || state == E_State::ATTACKING) StartWalkingRight();
@@ -301,9 +307,14 @@ void Enemy::MoveY()
 	{
 		pos.y += ENEMY_SPEED;
 		box = GetHitbox();
+		Point playerpos = player->GetPos();
 		if (map->TestCollisionGround(box, &pos.y))
 		{
 			if (state == E_State::FALLING) Stop();
+			else if(playerpos.y<pos.y)
+			{
+				StartJumping();
+			}
 		}
 		else
 		{

@@ -1,6 +1,7 @@
 #pragma once
 #include "Entity.h"
 #include "TileMap.h"
+#include "Player.h"
 
 //Representation model size: 32x32
 #define ENEMY_FRAME_SIZE		16
@@ -57,6 +58,7 @@ public:
 
 	AppStatus Initialise();
 	void SetTileMap(TileMap* tilemap);
+	void SetPlayer(Player* play);
 
 	void LifeManager();
 	void LooseCondition();
@@ -106,4 +108,5 @@ private:
 
 	int lifes;
 	int score;
+	Player* player;
 };

@@ -134,9 +134,12 @@ int Player::GetScore()
 }
 void Player::GetHit()
 {
-	lifes--;
-	state = State::DEAD;
-	SetAnimation((int)PlayerAnim::DEATH_ANIM);
+	if (state != State::DEAD)
+	{
+		lifes--;
+		state = State::DEAD;
+		SetAnimation((int)PlayerAnim::DEATH_ANIM);
+	}
 }
 int Player::GetLifes()
 {
@@ -280,10 +283,7 @@ void Player::Update()
 		LooseCondition();
 		Attack();
 	}
-	
 
-
-	
 	sprite->Update();
 	connect();
 

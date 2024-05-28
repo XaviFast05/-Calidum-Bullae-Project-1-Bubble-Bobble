@@ -364,6 +364,7 @@ AppStatus Scene::LoadLevel(int stage)
 				enem = new Enemy(pos, E_State::IDLE, E_Look::RIGHT, E_Type::BUSTER);
 				enem -> Initialise();
 				enem->SetTileMap(level);
+				enem->SetPlayer(player);
 				enemies.push_back(enem);
 				map[i] = 0;
 			}
@@ -374,6 +375,7 @@ AppStatus Scene::LoadLevel(int stage)
 				enem = new Enemy(pos, E_State::IDLE, E_Look::RIGHT, E_Type::SKELMON);
 				enem->Initialise();
 				enem->SetTileMap(level);
+				enem->SetPlayer(player);
 				enemies.push_back(enem);
 				map[i] = 0;
 			}
