@@ -456,6 +456,12 @@ void Scene::Update()
 	UpdateBubbles();
 	CheckCollisions();
 	BubbleShoot();
+	//for (Bubble* buble : bubbles)
+	//{
+	//	if(!buble->isAlive())
+	//		delete buble;
+	//}
+	
 }
 void Scene::Render()
 {
@@ -571,6 +577,16 @@ void Scene::ClearLevel()
 		delete enem;
 	}
 	enemies.clear();
+	for (Drunk* super : supers)
+	{
+		delete super;
+	}
+	supers.clear();
+	for (Bubble* buble : bubbles)
+	{
+		delete buble;
+	}
+	bubbles.clear();
 }
 void Scene::UpdateBubbles()
 {
