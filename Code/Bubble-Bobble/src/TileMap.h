@@ -100,7 +100,7 @@ private:
 	//Dictionary of tile frames
 	std::unordered_map<int, Rectangle> dict_rect;
 
-	Sprite* laser;
+
 
 	//Tile sheet
 	const Texture2D* img_tiles;

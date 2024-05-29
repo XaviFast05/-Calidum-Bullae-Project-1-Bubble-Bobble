@@ -9,7 +9,7 @@ TileMap::TileMap()
 	map = nullptr;
 	width = 0;
 	height = 0;
-	laser = nullptr;
+	
 	img_tiles = nullptr;
 	img_items = nullptr;
 
@@ -22,12 +22,7 @@ TileMap::~TileMap()
 		delete[] map;
 		map = nullptr;
 	}
-	if (laser != nullptr)
-	{
-		laser->Release();
-		delete laser;
-		laser = nullptr;
-	}
+	
 }
 void TileMap::InitTileDictionary()
 {
@@ -102,18 +97,7 @@ AppStatus TileMap::Initialise()
 	}
 	img_items = data.GetTexture(Resource::IMG_ITEMS);
 
-	laser = new Sprite(img_tiles);
-	if (laser == nullptr)
-	{
-		LOG("Failed to allocate memory for laser sprite");
-		return AppStatus::ERROR;
-	}
-	laser->SetNumberAnimations(1);
-	laser->SetAnimationDelay(0, ANIM_DELAY);
-	laser->AddKeyFrame(0, dict_rect[(int)Tile::SLAB_1]);
-	laser->AddKeyFrame(0, dict_rect[(int)Tile::SLAB_1]);
-	laser->AddKeyFrame(0, dict_rect[(int)Tile::SLAB_1]);
-	laser->SetAnimation(0);
+	
 
 	return AppStatus::OK;
 }
@@ -137,7 +121,7 @@ AppStatus TileMap::Load(int data[], int w, int h)
 }
 void TileMap::Update()
 {
-	laser->Update();
+
 }
 Tile TileMap::GetTileIndex(int x, int y) const
 {
@@ -314,7 +298,6 @@ void TileMap::Release()
 	ResourceManager& data = ResourceManager::Instance();
 	data.ReleaseTexture(Resource::IMG_TILES);
 
-	laser->Release();
 
 	dict_rect.clear();
 }
