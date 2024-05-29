@@ -6,7 +6,7 @@
 #include <raymath.h>
 #include "Player.h"
 
-//Super Borracho
+
 
 Drunk::Drunk(const Point& p, D_State s, D_Look view) :
 	Entity(p, DRUNK_PHYSICAL_WIDTH, DRUNK_PHYSICAL_HEIGHT, DRUNK_FRAME_SIZE, DRUNK_FRAME_SIZE)
@@ -247,71 +247,50 @@ void Drunk::MoveX()
 {
 	AABB box;
 	int prev_x = pos.x;
-
-	//We can only go up and down while climbing
-
-	if (look == D_Look::LEFT && state != D_State::FALLING && state != D_State::JUMPING)
-	{
-		pos.x += -DRUNK_SPEED;
-		if (state == D_State::IDLE || state == D_State::ATTACKING) StartWalkingLeft();
-		else
-		{
-			if (IsLookingRight()) ChangeAnimLeft();
-		}
-
-		box = GetHitbox();
-		if (map->TestCollisionWallLeft(box))
-		{
-			pos.x = prev_x;
-			if (state == D_State::WALKING) ChangeAnimRight();
-		}
-	}
-	else if (look == D_Look::RIGHT && state != D_State::FALLING && state != D_State::JUMPING)
+	box = GetHitbox();
+	if (look == D_Look::RIGHT)
 	{
 		pos.x += DRUNK_SPEED;
-		if (state == D_State::IDLE || state == D_State::ATTACKING) StartWalkingRight();
-		else
-		{
-			if (IsLookingLeft()) ChangeAnimRight();
-		}
-
-		box = GetHitbox();
 		if (map->TestCollisionWallRight(box))
 		{
 			pos.x = prev_x;
-			if (state == D_State::WALKING) ChangeAnimLeft();
+			look = D_Look::LEFT;
+			SetAnimation((int)DrunkAnim::WALKING_LEFT);
 		}
 	}
-	else
+	else if (look == D_Look::LEFT)
 	{
-		if (state == D_State::WALKING) Stop();
+		pos.x += -DRUNK_SPEED;
+		if (map->TestCollisionWallLeft(box))
+		{
+			pos.x = prev_x;
+			look = D_Look::RIGHT;
+			SetAnimation((int)DrunkAnim::WALKING_RIGHT);
+		}
 	}
 
 }
 void Drunk::MoveY()
 {
 	AABB box;
-
-	if (state == D_State::JUMPING)
+	int prev_y = pos.y;
+	box = GetHitbox();
+	if (DIAG_MOVE == Diag::DIAG_UP)
 	{
-		LogicJumping();
+		pos.y += -DRUNK_SPEED;
+		if (pos.y <= 80)
+		{
+			pos.y = prev_y;
+			DIAG_MOVE = Diag::DIAG_DOWN;
+		}
 	}
-	else //idle, walking, falling
+	else if (DIAG_MOVE == Diag::DIAG_DOWN)
 	{
 		pos.y += DRUNK_SPEED;
-		box = GetHitbox();
-		Point playerpos = player->GetPos();
-		if (map->TestCollisionGround(box, &pos.y))
+		if (pos.y >= 216)
 		{
-			if (state == D_State::FALLING) Stop();
-			else if (playerpos.y < pos.y)
-			{
-				StartJumping();
-			}
-		}
-		else
-		{
-			if (state != D_State::FALLING) StartFalling();
+			pos.y = prev_y;
+			DIAG_MOVE = Diag::DIAG_UP;
 		}
 	}
 }

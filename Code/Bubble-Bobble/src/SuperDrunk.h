@@ -36,6 +36,7 @@ enum class D_State { IDLE, WALKING, ATTACKING, JUMPING, FALLING, CLIMBING, DEAD 
 enum class D_Look { RIGHT, LEFT };
 
 //Rendering states
+enum class Diag {DIAG_UP, DIAG_DOWN};
 enum class DrunkAnim {
 	IDLE_LEFT, IDLE_RIGHT,
 	WALKING_LEFT, WALKING_RIGHT,
@@ -72,10 +73,11 @@ private:
 	bool IsLookingRight() const;
 	bool IsLookingLeft() const;
 
-	//Player mechanics
+	//Drunk movement
 	void MoveX();
 	void MoveY();
 	void LogicJumping();
+	Diag DIAG_MOVE;
 
 	//Animation management
 	void SetAnimation(int id);
