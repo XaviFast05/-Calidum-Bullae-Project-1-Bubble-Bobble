@@ -26,6 +26,7 @@ Player::~Player()
 {
 	UnloadSound(soundEffectsplayer1[0]);
 	UnloadSound(soundEffectsplayer1[1]);
+	UnloadSound(soundEffectsplayer1[2]);
 }
 AppStatus Player::Initialise()
 {
@@ -99,15 +100,15 @@ AppStatus Player::Initialise()
 	sprite->AddKeyFrame((int)PlayerAnim::LEVITATING_LEFT, { 0, 6 * n, n, n });
 
 	sprite->SetAnimationDelay((int)PlayerAnim::ATTACK_RIGHT, ANIM_DELAY);
-	sprite->AddKeyFrame((int)PlayerAnim::ATTACK_RIGHT, { 0, 1 * n, -n, n });
-	sprite->AddKeyFrame((int)PlayerAnim::ATTACK_RIGHT, { 8*n, 1 * n, -n, n });
-	sprite->AddKeyFrame((int)PlayerAnim::ATTACK_RIGHT, { 8*n, 1 * n, -n, n });
-	sprite->AddKeyFrame((int)PlayerAnim::ATTACK_RIGHT, { 8*n, 1 * n, -n, n });
+	for (i = 0; i < 4; ++i)
+	{
+		sprite->AddKeyFrame((int)PlayerAnim::ATTACK_RIGHT, { (float)i*n, 1 * n, -n, n });
+	}
 	sprite->SetAnimationDelay((int)PlayerAnim::ATTACK_LEFT, ANIM_DELAY);
-	sprite->AddKeyFrame((int)PlayerAnim::ATTACK_LEFT, { 0, 1 * n, n, n });
-	sprite->AddKeyFrame((int)PlayerAnim::ATTACK_LEFT, { 1*n, 1 * n, n, n });
-	sprite->AddKeyFrame((int)PlayerAnim::ATTACK_LEFT, { 2*n, 1 * n, n, n });
-	sprite->AddKeyFrame((int)PlayerAnim::ATTACK_LEFT, { 3*n, 1 * n, n, n });
+	for (i = 0; i < 4; ++i)
+	{
+		sprite->AddKeyFrame((int)PlayerAnim::ATTACK_LEFT, { (float)i * n, 1 * n, n, n });
+	}
 
 	sprite->SetAnimationDelay((int)PlayerAnim::DEATH_ANIM, ANIM_DELAY);
 	for (int i = 0; i < 13; ++i)

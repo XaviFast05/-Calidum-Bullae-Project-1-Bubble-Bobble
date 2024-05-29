@@ -123,6 +123,8 @@ void Sprite::DrawTint(int x, int y, const Color& col) const
     if (current_anim >= 0 && current_anim < animations.size())
     {
         Rectangle rect = animations[current_anim].frames[current_frame];
+        int offsetY = animations[current_anim].offsetX;
+        int offsetX = animations[current_anim].offsetY;
         DrawTextureRec(*img, rect, { (float)x, (float)y }, col);
     }
 }
