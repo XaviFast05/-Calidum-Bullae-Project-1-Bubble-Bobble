@@ -110,12 +110,17 @@ AppStatus Player::Initialise()
 		sprite->AddKeyFrame((int)PlayerAnim::ATTACK_LEFT, { (float)i * n, 1 * n, n, n });
 	}
 
-	sprite->SetAnimationDelay((int)PlayerAnim::DEATH_ANIM, ANIM_DELAY);
+	sprite->SetAnimationDelay((int)PlayerAnim::DEATH_RIGHT, ANIM_DELAY);
 	for (int i = 0; i < 13; ++i)
 	{
-		sprite->AddKeyFrameOffset((int)PlayerAnim::DEATH_ANIM, { (float)i * n, 10 * n, n, 2 * n }, 0, -n);
+		sprite->AddKeyFrameOffset((int)PlayerAnim::DEATH_RIGHT, { (float)i * n, 10 * n, -n, 2 * n }, 0, -n);
 	}
 
+	sprite->SetAnimationDelay((int)PlayerAnim::DEATH_LEFT, ANIM_DELAY);
+	for (int i = 0; i < 13; ++i)
+	{
+		sprite->AddKeyFrameOffset((int)PlayerAnim::DEATH_LEFT, { (float)i * n, 10 * n, n, 2 * n }, 0, -n);
+	}
 	
 		
 	sprite->SetAnimation((int)PlayerAnim::IDLE_RIGHT);
@@ -141,7 +146,9 @@ void Player::GetHit()
 	{
 		lifes--;
 		state = State::DEAD;
-		SetAnimation((int)PlayerAnim::DEATH_ANIM);
+		if (IsLookingRight())	SetAnimation((int)PlayerAnim::DEATH_RIGHT);
+		else					SetAnimation((int)PlayerAnim::DEATH_LEFT);
+
 		PlaySound(soundEffectsplayer1[2]);
 	}
 
@@ -256,6 +263,7 @@ void Player::ChangeAnimRight()
 		case State::JUMPING: SetAnimation((int)PlayerAnim::JUMPING_RIGHT); break;
 		case State::FALLING: SetAnimation((int)PlayerAnim::FALLING_RIGHT); break;
 		case State::ATTACKING: SetAnimation((int)PlayerAnim::ATTACK_RIGHT); break;
+		case State::DEAD: SetAnimation((int)PlayerAnim::DEATH_RIGHT); break;
 	}
 }
 void Player::ChangeAnimLeft()
@@ -268,6 +276,7 @@ void Player::ChangeAnimLeft()
 		case State::JUMPING: SetAnimation((int)PlayerAnim::JUMPING_LEFT); break;
 		case State::FALLING: SetAnimation((int)PlayerAnim::FALLING_LEFT); break;
 		case State::ATTACKING: SetAnimation((int)PlayerAnim::ATTACK_LEFT); break;
+		case State::DEAD: SetAnimation((int)PlayerAnim::DEATH_LEFT); break;
 	}
 }
 void Player::Update()

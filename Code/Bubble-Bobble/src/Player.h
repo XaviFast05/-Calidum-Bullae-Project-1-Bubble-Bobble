@@ -46,7 +46,7 @@ enum class PlayerAnim {
 	TELEPORT_LEFT, TELEPORT_RIGHT,
 	NUM_ANIMATIONS,
 	ATTACK_RIGHT, ATTACK_LEFT,
-	DEATH_ANIM
+	DEATH_RIGHT, DEATH_LEFT
 };
 
 class Player: public Entity
