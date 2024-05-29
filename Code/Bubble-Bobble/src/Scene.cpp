@@ -456,11 +456,22 @@ void Scene::Update()
 	UpdateBubbles();
 	CheckCollisions();
 	BubbleShoot();
-	//for (Bubble* buble : bubbles)
-	//{
-	//	if(!buble->isAlive())
-	//		delete buble;
-	//}
+	auto as = bubbles.begin();
+	while (as != bubbles.end())
+	{
+		if (!(*as)->isAlive())
+		{
+			delete* as;
+			//Erase the object from the vector and get the iterator to the next valid element
+			as = bubbles.erase(as);
+		}
+		else
+		{
+			//Move to the next object
+			++as;
+		}
+	}
+
 	
 }
 void Scene::Render()
