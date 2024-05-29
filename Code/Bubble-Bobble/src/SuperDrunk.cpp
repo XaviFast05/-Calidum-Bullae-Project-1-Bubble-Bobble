@@ -294,63 +294,7 @@ void Drunk::MoveY()
 		}
 	}
 }
-void Drunk::LogicJumping()
-{
-	AABB box, prev_box;
-	int prev_y;
 
-	jump_delay--;
-	if (jump_delay == 0)
-	{
-		prev_y = pos.y;
-		prev_box = GetHitbox();
-
-		pos.y += dir.y;
-		dir.y += DRUNK_FORCE;
-		jump_delay = DRUNK_JUMP_DELAY;
-
-		//Is the jump finished?
-		if (dir.y > DRUNK_JUMP_FORCE)
-		{
-			dir.y = DRUNK_SPEED;
-			StartFalling();
-		}
-		else
-		{
-			//Jumping is represented with 3 different states
-			if (IsAscending())
-			{
-				if (IsLookingRight())	SetAnimation((int)DrunkAnim::JUMPING_RIGHT);
-				else					SetAnimation((int)DrunkAnim::JUMPING_LEFT);
-			}
-			else if (IsLevitating())
-			{
-				if (IsLookingRight())	SetAnimation((int)DrunkAnim::LEVITATING_RIGHT);
-				else					SetAnimation((int)DrunkAnim::LEVITATING_LEFT);
-			}
-			else if (IsDescending())
-			{
-				if (IsLookingRight())	SetAnimation((int)DrunkAnim::FALLING_RIGHT);
-				else					SetAnimation((int)DrunkAnim::FALLING_LEFT);
-			}
-		}
-		//We check ground collision when jumping down
-		if (dir.y >= 0)
-		{
-			box = GetHitbox();
-
-			//A ground collision occurs if we were not in a collision state previously.
-			//This prevents scenarios where, after levitating due to a previous jump, we found
-			//ourselves inside a tile, and the entity would otherwise be placed above the tile,
-			//crossing it.
-			if (!map->TestCollisionGround(prev_box, &prev_y) &&
-				map->TestCollisionGround(box, &pos.y))
-			{
-				Stop();
-			}
-		}
-	}
-}
 
 void Drunk::DrawDebug(const Color& col) const
 {

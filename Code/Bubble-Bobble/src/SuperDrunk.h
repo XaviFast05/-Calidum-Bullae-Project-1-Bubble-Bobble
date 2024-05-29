@@ -76,7 +76,7 @@ private:
 	//Drunk movement
 	void MoveX();
 	void MoveY();
-	void LogicJumping();
+
 	Diag DIAG_MOVE;
 
 	//Animation management
