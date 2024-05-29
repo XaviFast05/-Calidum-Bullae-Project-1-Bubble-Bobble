@@ -6,7 +6,7 @@
 #include <raymath.h>
 #include "Player.h"
 
-
+//Super Borracho
 
 Drunk::Drunk(const Point& p, D_State s, D_Look view) :
 	Entity(p, DRUNK_PHYSICAL_WIDTH, DRUNK_PHYSICAL_HEIGHT, DRUNK_FRAME_SIZE, DRUNK_FRAME_SIZE)
