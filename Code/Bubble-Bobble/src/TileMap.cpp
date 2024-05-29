@@ -277,7 +277,7 @@ bool TileMap::CollisionTop(const Point& p, int distance) const
 		tile = GetTileIndex(x, y);
 
 		//One solid or laddertop tile is sufficient
-		if (IsTileSolid(tile))
+		if (IsTileSolid(tile) || IsTileSlab(tile))
 			return true;
 	}
 	return false;
