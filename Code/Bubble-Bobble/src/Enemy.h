@@ -37,6 +37,7 @@ enum class E_State { IDLE, WALKING, ATTACKING, JUMPING, FALLING, CLIMBING, DEAD 
 enum class E_Look { RIGHT, LEFT };
 
 //Rendering states
+enum class Diag_E { DIAG_UP_E, DIAG_DOWN_E };
 enum class EnemyAnim {
 	IDLE_LEFT, IDLE_RIGHT,
 	WALKING_LEFT, WALKING_RIGHT,
@@ -77,6 +78,8 @@ private:
 	void MoveX();
 	void MoveY();
 	void LogicJumping();
+
+	Diag_E DIAG_MOVE_E;
 
 	//Animation management
 	void SetAnimation(int id);

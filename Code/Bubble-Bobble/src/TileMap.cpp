@@ -189,6 +189,20 @@ bool TileMap::TestCollisionWallRight(const AABB& box) const
 {
 	return CollisionX(box.pos + Point(box.width - 1, 0), box.height);
 }
+bool TileMap::TestCollisionTop(const AABB& box, int* py) const
+{
+	Point p(box.pos.x, *py - box.height);	//control point
+	int tile_y;
+
+	if (CollisionTop(p, box.width))
+	{
+		tile_y = p.y / TILE_SIZE;
+
+		*py = tile_y * TILE_SIZE + 1;
+		return true;
+	}
+	return false;
+}
 bool TileMap::TestCollisionGround(const AABB& box, int* py) const
 {
 	Point p(box.pos.x, *py);	//control point
@@ -243,6 +257,27 @@ bool TileMap::CollisionY(const Point& p, int distance) const
 
 		//One solid or slab tile is sufficient
 		if (IsTileSolid(tile)||IsTileSlab(tile))
+			return true;
+	}
+	return false;
+}
+bool TileMap::CollisionTop(const Point& p, int distance) const
+{
+	int x, y, x0, x1;
+	Tile tile;
+
+	//Calculate the tile coordinates and the range of tiles to check for collision
+	y = (p.y + 1) / TILE_SIZE;
+	x0 = p.x / TILE_SIZE;
+	x1 = (p.x + distance - 1) / TILE_SIZE;
+
+	//Iterate over the tiles within the horizontal range
+	for (x = x0; x <= x1; ++x)
+	{
+		tile = GetTileIndex(x, y);
+
+		//One solid or laddertop tile is sufficient
+		if (IsTileSolid(tile))
 			return true;
 	}
 	return false;

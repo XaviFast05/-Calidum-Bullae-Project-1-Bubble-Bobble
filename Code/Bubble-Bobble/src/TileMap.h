@@ -75,7 +75,7 @@ public:
 	//penetration of the grounded tile, that is, the pixel y-position above the grounded tile.
 	//Grounded tile = solid tile (blocks) or ladder tops.
 	bool TestCollisionGround(const AABB& box, int* py) const;
-
+	bool TestCollisionTop(const AABB& box, int* py) const;
 	//Test if there is a ground tile one pixel below the given box
 	bool TestFalling(const AABB& box) const;
 
@@ -89,6 +89,7 @@ private:
 	bool IsTileSlab(Tile tile) const;
 	bool CollisionX(const Point& p, int distance) const;
 	bool CollisionY(const Point& p, int distance) const;
+	bool CollisionTop(const Point& p, int distance) const;
 
 	//Tile map
 	Tile* map;

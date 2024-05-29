@@ -253,78 +253,133 @@ void Enemy::Update()
 }
 void Enemy::MoveX()
 {
-	AABB box;
-	int prev_x = pos.x;
-
-	//We can only go up and down while climbing
-
-	if (look==E_Look::LEFT&&state!=E_State::FALLING&& state != E_State::JUMPING)
+	if (type == E_Type::BUSTER)
 	{
-		pos.x += -ENEMY_SPEED;
-		if (state == E_State::IDLE || state == E_State::ATTACKING) StartWalkingLeft();
-		else
-		{
-			if (IsLookingRight()) ChangeAnimLeft();
-		}
+		AABB box;
+		int prev_x = pos.x;
 
-		box = GetHitbox();
-		if (map->TestCollisionWallLeft(box))
-		{
-			pos.x = prev_x;
-			if (state == E_State::WALKING) ChangeAnimRight();
-		}
-	}
-	else if (look == E_Look::RIGHT && state != E_State::FALLING && state != E_State::JUMPING)
-	{
-		pos.x += ENEMY_SPEED;
-		if (state == E_State::IDLE || state == E_State::ATTACKING) StartWalkingRight();
-		else
-		{
-			if (IsLookingLeft()) ChangeAnimRight();
-		}
+		//We can only go up and down while climbing
 
-		box = GetHitbox();
-		if (map->TestCollisionWallRight(box))
+		if (look == E_Look::LEFT && state != E_State::FALLING && state != E_State::JUMPING)
 		{
-			pos.x = prev_x;
-			if (state == E_State::WALKING) ChangeAnimLeft();
-		}
-	}
-	else
-	{
-		if (state == E_State::WALKING) Stop();
-	}
-
-}
-void Enemy::MoveY()
-{
-	AABB box;
-
-	jumptime += GetFrameTime();
-	if (state == E_State::JUMPING)
-	{
-		LogicJumping();
-	}
-	else //idle, walking, falling
-	{
-		pos.y += ENEMY_SPEED;
-		box = GetHitbox();
-		Point playerpos = player->GetPos();
-		if (map->TestCollisionGround(box, &pos.y))
-		{
-			if (state == E_State::FALLING) Stop();
-			else if(playerpos.y<pos.y && jumptime>2)
+			pos.x += -ENEMY_SPEED;
+			if (state == E_State::IDLE || state == E_State::ATTACKING) StartWalkingLeft();
+			else
 			{
-				StartJumping();
-				jumptime = 0;
+				if (IsLookingRight()) ChangeAnimLeft();
+			}
+
+			box = GetHitbox();
+			if (map->TestCollisionWallLeft(box))
+			{
+				pos.x = prev_x;
+				if (state == E_State::WALKING) ChangeAnimRight();
+			}
+		}
+		else if (look == E_Look::RIGHT && state != E_State::FALLING && state != E_State::JUMPING)
+		{
+			pos.x += ENEMY_SPEED;
+			if (state == E_State::IDLE || state == E_State::ATTACKING) StartWalkingRight();
+			else
+			{
+				if (IsLookingLeft()) ChangeAnimRight();
+			}
+
+			box = GetHitbox();
+			if (map->TestCollisionWallRight(box))
+			{
+				pos.x = prev_x;
+				if (state == E_State::WALKING) ChangeAnimLeft();
 			}
 		}
 		else
 		{
-			if (state != E_State::FALLING && playerpos.y > pos.y) StartFalling();
-			else if (state != E_State::FALLING && playerpos.y < pos.y)
+			if (state == E_State::WALKING) Stop();
+		}
+	}
+	else
+	{
+		AABB box;
+		int prev_x = pos.x;
+		box = GetHitbox();
+		if (look == E_Look::RIGHT)
+		{
+			pos.x += ENEMY_SPEED;
+			if (map->TestCollisionWallRight(box))
 			{
-				StartJumping();
+				pos.x = prev_x;
+				look = E_Look::LEFT;
+				SetAnimation((int)EnemyAnim::WALKING_LEFT);
+			}
+		}
+		else if (look == E_Look::LEFT)
+		{
+			pos.x += -ENEMY_SPEED;
+			if (map->TestCollisionWallLeft(box))
+			{
+				pos.x = prev_x;
+				look = E_Look::RIGHT;
+				SetAnimation((int)EnemyAnim::WALKING_RIGHT);
+			}
+		}
+	}
+}
+void Enemy::MoveY()
+{
+	if (type == E_Type::BUSTER)
+	{
+		AABB box;
+
+		jumptime += GetFrameTime();
+		if (state == E_State::JUMPING)
+		{
+			LogicJumping();
+		}
+		else //idle, walking, falling
+		{
+			pos.y += ENEMY_SPEED;
+			box = GetHitbox();
+			Point playerpos = player->GetPos();
+			if (map->TestCollisionGround(box, &pos.y))
+			{
+				if (state == E_State::FALLING) Stop();
+				else if (playerpos.y < pos.y && jumptime>2)
+				{
+					StartJumping();
+					jumptime = 0;
+				}
+			}
+			else
+			{
+				if (state != E_State::FALLING && playerpos.y > pos.y) StartFalling();
+				else if (state != E_State::FALLING && playerpos.y < pos.y)
+				{
+					StartJumping();
+				}
+			}
+		}
+	}
+	else
+	{
+		AABB box;
+		int prev_y = pos.y;
+		box = GetHitbox();
+		if (DIAG_MOVE_E == Diag_E::DIAG_UP_E)
+		{
+			pos.y += -ENEMY_SPEED;
+			if (pos.y <= 30 or map->TestCollisionTop(box, &pos.y))
+			{
+				pos.y = prev_y;
+				DIAG_MOVE_E = Diag_E::DIAG_DOWN_E;
+			}
+		}
+		else if (DIAG_MOVE_E == Diag_E::DIAG_DOWN_E)
+		{
+			pos.y += ENEMY_SPEED;
+			if (map->TestCollisionGround(box, &pos.y))
+			{
+				pos.y = prev_y;
+				DIAG_MOVE_E = Diag_E::DIAG_UP_E;
 			}
 		}
 	}
