@@ -75,6 +75,8 @@ private:
 	//Player mechanics
 	void MoveX();
 	void MoveY();
+	void ClampPos();
+	void BubbleMovement();
 	void LogicJumping();
 
 	Diag_E DIAG_MOVE_E;
@@ -111,4 +113,8 @@ private:
 	int score;
 	Player* player;
 	float jumptime;
+	bool inShoot;
+	int stages;
+	int logPosXL;
+	int logPosXR;
 };

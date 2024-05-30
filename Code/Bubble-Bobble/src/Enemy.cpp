@@ -20,6 +20,10 @@ Enemy::Enemy(const Point& p, E_State s, E_Look view, E_Type t) :
 	lifes = 3;
 	player = nullptr;
 	jumptime = 0;
+	inShoot = true;
+	stages = 1;
+	logPosXL = pos.x - 65;
+	logPosXR = pos.x + 65;
 }
 Enemy::~Enemy()
 {
@@ -371,6 +375,97 @@ void Enemy::MoveY()
 			}
 		}
 	}
+}
+void Enemy::BubbleMovement()
+{
+	ClampPos();
+
+	if (pos.y > 32)
+	{
+		if (look == E_Look::LEFT)
+		{
+			switch (stages) {
+				SetAnimation((int)EnemyAnim::IDLE_LEFT);
+			case 1:
+				if (pos.x < 20)
+				{
+					pos.x++;
+					stages++;
+				}
+				inShoot = true;
+
+				dir = { -2, 0 };
+				if (pos.x <= logPosXL) {
+					stages++;
+				}
+				break;
+			case 2:
+				SetAnimation((int)EnemyAnim::IDLE_RIGHT);
+
+				inShoot = false;
+				dir = { 0, -1 };
+				break;
+
+
+			}
+		}
+		else if (look == E_Look::RIGHT)
+		{
+
+			switch (stages) {
+				SetAnimation((int)EnemyAnim::IDLE_LEFT);
+			case 1:
+				if (pos.x > 226)
+				{
+					pos.x--;
+					stages++;
+				}
+				inShoot = true;
+
+				dir = { 2, 0 };
+				if (pos.x >= logPosXR) {
+					stages++;
+				}
+				break;
+			case 2:
+				SetAnimation((int)EnemyAnim::IDLE_RIGHT);
+
+				inShoot = false;
+				dir = { 0, -1 };
+
+				break;
+
+			}
+
+		}
+	}
+
+}
+void Enemy::ClampPos()
+{
+
+	if (pos.y < 32)
+	{
+		if (pos.x <= WINDOW_WIDTH / 2)
+		{
+			dir = { 1, 1 };
+		}
+		else {
+			dir = { -1, 1 };
+		}
+	}
+	if (pos.y == 32)
+	{
+		if (pos.x <= GetRandomValue(110, WINDOW_WIDTH / 2))
+		{
+			dir = { 1, 0 };
+		}
+		else if (pos.x > GetRandomValue(WINDOW_WIDTH / 2, 140))
+		{
+			dir = { -1, 0 };
+		}
+	}
+
 }
 void Enemy::LogicJumping()
 {
