@@ -61,7 +61,9 @@ public:
 	void SetTileMap(TileMap* tilemap);
 	void SetPlayer(Player* play);
 
+	E_State GetState();
 
+	void Bubbler();
 	void Update();
 	void DrawDebug(const Color& col) const;
 	void Release();

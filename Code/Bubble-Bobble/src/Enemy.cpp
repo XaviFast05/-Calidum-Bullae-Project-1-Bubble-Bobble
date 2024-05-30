@@ -127,6 +127,14 @@ void Enemy::SetPlayer(Player* play)
 {
 	player = play;
 }
+E_State Enemy::GetState()
+{
+	return state;
+}
+void Enemy::Bubbler()
+{
+	state = E_State::BUBBLED;
+}
 bool Enemy::IsLookingRight() const
 {
 	return look == E_Look::RIGHT;
@@ -245,13 +253,17 @@ void Enemy::Update()
 }
 void Enemy::MoveX()
 {
-	if (type == E_Type::BUSTER)
+	if (state == E_State::BUBBLED)
+	{
+		BubbleMovement();
+	}
+	else if (type == E_Type::BUSTER)
 	{
 		AABB box;
 		int prev_x = pos.x;
 
 		//We can only go up and down while climbing
-
+		
 		if (look == E_Look::LEFT && state != E_State::FALLING && state != E_State::JUMPING)
 		{
 			pos.x += -ENEMY_SPEED;

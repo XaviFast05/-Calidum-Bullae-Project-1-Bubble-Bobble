@@ -530,7 +530,7 @@ void Scene::CheckCollisions()
 	while (en != enemies.end())
 	{
 		enemy_box = (*en)->GetHitbox();
-		if (player_box.TestAABB(enemy_box)&&player->GetState()!=State::DEAD)
+		if (player_box.TestAABB(enemy_box)&&player->GetState()!=State::DEAD&& (*en)->GetState() != E_State::BUBBLED)
 		{
 			player->GetHit();
 		}
@@ -560,9 +560,12 @@ void Scene::CheckCollisions()
 	while (yp != enemies.end())
 	{
 		enemy_box = (*yp)->GetHitbox();
-		if (bubble_box.TestAABB(enemy_box))
+		if (bubble_box.TestAABB(enemy_box)&& (*yp)->GetState() != E_State::BUBBLED)
 		{
-			
+			(*yp)->Bubbler();
+		}
+		else if (player_box.TestAABB(enemy_box) && (*yp)->GetState() == E_State::BUBBLED)
+		{
 			delete* yp;
 			//Erase the object from the vector and get the iterator to the next valid element
 			yp = enemies.erase(yp);
@@ -573,8 +576,6 @@ void Scene::CheckCollisions()
 			++yp;
 		}
 	}
-	
-
 }
 void Scene::ClearLevel()
 {
