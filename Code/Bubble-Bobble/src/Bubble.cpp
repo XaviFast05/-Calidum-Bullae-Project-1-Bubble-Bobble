@@ -53,8 +53,8 @@ AppStatus Bubble::Initialise()
 	sprite->AddKeyFrame((int)BubbleAnim::IDLE, { n, 0, n, n });
 
 	sprite->SetAnimationDelay((int)BubbleAnim::INSHOOT, ANIM_DELAY + 6);
-	for (int i = 0; i < 3; ++i)
-		sprite->AddKeyFrame((int)BubbleAnim::INSHOOT, { (float)i * n, 0, n, n });
+	for (int i = 2; i < 8; ++i)
+		sprite->AddKeyFrame((int)BubbleAnim::INSHOOT, { (float)i * n, 7*n, n, n });
 
 	sprite->SetAnimation((int)BubbleAnim::INSHOOT);
 	return AppStatus::OK;
