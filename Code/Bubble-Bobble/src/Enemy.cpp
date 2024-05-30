@@ -114,6 +114,9 @@ AppStatus Enemy::Initialise()
 	for (i = 0; i < 4; ++i)
 		sprite->AddKeyFrame((int)EnemyAnim::LEVITATING_LEFT, { (float)i * n, 0 * n, n, n });
 
+	sprite->SetAnimationDelay((int)EnemyAnim::CLIMBING, ANIM_JUMP_DELAY);
+	for (i = 0; i < 13; ++i)
+		sprite->AddKeyFrame((int)EnemyAnim::CLIMBING, { (float)i * n, 3 * n, n, n });
 
 	sprite->SetAnimation((int)EnemyAnim::IDLE_RIGHT);
 
@@ -134,6 +137,7 @@ E_State Enemy::GetState()
 void Enemy::Bubbler()
 {
 	state = E_State::BUBBLED;
+	SetAnimation((int)EnemyAnim::CLIMBING);
 }
 bool Enemy::IsLookingRight() const
 {

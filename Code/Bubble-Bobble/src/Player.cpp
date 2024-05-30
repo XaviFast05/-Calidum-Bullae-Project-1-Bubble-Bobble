@@ -99,28 +99,23 @@ AppStatus Player::Initialise()
 	sprite->AddKeyFrame((int)PlayerAnim::LEVITATING_LEFT, { n, 5 * n, n, n });
 	sprite->AddKeyFrame((int)PlayerAnim::LEVITATING_LEFT, { 0, 6 * n, n, n });
 
-	sprite->SetAnimationDelay((int)PlayerAnim::ATTACK_RIGHT, ANIM_DELAY);
+	sprite->SetAnimationDelay((int)PlayerAnim::CLIMBING, ANIM_DELAY);
 	for (i = 0; i < 4; ++i)
 	{
-		sprite->AddKeyFrame((int)PlayerAnim::ATTACK_RIGHT, { (float)i*n, 1 * n, -n, n });
+		sprite->AddKeyFrame((int)PlayerAnim::CLIMBING, { (float)i*n, 1 * n, -n, n });
 	}
-	sprite->SetAnimationDelay((int)PlayerAnim::ATTACK_LEFT, ANIM_DELAY);
+	sprite->SetAnimationDelay((int)PlayerAnim::CLIMBING_PRE_TOP, ANIM_DELAY);
 	for (i = 0; i < 4; ++i)
 	{
-		sprite->AddKeyFrame((int)PlayerAnim::ATTACK_LEFT, { (float)i * n, 1 * n, n, n });
+		sprite->AddKeyFrame((int)PlayerAnim::CLIMBING_PRE_TOP, { (float)i * n, 1 * n, n, n });
 	}
 
-	sprite->SetAnimationDelay((int)PlayerAnim::DEATH_RIGHT, ANIM_DELAY);
+	sprite->SetAnimationDelay((int)PlayerAnim::CLIMBING_TOP, ANIM_DELAY);
 	for (int i = 0; i < 13; ++i)
 	{
-		sprite->AddKeyFrameOffset((int)PlayerAnim::DEATH_RIGHT, { (float)i * n, 10 * n, -n, 2 * n }, 0, -n);
+		sprite->AddKeyFrameOffset((int)PlayerAnim::CLIMBING_TOP, { (float)i * n, 8 * n, -n, 2 * n }, 0, -n);
 	}
 
-	sprite->SetAnimationDelay((int)PlayerAnim::DEATH_LEFT, ANIM_DELAY);
-	for (int i = 0; i < 13; ++i)
-	{
-		sprite->AddKeyFrameOffset((int)PlayerAnim::DEATH_LEFT, { (float)i * n, 10 * n, n, 2 * n }, 0, -n);
-	}
 	
 		
 	sprite->SetAnimation((int)PlayerAnim::IDLE_RIGHT);
@@ -146,8 +141,7 @@ void Player::GetHit()
 	{
 		lifes--;
 		state = State::DEAD;
-		if (IsLookingRight())	SetAnimation((int)PlayerAnim::DEATH_RIGHT);
-		else					SetAnimation((int)PlayerAnim::DEATH_LEFT);
+		SetAnimation((int)PlayerAnim::CLIMBING_TOP);
 
 		PlaySound(soundEffectsplayer1[2]);
 	}
@@ -247,10 +241,9 @@ void Player::StartJumping()
 }
 void Player::StartAttacking()
 {
-	&Sprite::SetAutomaticMode;
 	state = State::ATTACKING;
-	if (IsLookingRight())	SetAnimation((int)PlayerAnim::ATTACK_RIGHT);
-	else					SetAnimation((int)PlayerAnim::ATTACK_LEFT);
+	if (IsLookingRight())	SetAnimation((int)PlayerAnim::CLIMBING);
+	else					SetAnimation((int)PlayerAnim::CLIMBING_PRE_TOP);
 	
 }
 void Player::ChangeAnimRight()
@@ -294,6 +287,7 @@ void Player::Update()
 			pos = { 4 * TILE_SIZE, 27 * TILE_SIZE };
 		}
 	}
+
 	else
 	{
 		MoveX();
@@ -354,7 +348,7 @@ void Player::MoveX()
 void Player::Attack()
 {
 	BubbleTime += GetFrameTime();
-	if (IsKeyPressed(KEY_F)&&state!=State::JUMPING&& BubbleTime>=.3)
+	if (IsKeyPressed(KEY_F)&&state!=State::JUMPING)
 	{
 		PlaySound(soundEffectsplayer1[1]);
 		StartAttacking();
