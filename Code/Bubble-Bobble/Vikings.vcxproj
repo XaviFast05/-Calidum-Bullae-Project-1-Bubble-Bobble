@@ -27,6 +27,8 @@
     <ClCompile Include="src\Globals.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Object.cpp" />
+    <ClCompile Include="src\Particle.cpp" />
+    <ClCompile Include="src\ParticleManager.cpp" />
     <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\RenderComponent.cpp" />
     <ClCompile Include="src\ResourceManager.cpp" />
@@ -46,6 +48,8 @@
     <ClInclude Include="src\Globals.h" />
     <ClInclude Include="src\MemLeaks.h" />
     <ClInclude Include="src\Object.h" />
+    <ClInclude Include="src\Particle.h" />
+    <ClInclude Include="src\ParticleManager.h" />
     <ClInclude Include="src\Player.h" />
     <ClInclude Include="src\Point.h" />
     <ClInclude Include="src\RenderComponent.h" />
@@ -120,8 +124,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\martima2\Documents\GitHub\-Calidum-Bullae-Project-1-Bubble-Bobble\Code\Bubble-Bobble\raylib\raylib\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\martima2\Documents\GitHub\-Calidum-Bullae-Project-1-Bubble-Bobble\Code\Bubble-Bobble\raylib\raylib\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\xaviercf12\Documents\GitHub\-Calidum-Bullae-Project-1-Bubble-Bobble\Code\Bubble-Bobble\raylib\raylib\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\xaviercf12\Documents\GitHub\-Calidum-Bullae-Project-1-Bubble-Bobble\Code\Bubble-Bobble\raylib\raylib\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>

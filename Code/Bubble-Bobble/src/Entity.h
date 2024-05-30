@@ -9,14 +9,19 @@
 class Entity
 {
 public:
+	Entity();
 	Entity(const Point& p, int width, int height);
 	Entity(const Point& p, int width, int height, int frame_width, int frame_height);
 	virtual ~Entity();
 
 	void SetPos(const Point& p);
+	void Set(const Point& p, const Point& d, int w, int h, int framew, int frameh);
 	void Update();
 	void connect();
 	AABB GetHitbox() const;
+
+	void SetAlive(bool b);
+	bool IsAlive() const;
 
 	//Draw representation model
 	void Draw() const;
@@ -36,6 +41,8 @@ protected:
 
 	//Representation model
 	int frame_width, frame_height;
+
+	bool alive;
 
 	RenderComponent *render;
 };

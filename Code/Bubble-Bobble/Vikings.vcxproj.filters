@@ -52,6 +52,12 @@
     <ClCompile Include="src\SuperDrunk.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
+    <ClCompile Include="src\ParticleManager.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Particle.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Globals.h">
@@ -106,6 +112,12 @@
       <Filter>Entities</Filter>
     </ClInclude>
     <ClInclude Include="src\SuperDrunk.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Particle.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ParticleManager.h">
       <Filter>Entities</Filter>
     </ClInclude>
   </ItemGroup>

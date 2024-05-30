@@ -28,6 +28,7 @@ public:
 
     void SetManualMode();
     void SetAutomaticMode();
+    bool IsAnimationComplete() const;
     bool AnimationEnd() const;
     
     void Update();
@@ -50,5 +51,6 @@ private:
     AnimMode mode;
 
     bool animation_end = false;
+    bool animation_complete = false;
 };
 
