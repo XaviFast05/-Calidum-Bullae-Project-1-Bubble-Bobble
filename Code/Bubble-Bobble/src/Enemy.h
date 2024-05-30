@@ -77,7 +77,8 @@ private:
 	//Player mechanics
 	void MoveX();
 	void MoveY();
-	void ClampPos();
+	void TimeInBubble();
+	int CheckTime();
 	void BubbleMovement();
 	void LogicJumping();
 
@@ -113,6 +114,8 @@ private:
 
 	int lifes;
 	int score;
+	bool GettingTime;
+	int Time;
 	Player* player;
 	float jumptime;
 	bool inShoot;

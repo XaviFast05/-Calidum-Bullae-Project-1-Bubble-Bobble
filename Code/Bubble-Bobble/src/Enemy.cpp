@@ -24,6 +24,9 @@ Enemy::Enemy(const Point& p, E_State s, E_Look view, E_Type t) :
 	stages = 1;
 	logPosXL = pos.x - 65;
 	logPosXR = pos.x + 65;
+
+	GettingTime = true;
+	Time = GetTime();
 }
 Enemy::~Enemy()
 {
@@ -115,7 +118,7 @@ AppStatus Enemy::Initialise()
 		sprite->AddKeyFrame((int)EnemyAnim::LEVITATING_LEFT, { (float)i * n, 0 * n, n, n });
 
 	sprite->SetAnimationDelay((int)EnemyAnim::CLIMBING, ANIM_JUMP_DELAY);
-	for (i = 0; i < 13; ++i)
+	for (i = 0; i < 3; ++i)
 		sprite->AddKeyFrame((int)EnemyAnim::CLIMBING, { (float)i * n, 3 * n, n, n });
 
 	sprite->SetAnimation((int)EnemyAnim::IDLE_RIGHT);
@@ -242,13 +245,21 @@ void Enemy::ChangeAnimLeft()
 	case E_State::ATTACKING: SetAnimation((int)EnemyAnim::ATTACK_LEFT); break;
 	}
 }
+
 void Enemy::Update()
 {
 	//Player doesn't use the "Entity::Update() { pos += dir; }" default behaviour.
 	//Instead, uses an independent behaviour for each axis.
-	MoveX();
-	MoveY();
-
+	if (state == E_State::BUBBLED)
+	{
+		TimeInBubble();
+		MoveY();
+	}
+	else 
+	{
+		MoveX();
+		MoveY();
+	}
 
 	Sprite* sprite = dynamic_cast<Sprite*>(render);
 	sprite->Update();
@@ -259,14 +270,11 @@ void Enemy::MoveX()
 {
 	if (state == E_State::BUBBLED)
 	{
-		BubbleMovement();
 	}
 	else if (type == E_Type::BUSTER)
 	{
 		AABB box;
 		int prev_x = pos.x;
-
-		//We can only go up and down while climbing
 		
 		if (look == E_Look::LEFT && state != E_State::FALLING && state != E_State::JUMPING)
 		{
@@ -334,7 +342,12 @@ void Enemy::MoveX()
 }
 void Enemy::MoveY()
 {
-	if (type == E_Type::BUSTER)
+	
+	if (state == E_State::BUBBLED)
+	{
+		BubbleMovement();
+	}
+	else if (type == E_Type::BUSTER)
 	{
 		AABB box;
 
@@ -392,96 +405,44 @@ void Enemy::MoveY()
 		}
 	}
 }
+
 void Enemy::BubbleMovement()
 {
-	ClampPos();
-
 	if (pos.y > 32)
 	{
-		if (look == E_Look::LEFT)
-		{
-			switch (stages) {
-				SetAnimation((int)EnemyAnim::IDLE_LEFT);
-			case 1:
-				if (pos.x < 20)
-				{
-					pos.x++;
-					stages++;
-				}
-				inShoot = true;
-
-				dir = { -2, 0 };
-				if (pos.x <= logPosXL) {
-					stages++;
-				}
-				break;
-			case 2:
-				SetAnimation((int)EnemyAnim::IDLE_RIGHT);
-
-				inShoot = false;
-				dir = { 0, -1 };
-				break;
-
-
-			}
-		}
-		else if (look == E_Look::RIGHT)
-		{
-
-			switch (stages) {
-				SetAnimation((int)EnemyAnim::IDLE_LEFT);
-			case 1:
-				if (pos.x > 226)
-				{
-					pos.x--;
-					stages++;
-				}
-				inShoot = true;
-
-				dir = { 2, 0 };
-				if (pos.x >= logPosXR) {
-					stages++;
-				}
-				break;
-			case 2:
-				SetAnimation((int)EnemyAnim::IDLE_RIGHT);
-
-				inShoot = false;
-				dir = { 0, -1 };
-
-				break;
-
-			}
-
-		}
+		pos.y += -ENEMY_SPEED;
 	}
-
-}
-void Enemy::ClampPos()
-{
-
-	if (pos.y < 32)
-	{
-		if (pos.x <= WINDOW_WIDTH / 2)
-		{
-			dir = { 1, 1 };
-		}
-		else {
-			dir = { -1, 1 };
-		}
-	}
-	if (pos.y == 32)
+	else
 	{
 		if (pos.x <= GetRandomValue(110, WINDOW_WIDTH / 2))
 		{
-			dir = { 1, 0 };
+			pos.x += ENEMY_SPEED;
 		}
 		else if (pos.x > GetRandomValue(WINDOW_WIDTH / 2, 140))
 		{
-			dir = { -1, 0 };
+			pos.x += -ENEMY_SPEED;
 		}
 	}
+}
+int Enemy::CheckTime()
+{
+	if (GettingTime == true)
+	{
+		Time = GetTime();
+		GettingTime = false;
+	}
 
+	return GetTime() - Time;
+}
+void Enemy::TimeInBubble()
+{
+	GettingTime = true;
+	Time = 0;
+	CheckTime();
+	if (Time >= 10)
+	{
+		state = E_State::IDLE;
+	}
 }
 void Enemy::LogicJumping()
 {

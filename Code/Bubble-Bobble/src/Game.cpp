@@ -21,7 +21,7 @@ Game::Game()
     TransCounter = 0;
 
     GettingTime = true;
-    Time = GetTime();
+    Time = 0;
 
     target = {};
     src = {};
