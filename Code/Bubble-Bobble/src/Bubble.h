@@ -3,6 +3,7 @@
 #include "TileMap.h"
 #include "Player.h"
 #include "Bubble.h"
+#include "ParticleManager.h"
 
 #define BUBBLE_PHYSICAL_SIZE	14
 #define BUBBLE_FRAME_SIZE		16
@@ -26,13 +27,16 @@ public:
 	void Movement(Directions d);
 	void ClampPos();
 	AppStatus Initialise();
-	bool isAlive();
+	bool isBubbleAlive();
 	void Release();
 	Directions dire;
 	int stages;
 	void DrawDebug(const Color& col) const;
 	
 	void SetPlayer(Player* p);
+
+	//Set the TileMap reference for managing shot collisions
+	void SetParticleManager(ParticleManager* particles);
 
 private:
 	//void DrawDebug(const Color& col) const;
@@ -47,4 +51,8 @@ private:
 	float lifeTime;
 	float speed;
 	Player* player;
+
+	//Reference to the TileMap object
+	//This class does not own the object, it only holds a reference to it
+
 };

@@ -7,6 +7,7 @@
 #include "Bubble.h"
 #include "Text.h"
 #include "SuperDrunk.h"
+#include "Particle.h"
 
 enum class DebugMode { OFF, SPRITES_AND_HITBOXES, ONLY_HITBOXES, SIZE };
 
@@ -41,6 +42,7 @@ private:
     std::vector<Object*> objects;
     std::vector<Enemy*> enemies;
     std::vector<Bubble*> bubbles;
+    std::vector<Particle*> particles;
     float BubbleTime;
     Camera2D camera;
 

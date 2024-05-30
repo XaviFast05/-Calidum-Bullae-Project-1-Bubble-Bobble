@@ -12,9 +12,9 @@ Particle::Particle()
 	sprite->SetNumberAnimations(1);
 	
 	sprite->SetAnimationDelay(0, PARTICLE_ANIM_DELAY);
-	sprite->AddKeyFrame(0, { 2*n,   n, PARTICLE_FRAME_SIZE, PARTICLE_FRAME_SIZE });
-	sprite->AddKeyFrame(0, { 2*n, 2*n, PARTICLE_FRAME_SIZE, PARTICLE_FRAME_SIZE });
-	sprite->AddKeyFrame(0, { 2*n, 3*n, PARTICLE_FRAME_SIZE, PARTICLE_FRAME_SIZE });
+	sprite->AddKeyFrame(0, { 7*n,   n, PARTICLE_FRAME_SIZE, PARTICLE_FRAME_SIZE });
+	sprite->AddKeyFrame(0, { 7*n, 2*n, PARTICLE_FRAME_SIZE, PARTICLE_FRAME_SIZE });
+	sprite->AddKeyFrame(0, { 7*n, 3*n, PARTICLE_FRAME_SIZE, PARTICLE_FRAME_SIZE });
 	
 	sprite->SetAnimation(0);
 

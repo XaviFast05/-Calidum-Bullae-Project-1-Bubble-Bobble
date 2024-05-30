@@ -18,12 +18,9 @@ void ParticleManager::Add(const Point& pos)
 	bool found = false;
 	for (Particle& particle : particles)
 	{
-		if (!particle.IsAlive())
-		{
-			particle.Init(pos);
-			found = true;
-			break;
-		}
+		particle.Init(pos);
+		found = true;
+		break;
 	}
 	if (!found) LOG("Not enough space to add a new particle in the ParticleManager!");
 }

@@ -64,7 +64,7 @@ void Entity::SetAlive(bool b)
 }
 bool Entity::IsAlive() const
 {
-	return alive;
+    return alive;
 }
 Point Entity::GetRenderingPosition() const
 {

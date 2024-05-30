@@ -81,7 +81,6 @@ AppStatus Scene::Init()
 	}
 	//Assign the tile map reference to the player to check collisions while navigating
 	player->SetTileMap(level);
-
 	font1 = new Text();
 	if (font1 == nullptr)
 	{
@@ -459,7 +458,7 @@ void Scene::Update()
 	auto as = bubbles.begin();
 	while (as != bubbles.end())
 	{
-		if (!(*as)->isAlive())
+		if (!(*as)->isBubbleAlive())
 		{
 			delete* as;
 			//Erase the object from the vector and get the iterator to the next valid element

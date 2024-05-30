@@ -67,14 +67,15 @@ void Bubble::Update()
 	Sprite* sprite = dynamic_cast<Sprite*>(render);
 	sprite->Update();
 }
-bool Bubble::isAlive()
+bool Bubble::isBubbleAlive()
 {
 	eTime += GetFrameTime();
 	if (eTime >= lifeTime)
 	{
 		return false;
 	}
-	else {
+	else 
+	{
 		return true;
 	}
 }
@@ -108,7 +109,6 @@ void Bubble::SetPlayer(Player* p)
 {
 	player = p;
 }
-
 void Bubble::Movement(Directions d)
 {
 	ClampPos();
