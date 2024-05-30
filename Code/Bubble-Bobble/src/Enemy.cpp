@@ -115,17 +115,6 @@ AppStatus Enemy::Initialise()
 
 	return AppStatus::OK;
 }
-void Enemy::LifeManager()
-{
-	lifes--;
-}
-void Enemy::LooseCondition()
-{
-	if (lifes < 0)
-	{
-
-	}
-}
 void Enemy::SetTileMap(TileMap* tilemap)
 {
 	map = tilemap;
@@ -243,7 +232,6 @@ void Enemy::Update()
 	//Instead, uses an independent behaviour for each axis.
 	MoveX();
 	MoveY();
-	LooseCondition();
 
 
 	Sprite* sprite = dynamic_cast<Sprite*>(render);

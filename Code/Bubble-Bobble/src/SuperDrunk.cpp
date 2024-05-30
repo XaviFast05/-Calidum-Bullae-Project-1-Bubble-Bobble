@@ -107,17 +107,6 @@ AppStatus Drunk::Initialise()
 
 	return AppStatus::OK;
 }
-void Drunk::LifeManager()
-{
-	lifes--;
-}
-void Drunk::LooseCondition()
-{
-	if (lifes < 0)
-	{
-
-	}
-}
 void Drunk::SetTileMap(TileMap* tilemap)
 {
 	map = tilemap;
@@ -235,8 +224,6 @@ void Drunk::Update()
 	//Instead, uses an independent behaviour for each axis.
 	MoveX();
 	MoveY();
-	LooseCondition();
-
 
 	Sprite* sprite = dynamic_cast<Sprite*>(render);
 	sprite->Update();

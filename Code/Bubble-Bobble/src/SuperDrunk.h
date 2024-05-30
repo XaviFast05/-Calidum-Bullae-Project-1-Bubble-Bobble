@@ -60,9 +60,6 @@ public:
 	void SetTileMap(TileMap* tilemap);
 	void SetPlayer(Player* play);
 
-	void LifeManager();
-	void LooseCondition();
-
 	void Update();
 	void DrawDebug(const Color& col) const;
 	void Release();
