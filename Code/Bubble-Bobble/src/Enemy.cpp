@@ -114,6 +114,9 @@ AppStatus Enemy::Initialise()
 	for (i = 0; i < 4; ++i)
 		sprite->AddKeyFrame((int)EnemyAnim::LEVITATING_LEFT, { (float)i * n, 0 * n, n, n });
 
+	sprite->SetAnimationDelay((int)EnemyAnim::CLIMBING, ANIM_JUMP_DELAY);
+	for (i = 0; i < 13; ++i)
+		sprite->AddKeyFrame((int)EnemyAnim::CLIMBING, { (float)i * n, 3 * n, n, n });
 
 	sprite->SetAnimation((int)EnemyAnim::IDLE_RIGHT);
 
@@ -126,6 +129,15 @@ void Enemy::SetTileMap(TileMap* tilemap)
 void Enemy::SetPlayer(Player* play)
 {
 	player = play;
+}
+E_State Enemy::GetState()
+{
+	return state;
+}
+void Enemy::Bubbler()
+{
+	state = E_State::BUBBLED;
+	SetAnimation((int)EnemyAnim::CLIMBING);
 }
 bool Enemy::IsLookingRight() const
 {
@@ -245,13 +257,17 @@ void Enemy::Update()
 }
 void Enemy::MoveX()
 {
-	if (type == E_Type::BUSTER)
+	if (state == E_State::BUBBLED)
+	{
+		BubbleMovement();
+	}
+	else if (type == E_Type::BUSTER)
 	{
 		AABB box;
 		int prev_x = pos.x;
 
 		//We can only go up and down while climbing
-
+		
 		if (look == E_Look::LEFT && state != E_State::FALLING && state != E_State::JUMPING)
 		{
 			pos.x += -ENEMY_SPEED;
