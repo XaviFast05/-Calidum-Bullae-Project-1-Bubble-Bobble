@@ -6,7 +6,7 @@ _Calidum Bullae logo_
 
 # Team photo
 
-![Team Photo](https://github.com/XaviFast05/-Calidum-Bullae-Project-1-Bubble-Bobble.github.io/blob/gh-pages/Resources/Home-Images/GroupFoto.jpeg)
+![Team Photo](https://github.com/XaviFast05/-Calidum-Bullae-Project-1-Bubble-Bobble.github.io/blob/gh-pages/Resources/Home-Images/GroupFoto.png)
 
 # Team members
 
