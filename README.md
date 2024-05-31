@@ -1,6 +1,6 @@
 # Calidum Bullae Project 1: _Bubble Bobble_
 
-![bullae logo](https://github.com/XaviFast05/-Calidum-Bullae-Project-1-Bubble-Bobble/assets/157905893/06f05f36-d3e3-4191-8d22-47ee36a4a5a8)
+![bullae logo](https://github.com/XaviFast05/-Calidum-Bullae-Project-1-Bubble-Bobble/blob/main/Resources/Home-Images/CALLIDUM%20BULLAE.jpg)
 
 _Calidum Bullae logo_
 
