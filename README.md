@@ -24,9 +24,9 @@
             <h2>Inicio</h2>
             <p>Esta es la página de inicio.</p>
         </section>
-        <section id="sobre-mi">
+        <section id="Bubble-Bobble">
             <h2>Sobre Mí</h2>
-            <p>Información sobre mí.</p>
+            <p>Bubble bobble is better than supers soukoban.</p>
         </section>
         <section id="proyectos">
             <h2>Proyectos</h2>
