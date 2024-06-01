@@ -8,7 +8,8 @@ Scene::Scene()
 {
 	player = nullptr;
     level = nullptr;
-
+	enemiesDefeat = 0;
+	currentStage = 1;
 
 	camera.target = { 0, 0 };				 //Center of the screen
 	camera.offset = { 0, MARGIN_GUI_Y };	//Offset from the target (center of the screen)
@@ -124,12 +125,12 @@ AppStatus Scene::LoadLevel(int stage)
 			10, 10, 71, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10,
 			10, 10, 71, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10,
 			10, 10, 71, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10,
-			10, 10, 71, 101, 0, 0, 0, 0, 93, 0, 0, 0, 0, 0, 0, 94, 0, 0, 0, 0, 0, 95, 0, 0, 0, 0, 0, 0, 102, 0, 10, 10,
+			10, 10, 71, 101, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 102, 0, 10, 10,
 			10, 10, 1, 1, 70, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 70, 0, 0, 1, 1, 10, 10,
 			10, 10, 74, 73, 75, 0, 0, 72, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 75, 0, 0, 72, 73, 10, 10,
 			10, 10, 71, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10,
 			10, 10, 71, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10,
-			10, 10, 71, 0, 0, 0, 0, 0, 90, 0, 0, 0, 0, 0, 0, 91, 0, 0, 0, 0, 0, 0, 92, 0, 0, 0, 0, 0, 0, 0, 10, 10,
+			10, 10, 71, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10,
 			10, 10, 1, 1, 70, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 70, 0, 0, 1, 1, 10, 10,
 			10, 10, 74, 73, 75, 0, 0, 72, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 73, 75, 0, 0, 72, 73, 10, 10,
 			10, 10, 71, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10,
@@ -144,6 +145,7 @@ AppStatus Scene::LoadLevel(int stage)
 
 		};
 		player->InitScore();
+		enemiesDefeat = 3;
 	}
 	else if (stage == 2)
 	{
@@ -154,7 +156,7 @@ AppStatus Scene::LoadLevel(int stage)
 				32, 33, 84, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 32, 33,
 				30, 31, 81, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 30, 31,
 				32, 33, 81, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 32, 33,
-				30, 31, 81, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 94, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 30, 31,
+				30, 31, 81, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 102, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 30, 31,
 				32, 33, 81, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 80, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 32, 33,
 				30, 31, 81, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 82, 83, 83, 83, 83, 83, 85, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 30, 31,
 				32, 33, 81, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 32, 33,
@@ -169,7 +171,7 @@ AppStatus Scene::LoadLevel(int stage)
 				30, 31, 81, 0, 0, 0, 0, 82, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 85, 0, 0, 0, 0, 30, 31,
 				32, 33, 81, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 32, 33,
 				30, 31, 81, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 30, 31,
-				32, 33, 81, 0, 0, 0, 0, 0, 91, 0, 0, 0, 0, 0, 0, 0, 101, 0, 0, 0, 0, 0, 0, 0, 0, 95, 0, 0, 0, 0, 32, 33,
+				32, 33, 81, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 101, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 32, 33,
 				30, 31, 81, 0, 2, 2, 2, 2, 2, 2, 2, 80, 0, 2, 2, 2, 2, 2, 2, 80, 0, 2, 2, 2, 2, 2, 2, 2, 80, 0, 30, 31,
 				32, 33, 81, 0, 82, 83, 83, 83, 83, 83, 83, 85, 0, 82, 83, 83, 83, 83, 83, 85, 0, 82, 83, 83, 83, 83, 83, 83, 85, 0, 32, 33,
 				30, 31, 81, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 30, 31,
@@ -177,6 +179,7 @@ AppStatus Scene::LoadLevel(int stage)
 				30, 31, 81, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 30, 31,
 				32, 33, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 32, 33
 		};
+		enemiesDefeat = 4;
 	}
 	else if (stage == 3)
 	{
@@ -212,10 +215,12 @@ AppStatus Scene::LoadLevel(int stage)
 
 				
 		};
+		enemiesDefeat = 4;
 	}
 	else if (stage == 4)
 	{
-	map = new int[size] {
+		map = new int[size] 
+		{
 			0, 19, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 19, 0,
 			0, 19, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 19, 0,
 			40, 41, 8, 8, 8, 8, 8, 8, 45, 61, 0, 0, 0, 8, 8, 8, 8, 8, 8, 60, 0, 0, 0, 45, 8, 8, 8, 8, 8, 8, 40, 41,
@@ -247,11 +252,13 @@ AppStatus Scene::LoadLevel(int stage)
 			
 
 
-	};
+		};
+		enemiesDefeat = 4;
 	}
 	else if (stage == 5)
 	{
-	map = new int[size] {
+		map = new int[size] 
+		{
 		0, 19, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 19, 0,
 		0, 19, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 19, 0,
 			50, 50, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 50, 50,
@@ -283,7 +290,8 @@ AppStatus Scene::LoadLevel(int stage)
 			
 
 
-	};
+		};
+		enemiesDefeat = 1;
 	}
 	else
 	{
@@ -427,10 +435,187 @@ void Scene::BubbleShoot()
 
 
 }
+void Scene::RandomItem()
+{
+	int GetObject = 0;
+	int NewPosition = 0;
+
+	for (int i = 0; i < 7; ++i)
+	{
+		GetObject = GetRandomValue(1, 5);
+		NewPosition = GetRandomValue(1, 4);
+		
+		Point pos;
+		Object* obj;
+
+		switch (GetObject)
+		{
+		case 1:
+			switch (NewPosition)
+			{
+			case 1:
+				
+				pos.x = 16;
+				pos.y = 215;
+				break;
+			case 2:
+				pos.x = 55;
+				pos.y = 175;
+				break;
+			case 3:
+				pos.x = 85;
+				pos.y = 135;
+				break;
+			case 4:
+				pos.x = 115;
+				pos.y = 95;
+				break;
+			default:
+				LOG("No position found.");
+				return;
+			}
+			obj = new Object(pos, ObjectType::MUSHROOM);
+			break;
+		case 2:
+			switch (NewPosition)
+			{
+			case 1:
+				pos.x = 35;
+				pos.y = 215;
+				break;
+			case 2:
+				pos.x = 200;
+				pos.y = 175;
+				break;
+			case 3:
+				pos.x = 50;
+				pos.y = 135;
+				break;
+			case 4:
+				pos.x = 150;
+				pos.y = 95;
+				break;
+			default:
+				LOG("No position found.");
+				return;
+			}
+			obj = new Object(pos, ObjectType::BANANA);
+			break;
+		case 3:
+			switch (NewPosition)
+			{
+			case 1:
+				pos.x = 100;
+				pos.y = 215;
+				break;
+			case 2:
+				pos.x = 220;
+				pos.y = 175;
+				break;
+			case 3:
+				pos.x = 60;
+				pos.y = 135;
+				break;
+			case 4:
+				pos.x = 160;
+				pos.y = 95;
+				break;
+			default:
+				LOG("No position found.");
+				return;
+			}
+			obj = new Object(pos, ObjectType::ICE_CREAM);
+			break;
+		case 4:
+			switch (NewPosition)
+			{
+			case 1:
+				pos.x = 110;
+				pos.y = 215;
+				break;
+			case 2:
+				pos.x = 210;
+				pos.y = 175;
+				break;
+			case 3:
+				pos.x = 75;
+				pos.y = 135;
+				break;
+			case 4:
+				pos.x = 170;
+				pos.y = 95;
+				break;
+			default:
+				LOG("No position found.");
+				return;
+			}
+			obj = new Object(pos, ObjectType::FLAN);
+			break;
+		case 5:
+			switch (NewPosition)
+			{
+			case 1:
+				pos.x = 80;
+				pos.y = 215;
+				break;
+			case 2:
+				pos.x = 180;
+				pos.y = 175;
+				break;
+			case 3:
+				pos.x = 25;
+				pos.y = 135;
+				break;
+			case 4:
+				pos.x = 130;
+				pos.y = 95;
+				break;
+			default:
+				LOG("No position found.");
+				return;
+			}
+			obj = new Object(pos, ObjectType::CAKE);
+			break;
+		case 6:
+			switch (NewPosition)
+			{
+			case 1:
+				pos.x = 120;
+				pos.y = 215;
+				break;
+			case 2:
+				pos.x = 190;
+				pos.y = 175;
+				break;
+			case 3:
+				pos.x = 65;
+				pos.y = 135;
+				break;
+			case 4:
+				pos.x = 95;
+				pos.y = 95;
+				break;
+			default:
+				LOG("No position found.");
+				return;
+			}
+			obj = new Object(pos, ObjectType::CHERRY);
+			break;
+		default:
+			LOG("No object found.");
+			return;
+		}
+		if (obj != nullptr)
+		{
+			objects.push_back(obj);
+		}
+	}
+}
 void Scene::Update()
 {
 	Point p1, p2;
 	AABB box;
+	
 
 	//Switch between the different debug modes: off, on (sprites & hitboxes), on (hitboxes) 
 	if (IsKeyPressed(KEY_F1))
@@ -438,11 +623,31 @@ void Scene::Update()
 		debug = (DebugMode)(((int)debug + 1) % (int)DebugMode::SIZE);
 	}
 	//Debug levels instantly
-	if (IsKeyPressed(KEY_ONE))		LoadLevel(1);
-	else if (IsKeyPressed(KEY_TWO))	LoadLevel(2);
-	else if (IsKeyPressed(KEY_THREE))	LoadLevel(3);
-	else if (IsKeyPressed(KEY_FOUR))	LoadLevel(4);
-	else if (IsKeyPressed(KEY_FIVE))	LoadLevel(5);
+	if (IsKeyPressed(KEY_ONE))
+	{
+		LoadLevel(1);
+		currentStage = 1;
+	}
+	else if (IsKeyPressed(KEY_TWO))
+	{
+		LoadLevel(2);
+		currentStage = 2;
+	}
+	else if (IsKeyPressed(KEY_THREE))
+	{
+		LoadLevel(3);
+		currentStage = 3;
+	}
+	else if (IsKeyPressed(KEY_FOUR))
+	{
+		LoadLevel(4);
+		currentStage = 4;
+	}
+	else if (IsKeyPressed(KEY_FIVE))
+	{
+		LoadLevel(5);
+		currentStage = 5;
+	}
 
 	for (Bubble* buble : bubbles)
 	{
@@ -453,8 +658,46 @@ void Scene::Update()
 	player->Update();
 	EnemyUpdate();
 	UpdateBubbles();
+
+	ObjectTime += GetFrameTime();
+	if (ObjectTime >= 9.0f) 
+	{
+		RandomItem();
+		ObjectTime = 0;
+	}
+
 	CheckCollisions();
 	BubbleShoot();
+	
+	//NextStage Manager
+	if (enemiesDefeat == 0)
+	{
+		TimerStage += GetFrameTime();
+		if (TimerStage >= 3.0f)
+		{
+			currentStage += 1;
+			switch (currentStage)
+			{
+			case 2:
+				LoadLevel(2);
+				break;
+			case 3:
+				LoadLevel(3);
+				break;
+			case 4:
+				LoadLevel(4);
+				break;
+			case 5:
+				LoadLevel(5);
+				break;
+			default:
+				break;
+			}
+			TimerStage = 0;
+		}
+		
+	}
+
 	auto as = bubbles.begin();
 	while (as != bubbles.end())
 	{
@@ -568,6 +811,7 @@ void Scene::CheckCollisions()
 			delete* yp;
 			//Erase the object from the vector and get the iterator to the next valid element
 			yp = enemies.erase(yp);
+			--enemiesDefeat;
 		}
 		else
 		{

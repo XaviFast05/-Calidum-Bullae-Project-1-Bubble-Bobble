@@ -35,6 +35,7 @@ private:
     void RenderEnemiesDebug(const Color& col) const;
     void RenderGUI() const;
     void UpdateBubbles();
+    void RandomItem();
 
     Player *player;
     TileMap *level;
@@ -44,7 +45,11 @@ private:
     std::vector<Bubble*> bubbles;
     std::vector<Particle*> particles;
     float BubbleTime;
+    float ObjectTime;
     Camera2D camera;
+    int enemiesDefeat;
+    int currentStage;
+    float TimerStage;
 
     Text *font1;
 
