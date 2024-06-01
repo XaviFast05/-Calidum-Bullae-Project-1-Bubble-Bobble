@@ -96,9 +96,6 @@ AppStatus TileMap::Initialise()
 		return AppStatus::ERROR;
 	}
 	img_items = data.GetTexture(Resource::IMG_ITEMS);
-
-	
-
 	return AppStatus::OK;
 }
 AppStatus TileMap::Load(int data[], int w, int h)

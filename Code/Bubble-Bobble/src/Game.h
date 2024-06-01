@@ -16,6 +16,7 @@ public:
     void Cleanup();
     void Transition();
     int CheckTime();
+    void MusicPlayer();
 
 private:
     AppStatus BeginPlay();
@@ -43,6 +44,7 @@ private:
     int Timer = 0;
     float MaxTime = 1.5f;
     float TimeElapsed = 0.0f;
+    int i = 0;
 
     //To work with original game units and then scale the result
     RenderTexture2D target;

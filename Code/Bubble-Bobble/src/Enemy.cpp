@@ -340,7 +340,6 @@ void Enemy::MoveX()
 }
 void Enemy::MoveY()
 {
-	
 	if (state == E_State::BUBBLED)
 	{
 		BubbleMovement();

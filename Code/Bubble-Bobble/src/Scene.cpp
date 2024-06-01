@@ -616,6 +616,7 @@ void Scene::Update()
 	Point p1, p2;
 	AABB box;
 	
+	
 
 	//Switch between the different debug modes: off, on (sprites & hitboxes), on (hitboxes) 
 	if (IsKeyPressed(KEY_F1))

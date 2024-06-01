@@ -129,8 +129,7 @@ int Game::CheckTime()
 AppStatus Game::BeginPlay()
 {
     scene = new Scene();
-    soundMusic[0] = LoadMusicStream("sound/Music/Main-Theme.ogg");
-    PlayMusicStream(soundMusic[0]);
+
     if (scene == nullptr)
     {
         LOG("Failed to allocate memory for Scene");
@@ -154,6 +153,7 @@ AppStatus Game::Update()
 {
     //Check if user attempts to close the window, either by clicking the close button or by pressing Alt+F4
     if(WindowShouldClose()) return AppStatus::QUIT;
+    MusicPlayer();
     UpdateMusicStream(soundMusic[0]);
     switch (state)
     {
@@ -197,11 +197,13 @@ AppStatus Game::Update()
                 
                 
                 state = GameState::PLAYING;
+                i = 0;
                 GettingTime = true;
             }
             
         break;
         case GameState::GAME_OVER:
+            i = 0;
             PauseMusicStream(soundMusic[0]);
             if (CheckTime() > 3)
             {
@@ -264,12 +266,34 @@ AppStatus Game::Update()
     }
     return AppStatus::OK;
 }
+void Game::MusicPlayer()
+{
+    if (state == GameState::OPENING)
+    {
+        if (i == 0)
+        {
+            i++;
+            soundMusic[0] = LoadMusicStream("sound/Music/Main-Theme.ogg");
+            PlayMusicStream(soundMusic[0]);
+        }
+    }
+    else if (state == GameState::GAME_OVER)
+    {
+        if (i == 0)
+        {
+            i++;
+            soundMusic[1] = LoadMusicStream("sound/Music/9-Game-Over.ogg");
+            PlayMusicStream(soundMusic[1]);
+        }
+    }
+
+}
 void Game::Render()
 {
     //Draw everything in the render texture, note this will not be rendered on screen, yet
     BeginTextureMode(target);
     ClearBackground(BLACK);
-    
+    int i = 0;
     switch (state)
     {
         case GameState::START:
