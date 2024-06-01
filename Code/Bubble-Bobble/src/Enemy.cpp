@@ -26,7 +26,7 @@ Enemy::Enemy(const Point& p, E_State s, E_Look view, E_Type t) :
 	logPosXR = pos.x + 65;
 
 	GettingTime = true;
-	Time = GetTime();
+	TimeToGo = 0;
 }
 Enemy::~Enemy()
 {
@@ -139,6 +139,7 @@ E_State Enemy::GetState()
 }
 void Enemy::Bubbler()
 {
+	TimeToGo = GetTime() + 10;
 	state = E_State::BUBBLED;
 	SetAnimation((int)EnemyAnim::CLIMBING);
 }
@@ -268,10 +269,7 @@ void Enemy::Update()
 }
 void Enemy::MoveX()
 {
-	if (state == E_State::BUBBLED)
-	{
-	}
-	else if (type == E_Type::BUSTER)
+	if (type == E_Type::BUSTER)
 	{
 		AABB box;
 		int prev_x = pos.x;
@@ -313,7 +311,7 @@ void Enemy::MoveX()
 			if (state == E_State::WALKING) Stop();
 		}
 	}
-	else
+	else if (type == E_Type::SKELMON)
 	{
 		AABB box;
 		int prev_x = pos.x;
@@ -408,7 +406,7 @@ void Enemy::MoveY()
 
 void Enemy::BubbleMovement()
 {
-	if (pos.y > 32)
+	if (pos.y > 40)
 	{
 		pos.y += -ENEMY_SPEED;
 	}
@@ -424,22 +422,9 @@ void Enemy::BubbleMovement()
 		}
 	}
 }
-int Enemy::CheckTime()
-{
-	if (GettingTime == true)
-	{
-		Time = GetTime();
-		GettingTime = false;
-	}
-
-	return GetTime() - Time;
-}
 void Enemy::TimeInBubble()
 {
-	GettingTime = true;
-	Time = 0;
-	CheckTime();
-	if (Time >= 10)
+	if (TimeToGo <= GetTime())
 	{
 		state = E_State::IDLE;
 	}
@@ -494,7 +479,7 @@ void Enemy::LogicJumping()
 			//ourselves inside a tile, and the entity would otherwise be placed above the tile,
 			//crossing it.
 			if (!map->TestCollisionGround(prev_box, &prev_y) &&
-				map->TestCollisionGround(box, &pos.y))
+				map->TestCollisionGround(box, &pos.y)&& state != E_State::BUBBLED)
 			{
 				Stop();
 			}
