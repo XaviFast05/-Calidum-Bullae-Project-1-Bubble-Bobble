@@ -279,11 +279,20 @@ void Game::MusicPlayer()
     }
     else if (state == GameState::GAME_OVER)
     {
-        if (i == 0)
+        if (j == 0)
         {
-            i++;
+            j++;
             soundMusic[1] = LoadMusicStream("sound/Music/9-Game-Over.ogg");
             PlayMusicStream(soundMusic[1]);
+        }
+    }
+    else if (state == GameState::MAIN_MENU)
+    {
+        if (k == 0)
+        {
+            k++;
+            soundMusic[2] = LoadMusicStream("sound/Music/TitleFX.wav");
+            PlayMusicStream(soundMusic[2]);
         }
     }
 

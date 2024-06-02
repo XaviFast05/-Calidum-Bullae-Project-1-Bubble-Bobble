@@ -6,7 +6,7 @@
 #include <raymath.h>
 
 Sound soundEffectsplayer1[10];
-
+Music soundMusicPlayer1[5];
 
 Player::Player(const Point& p, State s, Look view) :
 	Entity(p, PLAYER_PHYSICAL_WIDTH, PLAYER_PHYSICAL_HEIGHT, PLAYER_FRAME_SIZE, PLAYER_FRAME_SIZE)
@@ -27,6 +27,7 @@ Player::~Player()
 	UnloadSound(soundEffectsplayer1[0]);
 	UnloadSound(soundEffectsplayer1[1]);
 	UnloadSound(soundEffectsplayer1[2]);
+	UnloadMusicStream(soundMusicPlayer1[0]);
 }
 AppStatus Player::Initialise()
 {
@@ -35,6 +36,7 @@ AppStatus Player::Initialise()
 	soundEffectsplayer1[0] = LoadSound("sound/SoundEffects/Characters/JumpFX.wav");
 	soundEffectsplayer1[1] = LoadSound("sound/SoundEffects/Characters/AttackFX.wav");
 	soundEffectsplayer1[2] = LoadSound("sound/SoundEffects/Characters/DeathFX.wav");
+	soundMusicPlayer1[0] = LoadMusicStream("sound/Music/9-Game-Over.ogg");
 
 	ResourceManager& data = ResourceManager::Instance();
 	if (data.LoadTexture(Resource::IMG_PLAYER, "images/bubMoveSprite.png") != AppStatus::OK)
@@ -159,6 +161,7 @@ bool Player::LooseCondition()
 {
 	if (lifes == 0)
 	{
+		PlayMusicStream(soundMusicPlayer1[0]);
 		return true;
 	}
 	else return false;

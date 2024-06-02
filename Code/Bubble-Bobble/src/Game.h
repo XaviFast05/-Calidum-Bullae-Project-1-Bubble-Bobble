@@ -45,6 +45,8 @@ private:
     float MaxTime = 1.5f;
     float TimeElapsed = 0.0f;
     int i = 0;
+    int j = 0;
+    int k = 0;
 
     //To work with original game units and then scale the result
     RenderTexture2D target;
