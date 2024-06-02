@@ -20,6 +20,7 @@ enum class Resource {
     IMG_OPENING,
     IMG_BUBBLE,
     IMG_FONT,
+    IMG_WIN,
 
 };
 

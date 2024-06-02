@@ -15,6 +15,7 @@ Game::Game()
     img_game_over = nullptr;
     img_upc = nullptr;
     img_creators = nullptr;
+    img_win = nullptr;
 
     a = 1;
     TransCondition = true;
@@ -112,6 +113,13 @@ AppStatus Game::LoadResources()
         return AppStatus::ERROR;
     }
     img_opening = data.GetTexture(Resource::IMG_OPENING);
+
+    return AppStatus::OK;
+    if (data.LoadTexture(Resource::IMG_WIN, "images/superdrunk.png") != AppStatus::OK)
+    {
+        return AppStatus::ERROR;
+    }
+    img_win = data.GetTexture(Resource::IMG_WIN);
 
     return AppStatus::OK;
 }
@@ -213,6 +221,17 @@ AppStatus Game::Update()
             }
         break;
 
+        case GameState::WIN:
+            i = 0;
+            PauseMusicStream(soundMusic[0]);
+            if (CheckTime() > 3)
+            {
+
+                state = GameState::MAIN_MENU;
+                GettingTime = true;
+            }
+            break;
+
         case GameState::PLAYING:
         {
             Player* player = scene->GetPlayer();
@@ -225,6 +244,10 @@ AppStatus Game::Update()
             else if (player->LooseCondition())
             {
                 state = GameState::GAME_OVER;
+            }
+            else if (scene->WinCondition())
+            {
+                state = GameState::WIN;
             }
             else
             {
@@ -332,7 +355,6 @@ void Game::Render()
             DrawTexture(*img_menu, 0, 0, WHITE);
             
             break;
-
     
         case GameState::OPENING:
             DrawTexture(*img_opening, 0, 0, WHITE);
@@ -345,6 +367,7 @@ void Game::Render()
         case GameState::PLAYING:
             scene->Render();
             break;
+
 
     /*    case GameState::TRANSITIONING:
             float progress = timeElapsed / totalTime;
@@ -416,6 +439,7 @@ void Game::UnloadResources()
     data.ReleaseTexture(Resource::IMG_COPY);
     data.ReleaseTexture(Resource::IMG_MENU);
     data.ReleaseTexture(Resource::IMG_UPC);
+    data.ReleaseTexture(Resource::IMG_WIN);
 
     UnloadRenderTexture(target);
 }

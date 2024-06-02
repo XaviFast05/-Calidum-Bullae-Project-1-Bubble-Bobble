@@ -57,6 +57,7 @@ public:
 	~Drunk();
 
 	AppStatus Initialise();
+	void LifeManager();
 	void SetTileMap(TileMap* tilemap);
 	void SetPlayer(Player* play);
 
@@ -64,7 +65,7 @@ public:
 	void DrawDebug(const Color& col) const;
 	void Release();
 	void Stop();
-
+	int GetLifes();
 private:
 
 	bool IsLookingRight() const;
@@ -96,6 +97,8 @@ private:
 	//Ladder get in/out steps
 	bool IsInFirstHalfTile() const;
 	bool IsInSecondHalfTile() const;
+
+
 
 	D_State state;
 	D_Look look;

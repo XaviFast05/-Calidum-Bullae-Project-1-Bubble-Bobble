@@ -16,7 +16,7 @@ Drunk::Drunk(const Point& p, D_State s, D_Look view) :
 	jump_delay = DRUNK_JUMP_DELAY;
 	map = nullptr;
 	score = 0;
-	lifes = 3;
+	lifes = 15;
 	player = nullptr;
 }
 Drunk::~Drunk()
@@ -29,7 +29,7 @@ AppStatus Drunk::Initialise()
 
 	ResourceManager& data = ResourceManager::Instance();
 
-	if (data.LoadTexture(Resource::IMG_SUPERDRUNK, "images/TrueSuperDrunk.png") != AppStatus::OK)
+	if (data.LoadTexture(Resource::IMG_SUPERDRUNK, "images/superDrunkSprite.png") != AppStatus::OK)
 	{
 		return AppStatus::ERROR;
 	}
@@ -107,6 +107,10 @@ AppStatus Drunk::Initialise()
 
 	return AppStatus::OK;
 }
+void Drunk::LifeManager()
+{
+	lifes--;
+}
 void Drunk::SetTileMap(TileMap* tilemap)
 {
 	map = tilemap;
@@ -159,6 +163,10 @@ void Drunk::Stop()
 	state = D_State::IDLE;
 	if (IsLookingRight())	SetAnimation((int)DrunkAnim::IDLE_RIGHT);
 	else					SetAnimation((int)DrunkAnim::IDLE_LEFT);
+}
+int Drunk::GetLifes()
+{
+	return lifes;
 }
 void Drunk::StartWalkingLeft()
 {
@@ -255,7 +263,6 @@ void Drunk::MoveX()
 			SetAnimation((int)DrunkAnim::WALKING_RIGHT);
 		}
 	}
-
 }
 void Drunk::MoveY()
 {

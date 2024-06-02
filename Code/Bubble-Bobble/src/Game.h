@@ -2,7 +2,7 @@
 #include "Globals.h"
 #include "Scene.h"
 
-enum class GameState { MAIN_MENU, PLAYING, SETTINGS, CREDITS, TRANSITION, OPENING, GAME_OVER, START };
+enum class GameState { MAIN_MENU, PLAYING, SETTINGS, CREDITS, TRANSITION, OPENING, GAME_OVER, START, WIN };
 
 class Game
 {
@@ -39,6 +39,7 @@ private:
     const Texture2D* img_copy;
     const Texture2D* img_game_over;
     const Texture2D* img_opening;
+    const Texture2D* img_win;
 
     int TimeCount = 0;
     int Timer = 0;

@@ -17,6 +17,7 @@ Scene::Scene()
 	camera.zoom = 1.0f;						//Default zoom
 
 	debug = DebugMode::OFF;
+	drunklifes = 15;
 }
 Scene::~Scene()
 {
@@ -392,7 +393,7 @@ AppStatus Scene::LoadLevel(int stage)
 			{
 				pos.x = x * TILE_SIZE;
 				pos.y = y * TILE_SIZE + TILE_SIZE - 1;
-				super = new Drunk(pos, D_State::IDLE, D_Look::RIGHT);
+				super = new Drunk(pos, D_State::FALLING, D_Look::RIGHT);
 				super->Initialise();
 				super->SetTileMap(level);
 				super->SetPlayer(player);
@@ -715,6 +716,21 @@ void Scene::Update()
 		}
 	}
 
+	auto dr = supers.begin();
+	while (dr != supers.end())
+	{
+		if (drunklifes == 0)
+		{
+			delete* dr;
+			//Erase the object from the vector and get the iterator to the next valid element
+			dr = supers.erase(dr);
+		}
+		else
+		{
+			//Move to the next object
+			++dr;
+		}
+	}
 	
 }
 void Scene::Render()
@@ -747,7 +763,7 @@ void Scene::Release()
 }
 void Scene::CheckCollisions()
 {
-	AABB player_box, obj_box, enemy_box, bubble_box;
+	AABB player_box, obj_box, enemy_box, bubble_box, DrunkBox;
 	
 	player_box = player->GetHitbox();
 	auto it = objects.begin();
@@ -783,6 +799,20 @@ void Scene::CheckCollisions()
 			++en;
 		}
 	}
+	auto dr = supers.begin();
+	while (dr != supers.end())
+	{
+		DrunkBox = (*dr)->GetHitbox();
+		if (player_box.TestAABB(DrunkBox) && player->GetState() != State::DEAD)
+		{
+			player->GetHit();
+		}
+		else
+		{
+			//Move to the next object
+			++dr;
+		}
+	}
 	auto as = bubbles.begin();
 	while (as != bubbles.end())
 	{
@@ -792,6 +822,13 @@ void Scene::CheckCollisions()
 			delete* as;
 			//Erase the object from the vector and get the iterator to the next valid element
 			as = bubbles.erase(as);
+		}
+		else if (bubble_box.TestAABB(DrunkBox))
+		{
+			delete* as;
+			//Erase the object from the vector and get the iterator to the next valid element
+			as = bubbles.erase(as);
+			drunklifes--;
 		}
 		else
 		{
@@ -939,4 +976,15 @@ void Scene::RenderGUI() const
 Player* Scene::GetPlayer()
 {
 	return player;
+}
+bool Scene::WinCondition()
+{
+	if (drunklifes <= 0)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }

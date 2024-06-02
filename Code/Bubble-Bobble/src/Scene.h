@@ -23,6 +23,7 @@ public:
     void Release();
     void BubbleShoot();
     Player* GetPlayer();
+    bool WinCondition();
 private:
     AppStatus LoadLevel(int stage);
     
@@ -50,6 +51,7 @@ private:
     int enemiesDefeat;
     int currentStage;
     float TimerStage;
+    int drunklifes;
 
     Text *font1;
 
