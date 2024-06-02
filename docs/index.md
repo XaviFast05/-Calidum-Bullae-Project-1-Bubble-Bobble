@@ -29,6 +29,10 @@ _Bubble Bobble_
 
 Link: https://youtu.be/NeUO54YjGS4
 
+# Release Link
+
+Release: https://github.com/XaviFast05/-Calidum-Bullae-Project-1-Bubble-Bobble/releases/tag/v1.0
+
 # Game Description
 
 [Bubble Bobble](https://en.wikipedia.org/wiki/Bubble_Bobble_(video_game)) is a classic arcade-style, action platformer made and published by [Taito](https://en.wikipedia.org/wiki/Taito). It was first launched for arcades in 1986, and then for a great number of home consoles like the NES.
@@ -43,3 +47,6 @@ Each level presents new challenges and surprises, from tricky enemy patterns to 
 
 ![](https://i.ytimg.com/vi/30tApcSaeYs/maxresdefault.jpg)
 ![](https://i.pinimg.com/originals/bb/07/0f/bb070ff1ae816d3d552815add8f1d1f9.gif)
+
+
+
