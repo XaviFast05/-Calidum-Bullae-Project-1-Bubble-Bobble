@@ -1,4 +1,4 @@
-BUBBLE BOBBLE GAME v0.5
+BUBBLE BOBBLE GAME ALPHA
 
 Bubble Bobble is a classic arcade-style, action platformer made and published by Taito. It was first launched for arcades in 1986, and then for a great number of home consoles like the NES.
 
@@ -29,12 +29,15 @@ F3 to go to Game Over Screen
 
 F4 for GOD mode
 
-Use 1 through 5 to change stages (only stage 1 is ready for gameplay)
+Use 1 through 5 to change stages 
 
 
 CLAIDUM BULLAE TEAM
 
-Webpage: https://github.com/XaviFast05/-Calidum-Bullae-Project-1-Bubble-Bobble
+Webpage: https://xavifast05.github.io/-Calidum-Bullae-Project-1-Bubble-Bobble/
+
+GitHub: https://github.com/XaviFast05/-Calidum-Bullae-Project-1-Bubble-Bobble
+
 2 minute Gameplay: https://youtu.be/NeUO54YjGS4
 
 Xavier Chaparro (@XaviFast05)
