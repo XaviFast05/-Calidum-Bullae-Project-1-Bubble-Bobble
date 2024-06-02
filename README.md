@@ -8,7 +8,7 @@ _Calidum Bullae logo_
 
 Martí Mach
 
-![bullae logo](https://github.com/XaviFast05/-Calidum-Bullae-Project-1-Bubble-Bobble/blob/gh-pages/Resources/Home-Images/465843c0-c84f-4742-bac9-ef9d168feaa6.jpg)
+![bullae logo](https://github.com/XaviFast05/-Calidum-Bullae-Project-1-Bubble-Bobble/blob/gh-pages/Code/Bubble-Bobble/images/super%20drunk.png)
 
 * Code & Management
 * [0psycada](https://github.com/0psycada)
@@ -24,6 +24,10 @@ Xavier Chaparro
 ![BUBBLE BOBBLE](https://i.pinimg.com/originals/16/a6/ee/16a6eef871867c66a60e9dd43d5753c4.png)
 
 _Bubble Bobble_
+
+# Gameplay Video
+
+Link: https://youtu.be/NeUO54YjGS4
 
 # Game Description
 
