@@ -8,7 +8,7 @@ _Calidum Bullae logo_
 
 Martí Mach
 
-![bullae logo](https://github.com/XaviFast05/-Calidum-Bullae-Project-1-Bubble-Bobble/blob/gh-pages/Resources/Home-Images/465843c0-c84f-4742-bac9-ef9d168feaa6.jpg)
+![bullae logo](https://github.com/XaviFast05/-Calidum-Bullae-Project-1-Bubble-Bobble/blob/gh-pages/Code/Bubble-Bobble/images/super%20drunk.png)
 
 * Code & Management
 * [0psycada](https://github.com/0psycada)
@@ -25,6 +25,10 @@ Xavier Chaparro
 
 _Bubble Bobble_
 
+# Gameplay Video
+
+Link: https://youtu.be/NeUO54YjGS4
+
 # Game Description
 
 [Bubble Bobble](https://en.wikipedia.org/wiki/Bubble_Bobble_(video_game)) is a classic arcade-style, action platformer made and published by [Taito](https://en.wikipedia.org/wiki/Taito). It was first launched for arcades in 1986, and then for a great number of home consoles like the NES.
@@ -39,6 +43,3 @@ Each level presents new challenges and surprises, from tricky enemy patterns to 
 
 ![](https://i.ytimg.com/vi/30tApcSaeYs/maxresdefault.jpg)
 ![](https://i.pinimg.com/originals/bb/07/0f/bb070ff1ae816d3d552815add8f1d1f9.gif)
-
-
-
